@@ -9,31 +9,11 @@
 <preferences/>
 <find_panel_settings/>
 <vnodes>
-<v t="tsc.20180209235629.1"><vh>@settings</vh>
-<v t="tsc.20180209235629.2"><vh>@data external tools</vh></v>
-<v t="tsc.20180209235629.3"><vh>@string sqlite_output_dir = "/home/tsc/Desktop/leo4sqlite-output"</vh></v>
-<v t="tsc.20180209235629.4"><vh>@string sqlite_temp_dir = "/home/tsc/Desktop/leo4sqlite-temp"</vh></v>
-<v t="tsc.20180209235629.5"><vh>@@ /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
-<v t="tsc.20180209235629.6"><vh>@@ /home/tsc/Desktop/leo4sqlite/leo4sqlite.py</vh></v>
+<v t="tscv11.20180119175627.1"><vh>Sqlite3</vh>
+<v t="tsc.20180206152253.2"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
 </v>
-<v t="tscv11.20180119175627.1" a="E"><vh>Sqlite3</vh>
-<v t="tsc.20180206152253.2" a="E"><vh>@file /home/tsc/Desktop/leo4sqlite/leo4sqlite@file.py</vh></v>
-</v>
-<v t="tsc.20180209235629.7"><vh>temp</vh></v>
-<v t="tsc.20180209235629.8"><vh>data</vh></v>
 </vnodes>
 <tnodes>
-<t tx="tsc.20180209235629.1"></t>
-<t tx="tsc.20180209235629.2"># one executable per line
-
-xviewer
-</t>
-<t tx="tsc.20180209235629.3"></t>
-<t tx="tsc.20180209235629.4"></t>
-<t tx="tsc.20180209235629.5"></t>
-<t tx="tsc.20180209235629.6"></t>
-<t tx="tsc.20180209235629.7"></t>
-<t tx="tsc.20180209235629.8"></t>
 <t tx="tscv11.20180119175627.1">**leo4sqlite.py plugin**
 
 *This node belongs at the top level of 'leoPlugins.leo'*
