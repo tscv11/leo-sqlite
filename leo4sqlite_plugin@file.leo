@@ -11,6 +11,10 @@
 <vnodes>
 <v t="tsc.20180211141409.1"><vh>@settings</vh>
 <v t="tsc.20180211195528.1"><vh>@data free-layout-layout</vh></v>
+<v t="tsc.20180211224859.1"><vh>@button extract-blob</vh></v>
+<v t="tsc.20180211224910.1"><vh>@button insert-blob</vh></v>
+<v t="tsc.20180211224851.1"><vh>@button view-blob</vh></v>
+<v t="tsc.20180211224516.1"><vh>@button open-blob</vh></v>
 <v t="tsc.20180211141409.2"><vh>@data external tools</vh></v>
 <v t="tsc.20180211141409.3"><vh>@string sqlite_output_dir = "/home/tsc/Desktop/leo4sqlite-output"</vh></v>
 <v t="tsc.20180211141409.4"><vh>@string sqlite_temp_dir = "/home/tsc/Desktop/leo4sqlite-temp"</vh></v>
@@ -18,26 +22,19 @@
 <v t="tsc.20180211141409.6"><vh>/home/tsc/Desktop/leo4sqlite/leo4sqlite.py</vh></v>
 <v t="tsc.20180211141409.7"><vh>/home/tsc/Desktop/leo4sqlite-file/leo4sqlite@file.py</vh></v>
 </v>
-<v t="tscv11.20180119175627.1" a="E"><vh>Sqlite3</vh>
-<v t="tsc.20180206152253.2" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580500000069636f6e7371035d71047d7105285807000000796f666673657471064b005807000000786f666673657471074b02580500000077686572657108580e0000006265666f7265486561646c696e657109580400000074797065710a580400000066696c65710b58020000006f6e710c5805000000766e6f6465710d580700000072656c50617468710e581800000066696c655f69636f6e732f66696c655f66696c652e706e67710f680b583f0000002f686f6d652f7473632f4465736b746f702f6c656f2d656469746f722f6c656f2f49636f6e732f66696c655f69636f6e732f66696c655f66696c652e706e677110580a00000076697375616c49636f6e7111580100000031711258040000007870616471134b01756173732e"><vh>@file /home/tsc/Desktop/leo4sqlite-file/leo4sqlite@file.py</vh></v>
+<v t="tscv11.20180119175627.1"><vh>Sqlite3</vh>
+<v t="tsc.20180206152253.2"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
 </v>
 <v t="tsc.20180211141409.8"><vh>temp</vh></v>
 <v t="tsc.20180211141409.9" a="E"><vh>data</vh>
 <v t="tsc.20180211222256.1" a="E"><vh>@db3 /home/tsc/Desktop/blob_test.db3</vh>
 <v t="tsc.20180211222256.2" a="E"><vh>@tbl testorama</vh>
-<v t="tsc.20180211222256.3"><vh>and.png</vh></v>
-<v t="tsc.20180211222256.4"><vh>i second.jpg</vh></v>
-<v t="tsc.20180211222256.5"><vh>that.jpg</vh></v>
 <v t="tsc.20180211222256.6"><vh>dumb.jpg</vh></v>
-<v t="tsc.20180211222256.7"><vh>Screenshot (3).png</vh></v>
-<v t="tsc.20180211222256.8"><vh>Screenshot (4).png</vh></v>
-<v t="tsc.20180211222256.9"><vh>WhatsNew_SimpleNavigation.mp4</vh></v>
-<v t="tsc.20180211222256.10"><vh>Spider.ico</vh></v>
 <v t="tsc.20180211222256.11"><vh>Screenshot (2).png</vh></v>
-<v t="tsc.20180211222256.12"><vh>1366x768._.jpg</vh></v>
-<v t="tsc.20180211222256.13"><vh>ly39gCL._.jpg</vh></v>
-<v t="tsc.20180211222256.14"><vh>500full-erica-durance._.jpg</vh></v>
 <v t="tsc.20180211222256.15"><vh>Feather-flying.jpg</vh></v>
+<v t="tsc.20180211222256.7"><vh>Screenshot (3).png</vh></v>
+<v t="tsc.20180211222256.10"><vh>Spider.ico</vh></v>
+<v t="tsc.20180211222256.8"><vh>Screenshot (4).png</vh></v>
 </v>
 </v>
 </v>
@@ -47,6 +44,7 @@
 <t tx="tsc.20180211141409.2"># one executable per line
 
 xviewer
+gimp-2.8
 </t>
 <t tx="tsc.20180211141409.3"></t>
 <t tx="tsc.20180211141409.4"></t>
@@ -89,24 +87,6 @@ Words: 'baby'
 Amount: 2.0
 Time: 3
 </t>
-<t tx="tsc.20180211222256.12">/home/tsc/Desktop/blob_test.db3
-
-Words: '71'
-Amount: 3.0
-Time: 4
-</t>
-<t tx="tsc.20180211222256.13">/home/tsc/Desktop/blob_test.db3
-
-Words: '72'
-Amount: 4.0
-Time: 5
-</t>
-<t tx="tsc.20180211222256.14">/home/tsc/Desktop/blob_test.db3
-
-Words: 'testykullman'
-Amount: 12.0
-Time: 0
-</t>
 <t tx="tsc.20180211222256.15">/home/tsc/Desktop/blob_test.db3
 
 Words: 'bloborific'
@@ -118,24 +98,6 @@ Time: 9
 ['Words', 'Amount', 'Time', 'Blobs', 'Filename', 'Extension']
 ['TEXT', 'REAL', 'INTEGER', 'BLOB', 'TEXT', 'TEXT']
 
-</t>
-<t tx="tsc.20180211222256.3">/home/tsc/Desktop/blob_test.db3
-
-Words: '10'
-Amount: 0.08
-Time: 1219
-</t>
-<t tx="tsc.20180211222256.4">/home/tsc/Desktop/blob_test.db3
-
-Words: '12'
-Amount: 'none'
-Time: 'never'
-</t>
-<t tx="tsc.20180211222256.5">/home/tsc/Desktop/blob_test.db3
-
-Words: '37'
-Amount: 'none'
-Time: 'never'
 </t>
 <t tx="tsc.20180211222256.6">/home/tsc/Desktop/blob_test.db3
 
@@ -155,12 +117,72 @@ Words: '32'
 Amount: 1.0
 Time: 2
 </t>
-<t tx="tsc.20180211222256.9">/home/tsc/Desktop/blob_test.db3
+<t tx="tsc.20180211224516.1">@language python
 
-Words: '33'
-Amount: 2.0
-Time: 1
+import re
+import sqlite3
+import subprocess
+import PyQt5
+import PyQt5.QtWidgets
+from PyQt5.QtWidgets import QInputDialog, QDesktopWidget
+    
+'''open the blob whose node is currently selected using an external tool'''        
+
+table_node = p.parent()
+c.selectPosition(table_node)
+table_name = table_node.h
+table_name = re.sub(r'^.*@tbl\s', '', str(table_name))
+
+lines = re.split(r'\n', p.b)
+filename = p.h
+blobfile = lines[0]
+
+blob_col = 3
+
+sqlite_temp_dir = c.config.getString('sqlite_temp_dir')
+
+if not sqlite_temp_dir:
+    raise NoTempDirectory
+
+sqlite_temp_dir = sqlite_temp_dir[1:-1]
+
+p = g.findNodeAnywhere(c, '@data external tools')
+tools = re.split(r'\n', p.b)
+tools = tools[2:-1]
+c.selectThreadBack()
+c.redraw()
+
+title = 'leo4sqlite - open blob - choose tool'
+dlg = QInputDialog()
+dlg.setWindowTitle(title)
+qtRectangle = dlg.frameGeometry()
+centerPoint = QDesktopWidget().availableGeometry().center()
+qtRectangle.moveCenter(centerPoint)
+dlg.move(qtRectangle.topLeft())
+
+dlg.setStyleSheet('padding: 3px; background: white');
+ext_tool, okPressed = dlg.getItem(dlg, "leo4sqlite","select external tool:", tools, 0, False)
+
+conn = sqlite3.connect(blobfile)
+cursor = conn.cursor()
+
+cursor.execute("select * from %s where Filename = ?" % (table_name), [filename])
+row = cursor.fetchone()
+
+filepath = (sqlite_temp_dir + '//' + filename)
+filename = filename[:-4]
+
+with open(filepath, "wb") as output_file:        
+    cursor.execute("select * from %s where Filename = ?" % (table_name), [filename])        
+    ablob = cursor.fetchone()
+    output_file.write(ablob[blob_col])
+    cursor.close()
+
+    p = subprocess.Popen([ext_tool, filepath])
 </t>
+<t tx="tsc.20180211224851.1"></t>
+<t tx="tsc.20180211224859.1"></t>
+<t tx="tsc.20180211224910.1"></t>
 <t tx="tscv11.20180119175627.1">**leo4sqlite.py plugin**
 
 *This node belongs at the top level of 'leoPlugins.leo'*

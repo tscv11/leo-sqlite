@@ -1,7 +1,41 @@
 #@+leo-ver=5-thin
 #@+node:tsc.20180206152253.2: * @file /home/tsc/Desktop/leo4sqlite-file/leo4sqlite@file.py
-#@+others
-#@+node:tsc.20180209234613.5: ** Declarations
+#@@language python
+#@+<< version history >>
+#@+node:tsc.20180212011016.1: ** << version history >>
+'''
+# version history
+# 
+# *leo4sqlite.py*
+# 
+#  **v.010** - first working version of plugin.
+# 
+#  **v.011** - the import layout is now saved in the @tbl node so the export layout can be chosen automatically.
+# 
+#  **v.015** - added 'sqlite-clear-data', 'sqlite-reset-temp', and 'sqlite-purge-files'.
+# 
+#  **v.016** - fixed a bug in 'sqlite-extract-table', thanks to Terry Brown.
+# 
+#  **v.020** - added command 'sqlite-edit-blob', which enables the user to edit indvidual text columns for a 'blob'.
+# 
+#  **v.022** - various small fixes and enhancements suggested by Terry Brown
+#  
+#  **v.023** - dialogs now have the standard Leo icon in the upper-left hand corner.
+#  
+#  **v.024** - the 'get external database' dialog now has two improved options: 1) all files   or   2) .db .db3 .sqlite .sqlite3
+#  
+#  **v.026** - added basic error handling
+#  
+#  **v.029** - added settings to auto-delete temporary blob files on exiting Leo and updated the documentation.
+#  
+#  **v.030** - removed the unused Leo4SQLiteController node.
+# 
+#  **v.031** - subclassed custom exceptions instead of creating a separate class for each error.
+#  
+#  **v.033** - added sqlite-make-template command, which creates a new outline with all all of the standard nodes needed to use the script.
+#@-<< version history >>
+#@+<< docstring >>
+#@+node:tsc.20180212011036.1: ** << docstring >>
 '''
 **leo4sqlite v0.31** - by tscv11
  |
@@ -196,38 +230,10 @@
 | includes the standard nodes you'll need, ready for customization.
 |
 '''
+#@-<< docstring >>
+#@+<< imports >>
+#@+node:tsc.20180209234613.5: ** << imports >>
 
-'''
-# version history
-# 
-# *leo4sqlite.py*
-# 
-#  **v.010** - first working version of plugin.
-# 
-#  **v.011** - the import layout is now saved in the @tbl node so the export layout can be chosen automatically.
-# 
-#  **v.015** - added 'sqlite-clear-data', 'sqlite-reset-temp', and 'sqlite-purge-files'.
-# 
-#  **v.016** - fixed a bug in 'sqlite-extract-table', thanks to Terry Brown.
-# 
-#  **v.020** - added command 'sqlite-edit-blob', which enables the user to edit indvidual text columns for a 'blob'.
-# 
-#  **v.022** - various small fixes and enhancements suggested by Terry Brown
-#  
-#  **v.023** - dialogs now have the standard Leo icon in the upper-left hand corner.
-#  
-#  **v.024** - the 'get external database' dialog now has two improved options: 1) all files   or   2) .db .db3 .sqlite .sqlite3
-#  
-#  **v.026** - added basic error handling
-#  
-#  **v.029** - added settings to auto-delete temporary blob files on exiting Leo and updated the documentation.
-#  
-#  **v.030** - removed the unused Leo4SQLiteController node.
-# 
-#  **v.031** - subclassed custom exceptions instead of creating a separate class for each error.
-#  
-#  **v.033** - added sqlite-make-template command, which creates a new outline with all all of the standard nodes needed to use the script.
-'''
 import leo.core.leoGlobals as g
 
 import glob
@@ -242,6 +248,8 @@ from PyQt5.QtWidgets import QLineEdit
 from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtWidgets import QInputDialog
 from PyQt5.QtWidgets import QDesktopWidget
+#@-<< imports >>
+#@+others
 #@+node:tsc.20180209234613.6: ** onCreate
 def onCreate (tag, keys):
     
@@ -1624,6 +1632,5 @@ def sqlite_purge_files(event):
 
 #@-others
 #@-others
-#@@language python
 #@@tabwidth -4
 #@-leo
