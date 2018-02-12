@@ -9,7 +9,7 @@
 <preferences/>
 <find_panel_settings/>
 <vnodes>
-<v t="tsc.20180211141409.1" a="E"><vh>@settings</vh>
+<v t="tsc.20180211141409.1"><vh>@settings</vh>
 <v t="tsc.20180211195528.1"><vh>@data free-layout-layout</vh></v>
 <v t="tsc.20180211141409.2"><vh>@data external tools</vh></v>
 <v t="tsc.20180211141409.3"><vh>@string sqlite_output_dir = "/home/tsc/Desktop/leo4sqlite-output"</vh></v>
@@ -18,15 +18,22 @@
 <v t="tsc.20180211141409.6"><vh>/home/tsc/Desktop/leo4sqlite/leo4sqlite.py</vh></v>
 <v t="tsc.20180211141409.7"><vh>/home/tsc/Desktop/leo4sqlite-file/leo4sqlite@file.py</vh></v>
 </v>
-<v t="tscv11.20180119175627.1" a="E"><vh>Sqlite3</vh>
-<v t="tsc.20180206152253.2" a="E"
-expanded="tsc.20180209235407.1,"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
+<v t="tscv11.20180119175627.1"><vh>Sqlite3</vh>
+<v t="tsc.20180206152253.2"><vh>@file /home/tsc/Desktop/leo4sqlite-file/leo4sqlite@file.py</vh></v>
 </v>
 <v t="tsc.20180211141409.8"><vh>temp</vh></v>
-<v t="tsc.20180211185713.2"><vh>@tbl test</vh></v>
 <v t="tsc.20180211141409.9" a="E"><vh>data</vh>
-<v t="tsc.20180211203555.1" a="E"><vh>@db3 /home/tsc/Desktop/blob_test.db3</vh>
-<v t="tsc.20180211203555.2"><vh>@tbl testorama</vh></v>
+<v t="tsc.20180211220324.1" a="E"><vh>@db3 /home/tsc/Desktop/blob_test.db3</vh>
+<v t="tsc.20180211220324.2" a="E"><vh>@tbl testorama</vh>
+<v t="tsc.20180211220324.7"><vh>Screenshot (3).png</vh></v>
+<v t="tsc.20180211220324.8"><vh>Screenshot (4).png</vh></v>
+<v t="tsc.20180211220324.9"><vh>WhatsNew_SimpleNavigation.mp4</vh></v>
+<v t="tsc.20180211220324.10"><vh>Spider.ico</vh></v>
+<v t="tsc.20180211220324.11"><vh>Screenshot (2).png</vh></v>
+<v t="tsc.20180211220324.12"><vh>1366x768._.jpg</vh></v>
+<v t="tsc.20180211220324.13"><vh>ly39gCL._.jpg</vh></v>
+<v t="tsc.20180211220324.15"><vh>Feather-flying.jpg</vh></v>
+</v>
 </v>
 </v>
 </vnodes>
@@ -43,19 +50,6 @@ xviewer
 <t tx="tsc.20180211141409.7"></t>
 <t tx="tsc.20180211141409.8"></t>
 <t tx="tsc.20180211141409.9"></t>
-<t tx="tsc.20180211185713.2">@language md
-
-'bd', ' cv', ' gdfg'
-123, 456.0, 789
-abd, dns, lke
-789, 456, 123
-blue, red, green
-
-column names, column types:
-
-name, amount, date
-text, real, text
-</t>
 <t tx="tsc.20180211195528.1">{
     "content": [
         "_leo_pane:bodyFrame",
@@ -77,25 +71,44 @@ text, real, text
     ],
     "orientation": 1
 }</t>
-<t tx="tsc.20180211203555.1"></t>
-<t tx="tsc.20180211203555.2">filepath: /home/tsc/Desktop/blob_test.db3
+<t tx="tsc.20180211220324.1"></t>
+<t tx="tsc.20180211220324.10">Words: 'testykulls'
+Amount: 1.0
+Time: 2
+</t>
+<t tx="tsc.20180211220324.11">Words: 'baby'
+Amount: 2.0
+Time: 3
+</t>
+<t tx="tsc.20180211220324.12">Words: '71'
+Amount: 3.0
+Time: 4
+</t>
+<t tx="tsc.20180211220324.13">Words: '72'
+Amount: 4.0
+Time: 5
+</t>
+<t tx="tsc.20180211220324.15">Words: 'bloborific'
+Amount: 15.0
+Time: 9
+</t>
+<t tx="tsc.20180211220324.2">filepath: /home/tsc/Desktop/blob_test.db3
 
 ['Words', 'Amount', 'Time', 'Blobs', 'Filename', 'Extension']
 ['TEXT', 'REAL', 'INTEGER', 'BLOB', 'TEXT', 'TEXT']
 
-'10', 0.08, 1219
-'12', 'none', 'never'
-'37', 'none', 'never'
-'18', 'ounce', 'half past'
-'31', 1.0, 2
-'32', 1.0, 2
-'33', 2.0, 1
-'testykulls', 1.0, 2
-'baby', 2.0, 3
-'71', 3.0, 4
-'72', 4.0, 5
-'testykullman', 12.0, 0
-'bloborific', 15.0, 9
+</t>
+<t tx="tsc.20180211220324.7">Words: '31'
+Amount: 1.0
+Time: 2
+</t>
+<t tx="tsc.20180211220324.8">Words: '32'
+Amount: 1.0
+Time: 2
+</t>
+<t tx="tsc.20180211220324.9">Words: '33'
+Amount: 2.0
+Time: 1
 </t>
 <t tx="tscv11.20180119175627.1">**leo4sqlite.py plugin**
 

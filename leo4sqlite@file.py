@@ -1370,6 +1370,9 @@ def import_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
     for col in col_nums:
         num_cols = num_cols + 1
     
+    filename_col = num_cols - 2
+    extension_col = num_cols -1
+    
     g.es("\nimporting blob table: " + table_name + "\n")
                     
     delim = ", "
@@ -1390,11 +1393,19 @@ def import_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
             ix = 0
             for col in cols:
                 if col != "" and col_types[cx] != "BLOB":
-                    new_row = new_row + col + ", "
+                    if cx == 0: col = col[1:]
+                    new_row = new_row + col_names[cx] + ": " + col + "\n"
                     cx = cx + 1
                 new_row = re.sub(r'[\"]', " ", str(new_row))   
-                                
-            p.b = p.b + str(new_row[1:-2]) + "\n"
+             
+            if cx == 1:                    
+                p = p.insertAsLastChild()
+            else:
+               p = p.insertAfter()
+                
+            c.selectPosition(p)
+            p.h = row[filename_col] + row[extension_col]
+            p.b = p.b + str(new_row[:-1]) + "\n"
             new_row = ""
 
     g.es("done\n")
