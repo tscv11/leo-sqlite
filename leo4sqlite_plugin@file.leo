@@ -18,21 +18,26 @@
 <v t="tsc.20180211141409.6"><vh>/home/tsc/Desktop/leo4sqlite/leo4sqlite.py</vh></v>
 <v t="tsc.20180211141409.7"><vh>/home/tsc/Desktop/leo4sqlite-file/leo4sqlite@file.py</vh></v>
 </v>
-<v t="tscv11.20180119175627.1"><vh>Sqlite3</vh>
-<v t="tsc.20180206152253.2"><vh>@file /home/tsc/Desktop/leo4sqlite-file/leo4sqlite@file.py</vh></v>
+<v t="tscv11.20180119175627.1" a="E"><vh>Sqlite3</vh>
+<v t="tsc.20180206152253.2" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580500000069636f6e7371035d71047d7105285807000000796f666673657471064b005807000000786f666673657471074b02580500000077686572657108580e0000006265666f7265486561646c696e657109580400000074797065710a580400000066696c65710b58020000006f6e710c5805000000766e6f6465710d580700000072656c50617468710e581800000066696c655f69636f6e732f66696c655f66696c652e706e67710f680b583f0000002f686f6d652f7473632f4465736b746f702f6c656f2d656469746f722f6c656f2f49636f6e732f66696c655f69636f6e732f66696c655f66696c652e706e677110580a00000076697375616c49636f6e7111580100000031711258040000007870616471134b01756173732e"><vh>@file /home/tsc/Desktop/leo4sqlite-file/leo4sqlite@file.py</vh></v>
 </v>
 <v t="tsc.20180211141409.8"><vh>temp</vh></v>
 <v t="tsc.20180211141409.9" a="E"><vh>data</vh>
-<v t="tsc.20180211220324.1" a="E"><vh>@db3 /home/tsc/Desktop/blob_test.db3</vh>
-<v t="tsc.20180211220324.2" a="E"><vh>@tbl testorama</vh>
-<v t="tsc.20180211220324.7"><vh>Screenshot (3).png</vh></v>
-<v t="tsc.20180211220324.8"><vh>Screenshot (4).png</vh></v>
-<v t="tsc.20180211220324.9"><vh>WhatsNew_SimpleNavigation.mp4</vh></v>
-<v t="tsc.20180211220324.10"><vh>Spider.ico</vh></v>
-<v t="tsc.20180211220324.11"><vh>Screenshot (2).png</vh></v>
-<v t="tsc.20180211220324.12"><vh>1366x768._.jpg</vh></v>
-<v t="tsc.20180211220324.13"><vh>ly39gCL._.jpg</vh></v>
-<v t="tsc.20180211220324.15"><vh>Feather-flying.jpg</vh></v>
+<v t="tsc.20180211222256.1" a="E"><vh>@db3 /home/tsc/Desktop/blob_test.db3</vh>
+<v t="tsc.20180211222256.2" a="E"><vh>@tbl testorama</vh>
+<v t="tsc.20180211222256.3"><vh>and.png</vh></v>
+<v t="tsc.20180211222256.4"><vh>i second.jpg</vh></v>
+<v t="tsc.20180211222256.5"><vh>that.jpg</vh></v>
+<v t="tsc.20180211222256.6"><vh>dumb.jpg</vh></v>
+<v t="tsc.20180211222256.7"><vh>Screenshot (3).png</vh></v>
+<v t="tsc.20180211222256.8"><vh>Screenshot (4).png</vh></v>
+<v t="tsc.20180211222256.9"><vh>WhatsNew_SimpleNavigation.mp4</vh></v>
+<v t="tsc.20180211222256.10"><vh>Spider.ico</vh></v>
+<v t="tsc.20180211222256.11"><vh>Screenshot (2).png</vh></v>
+<v t="tsc.20180211222256.12"><vh>1366x768._.jpg</vh></v>
+<v t="tsc.20180211222256.13"><vh>ly39gCL._.jpg</vh></v>
+<v t="tsc.20180211222256.14"><vh>500full-erica-durance._.jpg</vh></v>
+<v t="tsc.20180211222256.15"><vh>Feather-flying.jpg</vh></v>
 </v>
 </v>
 </v>
@@ -71,42 +76,88 @@ xviewer
     ],
     "orientation": 1
 }</t>
-<t tx="tsc.20180211220324.1"></t>
-<t tx="tsc.20180211220324.10">Words: 'testykulls'
+<t tx="tsc.20180211222256.1"></t>
+<t tx="tsc.20180211222256.10">/home/tsc/Desktop/blob_test.db3
+
+Words: 'testykulls'
 Amount: 1.0
 Time: 2
 </t>
-<t tx="tsc.20180211220324.11">Words: 'baby'
+<t tx="tsc.20180211222256.11">/home/tsc/Desktop/blob_test.db3
+
+Words: 'baby'
 Amount: 2.0
 Time: 3
 </t>
-<t tx="tsc.20180211220324.12">Words: '71'
+<t tx="tsc.20180211222256.12">/home/tsc/Desktop/blob_test.db3
+
+Words: '71'
 Amount: 3.0
 Time: 4
 </t>
-<t tx="tsc.20180211220324.13">Words: '72'
+<t tx="tsc.20180211222256.13">/home/tsc/Desktop/blob_test.db3
+
+Words: '72'
 Amount: 4.0
 Time: 5
 </t>
-<t tx="tsc.20180211220324.15">Words: 'bloborific'
+<t tx="tsc.20180211222256.14">/home/tsc/Desktop/blob_test.db3
+
+Words: 'testykullman'
+Amount: 12.0
+Time: 0
+</t>
+<t tx="tsc.20180211222256.15">/home/tsc/Desktop/blob_test.db3
+
+Words: 'bloborific'
 Amount: 15.0
 Time: 9
 </t>
-<t tx="tsc.20180211220324.2">filepath: /home/tsc/Desktop/blob_test.db3
+<t tx="tsc.20180211222256.2">filepath: /home/tsc/Desktop/blob_test.db3
 
 ['Words', 'Amount', 'Time', 'Blobs', 'Filename', 'Extension']
 ['TEXT', 'REAL', 'INTEGER', 'BLOB', 'TEXT', 'TEXT']
 
 </t>
-<t tx="tsc.20180211220324.7">Words: '31'
+<t tx="tsc.20180211222256.3">/home/tsc/Desktop/blob_test.db3
+
+Words: '10'
+Amount: 0.08
+Time: 1219
+</t>
+<t tx="tsc.20180211222256.4">/home/tsc/Desktop/blob_test.db3
+
+Words: '12'
+Amount: 'none'
+Time: 'never'
+</t>
+<t tx="tsc.20180211222256.5">/home/tsc/Desktop/blob_test.db3
+
+Words: '37'
+Amount: 'none'
+Time: 'never'
+</t>
+<t tx="tsc.20180211222256.6">/home/tsc/Desktop/blob_test.db3
+
+Words: '18'
+Amount: 'ounce'
+Time: 'half past'
+</t>
+<t tx="tsc.20180211222256.7">/home/tsc/Desktop/blob_test.db3
+
+Words: '31'
 Amount: 1.0
 Time: 2
 </t>
-<t tx="tsc.20180211220324.8">Words: '32'
+<t tx="tsc.20180211222256.8">/home/tsc/Desktop/blob_test.db3
+
+Words: '32'
 Amount: 1.0
 Time: 2
 </t>
-<t tx="tsc.20180211220324.9">Words: '33'
+<t tx="tsc.20180211222256.9">/home/tsc/Desktop/blob_test.db3
+
+Words: '33'
 Amount: 2.0
 Time: 1
 </t>

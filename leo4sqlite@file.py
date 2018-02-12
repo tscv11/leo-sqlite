@@ -1401,10 +1401,11 @@ def import_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
             if cx == 1:                    
                 p = p.insertAsLastChild()
             else:
-               p = p.insertAfter()
+                p = p.insertAfter()
                 
             c.selectPosition(p)
             p.h = row[filename_col] + row[extension_col]
+            p.b = p.b + str(filepath) + "\n\n"
             p.b = p.b + str(new_row[:-1]) + "\n"
             new_row = ""
 
