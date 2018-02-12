@@ -1365,7 +1365,6 @@ def import_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
     
     table_name = c._leo4sqlite['table_name']
     filepath = c._leo4sqlite['db_filename']
-    #layout = c._leo4sqlite['layout']
     
     num_cols = 0
     for col in col_nums:
@@ -1373,15 +1372,13 @@ def import_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
     
     g.es("\nimporting blob table: " + table_name + "\n")
                     
-    rx = 0
     delim = ", "
     new_row = ""
     
     p.b = p.b + "filepath: " + str(filepath) + "\n\n"
     p.b = p.b + str(col_names) + "\n"
     p.b = p.b + str(col_types) + "\n\n"
-    #p.b = p.b + str("layout: " + layout) + "\n\n"
-
+    
     conn = sqlite3.connect(filepath)
     cursor = conn.cursor()
     for row in cursor.execute("SELECT * FROM " + table_name):
@@ -1392,27 +1389,19 @@ def import_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
 
             ix = 0
             for col in cols:
-                if col != "":
-                    if col_types[ix] == "BLOB":
-                        cx += 1
-                        pass
-                    else:
-                        new_row = new_row + col + ", "
-                        
+                if col != "" and col_types[cx] != "BLOB":
+                    new_row = new_row + col + ", "
                     cx = cx + 1
                 new_row = re.sub(r'[\"]', " ", str(new_row))   
                                 
-            p.b = p.b + str(new_row[1:-3]) + "\n"
+            p.b = p.b + str(new_row[1:-2]) + "\n"
             new_row = ""
-            rx = rx + 1       
-    
+
     g.es("done\n")
     c.redraw()
     headline = ("@tbl " + table_name)    
     tbl_node = g.findNodeAnywhere(c, (headline))
     c.selectPosition(tbl_node)
-
-    g.es('still triggd')
 #@+node:tsc.20180209234613.40: ** export_blobs
 def export_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
     
