@@ -9,7 +9,7 @@
 <preferences/>
 <find_panel_settings/>
 <vnodes>
-<v t="tsc.20180211141409.1"><vh>@settings</vh>
+<v t="tsc.20180211141409.1" a="E"><vh>@settings</vh>
 <v t="tsc.20180211195528.1"><vh>@data free-layout-layout</vh></v>
 <v t="tsc.20180211224859.1"><vh>@button extract-blob</vh></v>
 <v t="tsc.20180211224910.1"><vh>@button insert-blob</vh></v>
@@ -18,12 +18,13 @@
 <v t="tsc.20180211141409.2"><vh>@data external tools</vh></v>
 <v t="tsc.20180211141409.3"><vh>@string sqlite_output_dir = "/home/tsc/Desktop/leo4sqlite-output"</vh></v>
 <v t="tsc.20180211141409.4"><vh>@string sqlite_temp_dir = "/home/tsc/Desktop/leo4sqlite-temp"</vh></v>
-<v t="tsc.20180211141409.5"><vh>/home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
-<v t="tsc.20180211141409.6"><vh>/home/tsc/Desktop/leo4sqlite/leo4sqlite.py</vh></v>
-<v t="tsc.20180211141409.7"><vh>/home/tsc/Desktop/leo4sqlite-file/leo4sqlite@file.py</vh></v>
+<v t="tsc.20180211141409.5"><vh>@@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
+<v t="tsc.20180211141409.6"><vh>@@file /home/tsc/Desktop/leo4sqlite/leo4sqlite.py</vh></v>
+<v t="tsc.20180211141409.7"><vh>@@file /home/tsc/Desktop/leo4sqlite-file/leo4sqlite@file.py</vh></v>
 </v>
-<v t="tscv11.20180119175627.1"><vh>Sqlite3</vh>
-<v t="tsc.20180206152253.2"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
+<v t="tscv11.20180119175627.1" a="E"><vh>Sqlite3</vh>
+<v t="tsc.20180206152253.2" a="E"
+expanded="tsc.20180209234613.16,"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
 </v>
 <v t="tsc.20180211141409.8"><vh>temp</vh></v>
 <v t="tsc.20180211141409.9" a="E"><vh>data</vh>
@@ -119,6 +120,8 @@ Time: 2
 </t>
 <t tx="tsc.20180211224516.1">@language python
 
+'''open the blob whose node is currently selected using an external tool'''        
+
 import re
 import sqlite3
 import subprocess
@@ -126,24 +129,19 @@ import PyQt5
 import PyQt5.QtWidgets
 from PyQt5.QtWidgets import QInputDialog, QDesktopWidget
     
-'''open the blob whose node is currently selected using an external tool'''        
-
 table_node = p.parent()
 c.selectPosition(table_node)
 table_name = table_node.h
 table_name = re.sub(r'^.*@tbl\s', '', str(table_name))
 
-lines = re.split(r'\n', p.b)
 filename = p.h
+lines = re.split(r'\n', p.b)
 blobfile = lines[0]
-
 blob_col = 3
 
 sqlite_temp_dir = c.config.getString('sqlite_temp_dir')
-
 if not sqlite_temp_dir:
     raise NoTempDirectory
-
 sqlite_temp_dir = sqlite_temp_dir[1:-1]
 
 p = g.findNodeAnywhere(c, '@data external tools')
@@ -180,7 +178,90 @@ with open(filepath, "wb") as output_file:
 
     p = subprocess.Popen([ext_tool, filepath])
 </t>
-<t tx="tsc.20180211224851.1"></t>
+<t tx="tsc.20180211224851.1">@language python
+
+''' view the selected blob as a temporary file that can be deleted automatically when Leo closes. This is controlled with a @settings tree node as follows: @bool delete_temp_files = 1: yes | 0: no '''
+
+import re
+import sqlite3
+import subprocess
+import PyQt5
+import PyQt5.QtWidgets
+from PyQt5.QtWidgets import QInputDialog, QDesktopWidget
+    
+img_types = ['.png', '.jpg', '.bmp', '.gif']
+vid_types = ['.mp4', '.avi', '.wmv', '.flv', '.mov', '.mkv']
+
+#prev_nd = c.p.v
+table_node = p.parent()
+c.selectPosition(table_node)
+table_name = table_node.h
+table_name = re.sub(r'^.*@tbl\s', '', str(table_name))
+g.es(table_name)
+#c.selectPosition(prev_nd)
+
+lines = re.split(r'\n', p.b)
+filename = p.h
+g.es(filename)
+fn_len = len(p.h) - 4
+extension = filename[fn_len:]
+g.es(extension)
+blobfile = lines[0]
+g.es(blobfile)
+blob_col = 3
+
+temp_dir = c.config.getString("sqlite_temp_dir")
+if not temp_dir:
+    raise NoTempDirectory    
+temp_dir = temp_dir[1:-1]
+
+ext_tools = g.findNodeAnywhere(c, '@data external tools')
+tools = re.split(r'\n', ext_tools.b)
+tools = tools[2:-1]
+    
+conn = sqlite3.connect(blobfile)
+cursor = conn.cursor()
+
+fn_no_ext = filename[:-4]
+g.es(fn_no_ext)
+
+filepath = temp_dir + "/" + filename
+
+ablob = []
+
+with open(filepath, "wb") as output_file:               
+    cursor.execute("select * from %s where Filename = ?" % (table_name), [fn_no_ext]) 
+    ablob = cursor.fetchone()
+    output_file.write(ablob[blob_col])
+    cursor.close()
+    
+    if extension in img_types: 
+        ph2b =  (r"@image " + filename)
+        g.es(ph2b)
+    if extension in vid_types:
+        ph2b =  (r"@movie " + filename)
+        g.es(ph2b)
+        
+    p = g.findNodeAnywhere(c, "temp")
+    c.selectPosition(p)
+    
+    for child in p.children():
+        if child.h == ph2b:
+            c.selectPosition(child)
+            c.executeMinibufferCommand('vr-show')
+            raise NodeExists()
+            break
+    
+    p = p.insertAsLastChild()
+    c.selectPosition(p)
+    p.h = ph2b
+    p.b = filepath
+    
+    c.executeMinibufferCommand('vr-show')
+    c.redraw()
+    p = p.parent() 
+    c.redraw()    
+</t>
 <t tx="tsc.20180211224859.1"></t>
 <t tx="tsc.20180211224910.1"></t>
 <t tx="tscv11.20180119175627.1">**leo4sqlite.py plugin**

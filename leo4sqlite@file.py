@@ -33,12 +33,13 @@
 #  **v.031** - subclassed custom exceptions instead of creating a separate class for each error.
 #  
 #  **v.033** - added sqlite-make-template command, which creates a new outline with all all of the standard nodes needed to use the script.
+'''
 #@-<< version history >>
 #@+<< docstring >>
 #@+node:tsc.20180212011036.1: ** << docstring >>
 '''
-**leo4sqlite v0.31** - by tscv11
- |
+**leo4sqlite v0.50** - by tscv11
+|
  
 *Introduction:*
 
@@ -110,6 +111,7 @@
  | sqlite-make-template
  | sqlite-import-table
  | sqlite-export-table
+ | sqlite-import-blobs
  | sqlite-insert-blob
  | sqlite-extract-blob
  | sqlite-view-blob
@@ -228,7 +230,6 @@
 
 | Included with this distribution you'll find a template made for leo4sqlite that
 | includes the standard nodes you'll need, ready for customization.
-|
 '''
 #@-<< docstring >>
 #@+<< imports >>
