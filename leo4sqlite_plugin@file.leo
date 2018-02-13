@@ -10,11 +10,18 @@
 <find_panel_settings/>
 <vnodes>
 <v t="tsc.20180211141409.1" a="E"><vh>@settings</vh>
-<v t="tsc.20180211195528.1"><vh>@data free-layout-layout</vh></v>
-<v t="tsc.20180211224859.1"><vh>@button extract-blob</vh></v>
-<v t="tsc.20180211224910.1"><vh>@button insert-blob</vh></v>
+<v t="tsc.20180212181615.1"><vh>@data free-layout-layout</vh></v>
+<v t="tsc.20180212181416.1"><vh>@bookmarks</vh>
+<v t="tsc.20180212181709.1"><vh>export-blobs</vh></v>
+<v t="tsc.20180212181502.1"><vh>leo4sqlite.py</vh></v>
+</v>
 <v t="tsc.20180211224851.1"><vh>@button view-blob</vh></v>
+<v t="tsc.20180211224859.1"><vh>@button extract-blob</vh></v>
 <v t="tsc.20180211224516.1"><vh>@button open-blob</vh></v>
+<v t="tsc.20180212171515.1"><vh>@button export-blobs</vh>
+<v t="tsc.20180212171515.2"><vh>@@button export-blobs</vh></v>
+</v>
+<v t="tsc.20180212174950.1"><vh>@button import-blobs</vh></v>
 <v t="tsc.20180211141409.2"><vh>@data external tools</vh></v>
 <v t="tsc.20180211141409.3"><vh>@string sqlite_output_dir = "/home/tsc/Desktop/leo4sqlite-output"</vh></v>
 <v t="tsc.20180211141409.4"><vh>@string sqlite_temp_dir = "/home/tsc/Desktop/leo4sqlite-temp"</vh></v>
@@ -23,20 +30,19 @@
 <v t="tsc.20180211141409.7"><vh>@@file /home/tsc/Desktop/leo4sqlite-file/leo4sqlite@file.py</vh></v>
 </v>
 <v t="tscv11.20180119175627.1" a="E"><vh>Sqlite3</vh>
-<v t="tsc.20180206152253.2" a="E"
-expanded="tsc.20180209234613.16,"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
+<v t="tsc.20180206152253.2" a="E"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
 </v>
 <v t="tsc.20180211141409.8"><vh>temp</vh></v>
-<v t="tsc.20180211141409.9" a="E"><vh>data</vh>
-<v t="tsc.20180211222256.1" a="E"><vh>@db3 /home/tsc/Desktop/blob_test.db3</vh>
-<v t="tsc.20180211222256.2" a="E"><vh>@tbl testorama</vh>
-<v t="tsc.20180211222256.6"><vh>dumb.jpg</vh></v>
-<v t="tsc.20180211222256.11"><vh>Screenshot (2).png</vh></v>
-<v t="tsc.20180211222256.15"><vh>Feather-flying.jpg</vh></v>
-<v t="tsc.20180211222256.7"><vh>Screenshot (3).png</vh></v>
-<v t="tsc.20180211222256.10"><vh>Spider.ico</vh></v>
-<v t="tsc.20180211222256.8"><vh>Screenshot (4).png</vh></v>
-</v>
+<v t="tsc.20180211141409.9"><vh>data</vh>
+<v t="tsc.20180212183140.1" a="E"><vh>@db3 /home/tsc/Desktop/blob_test.db3</vh>
+<v t="tsc.20180212183140.2"><vh>@tbl testorama</vh></v>
+<v t="tsc.20180212183140.3"><vh>dumb.jpg</vh></v>
+<v t="tsc.20180212183140.4"><vh>Screenshot (3).png</vh></v>
+<v t="tsc.20180212183140.5"><vh>Screenshot (4).png</vh></v>
+<v t="tsc.20180212183140.6"><vh>Spider.ico</vh></v>
+<v t="tsc.20180212183140.7"><vh>Screenshot (2).png</vh></v>
+<v t="tsc.20180212183140.8"><vh>ly39gCL._.jpg</vh></v>
+<v t="tsc.20180212183140.9"><vh>Feather-flying.jpg</vh></v>
 </v>
 </v>
 </vnodes>
@@ -54,70 +60,6 @@ gimp-2.8
 <t tx="tsc.20180211141409.7"></t>
 <t tx="tsc.20180211141409.8"></t>
 <t tx="tsc.20180211141409.9"></t>
-<t tx="tsc.20180211195528.1">{
-    "content": [
-        "_leo_pane:bodyFrame",
-        {
-            "content": [
-                "_leo_pane:outlineFrame",
-                "_leo_pane:logFrame"
-            ],
-            "sizes": [
-                309,
-                275
-            ],
-            "orientation": 2
-        }
-    ],
-    "sizes": [
-        807,
-        547
-    ],
-    "orientation": 1
-}</t>
-<t tx="tsc.20180211222256.1"></t>
-<t tx="tsc.20180211222256.10">/home/tsc/Desktop/blob_test.db3
-
-Words: 'testykulls'
-Amount: 1.0
-Time: 2
-</t>
-<t tx="tsc.20180211222256.11">/home/tsc/Desktop/blob_test.db3
-
-Words: 'baby'
-Amount: 2.0
-Time: 3
-</t>
-<t tx="tsc.20180211222256.15">/home/tsc/Desktop/blob_test.db3
-
-Words: 'bloborific'
-Amount: 15.0
-Time: 9
-</t>
-<t tx="tsc.20180211222256.2">filepath: /home/tsc/Desktop/blob_test.db3
-
-['Words', 'Amount', 'Time', 'Blobs', 'Filename', 'Extension']
-['TEXT', 'REAL', 'INTEGER', 'BLOB', 'TEXT', 'TEXT']
-
-</t>
-<t tx="tsc.20180211222256.6">/home/tsc/Desktop/blob_test.db3
-
-Words: '18'
-Amount: 'ounce'
-Time: 'half past'
-</t>
-<t tx="tsc.20180211222256.7">/home/tsc/Desktop/blob_test.db3
-
-Words: '31'
-Amount: 1.0
-Time: 2
-</t>
-<t tx="tsc.20180211222256.8">/home/tsc/Desktop/blob_test.db3
-
-Words: '32'
-Amount: 1.0
-Time: 2
-</t>
 <t tx="tsc.20180211224516.1">@language python
 
 '''open the blob whose node is currently selected using an external tool'''        
@@ -263,7 +205,262 @@ with open(filepath, "wb") as output_file:
     c.redraw()    
 </t>
 <t tx="tsc.20180211224859.1"></t>
-<t tx="tsc.20180211224910.1"></t>
+<t tx="tsc.20180212171515.1">@language python
+
+'''export table with any text field changes included.'''
+
+import re
+import sqlite3
+
+child_h = []
+child_b = []
+col_names = []
+col_values = []
+
+p = c.p
+parent = p.parent()
+c.selectPosition(parent)
+table_name = c.p.h[5:]
+
+# for child in parent.children():
+    # child_h.append(child.h)
+    # child_b = re.split(r'\n', str(child.b))
+
+#conn = sqlite3.connect(blobfile)
+#cur = conn.cursor()
+
+keys = []
+vals = []
+
+new_row = ''
+
+#child_b = child_b[2:]
+
+for child in parent.children():
+    g.es(child.h)
+
+    g.es("\n" + table_name + "\n")
+    
+    child_b = re.split(r'\n', child.b)
+    for line in child_b:
+        line = re.sub(r'^.*match=', '', line)
+        key_val = re.split(r':\s', line)
+        
+        i = 0
+        for field in key_val:
+            if i == 0 and field != "":
+                #g.es("key: " + str(field))
+                keys.append(field)
+            else:
+                if i == 1 and field != "":
+                    #g.es("val: " + str(field))
+                    vals.append(field)
+            i += 1
+    
+@ 
+    i = 0
+    for col_name in keys:
+        col_names.append(col_name)
+        col_values.append(vals[i])
+        g.es(col_names[i])
+        g.es(col_values[i])
+        i += 1
+    
+conn = sqlite3.connect(blobfile)
+cursor = conn.cursor()
+
+for col_name in col_names:
+    name = col_names[i]
+    value = col_values[i]
+    cur.execute("UPDATE %s SET %s = %s" % (table_name, name, value)
+    
+cur.execute("DROP TABLE " + table_name)
+    print("\ndropping old table")
+    cur.execute("CREATE TABLE " + table_name + " " + sql)
+    print("creating new table")</t>
+<t tx="tsc.20180212171515.2">@
+@@language python
+
+'''export table with any text field changes included.'''
+
+import re
+import sqlite3
+
+child_h = []
+child_b = []
+
+p = c.p
+parent = p.parent()
+c.selectPosition(parent)
+table_name = c.p.h[5:]
+
+for child in parent.children():
+    child_h.append(child.h)
+    child_b = re.split(r'\n', str(child.b))
+    blobfile = child_b[0]
+    #for line in child_b:
+        #key_val = re.sub(r'^&lt;.*:\s', '', line)
+
+conn = sqlite3.connect(blobfile)
+cur = conn.cursor()
+
+col_cnt = 0        
+row_cnt = 0
+new_row = ''
+
+for row in cur.execute("select * from %s" % (table_name)):
+    g.es(table_name)
+    for line in child_b:
+        line = re.sub(r'^.*match=', '', line)
+        #key_val = re.sub(r'.*:\'&gt;\s', '', line)
+        key_val = re.split(r':\s', line)
+        #key = re.sub(r'.*:', '', line)
+        #val = re.sub(r'^.*:\s', '', key_val) 
+        #g.es(key_val[0])
+        #g.es(key_val[1])
+        for key in key_val:
+            g.es(key)
+        #new_row = new_row + str(line_key + line_val) + "\n"
+        col_cnt += 1
+    row_cnt += 1
+
+#g.es(new_row)
+     
+</t>
+<t tx="tsc.20180212174950.1">@language python
+
+#import_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
+#table_name = c._leo4sqlite['table_name']
+
+import re
+import sqlite3
+
+child_h = []
+child_b = []
+col_names = []
+col_values = []
+
+p = c.p
+parent = p.parent()
+c.selectPosition(parent)
+table_name = c.p.h[5:]
+
+for child in parent.children():
+    child_h.append(child.h)
+    child_b = re.split(r'\n', str(child.b))
+    blobfile = child_b[0]
+
+filepath = blobfile # c._leo4sqlite['db_filename']
+
+num_cols = 0
+for col in col_nums:
+    num_cols = num_cols + 1
+
+filename_col = num_cols - 2
+
+g.es("\nimporting blob table: " + table_name + "\n")
+                
+delim = ", "
+new_row = ""
+
+#p.b = p.b + "filepath: " + str(filepath) + "\n\n"
+p.b = p.b + str(col_names) + "\n"
+p.b = p.b + str(col_types) + "\n\n"
+conn = sqlite3.connect(filepath)
+cursor = conn.cursor()
+for row in cursor.execute("SELECT * FROM " + table_name):
+
+    cx = 0 
+    if row != "":
+        cols = re.split(delim, str(row))
+
+        #ix = 0
+        for col in cols:
+            if col != "" and col_types[cx] != "BLOB":
+                if cx == 0: col = col[1:]
+                new_row = new_row + col_names[cx] + ": " + col + "\n"
+                cx = cx + 1
+            new_row = re.sub(r'[\"]', " ", str(new_row))   
+         
+        if cx &lt; 3:                    
+            p = p.insertAsLastChild()
+            cx = 0
+        else:
+            p = p.insertAfter()
+            
+        c.selectPosition(p)
+        p.h = row[filename_col] + row[extension_col]
+        #p.b = p.b + str(filepath) + "\n\n"
+        p.b = p.b + str(new_row[:-1]) + "\n"
+        new_row = ""
+
+g.es("done\n")
+c.redraw()
+headline = ("@tbl " + table_name)    
+tbl_node = g.findNodeAnywhere(c, (headline))
+c.selectPosition(tbl_node)
+[]
+[]
+</t>
+<t tx="tsc.20180212181416.1"></t>
+<t tx="tsc.20180212181502.1" __bookmarks="7d7100580700000069735f6475706571014930300a732e">#Sqlite3:1--&gt;@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py:0</t>
+<t tx="tsc.20180212181615.1">{
+    "content": [
+        "_leo_pane:bodyFrame",
+        {
+            "content": [
+                "_leo_bookmarks_show:",
+                "_leo_pane:outlineFrame",
+                "_leo_pane:logFrame"
+            ],
+            "orientation": 2,
+            "sizes": [
+                23,
+                239,
+                276
+            ]
+        }
+    ],
+    "orientation": 1,
+    "sizes": [
+        807,
+        547
+    ]
+}</t>
+<t tx="tsc.20180212181709.1" __bookmarks="7d7100580700000069735f6475706571014930300a732e">#@settings:0--&gt;@button export-blobs:5</t>
+<t tx="tsc.20180212183140.1"></t>
+<t tx="tsc.20180212183140.2">['Words', 'Amount', 'Time', 'Blobs', 'Filename', 'Extension']
+['TEXT', 'REAL', 'INTEGER', 'BLOB', 'TEXT', 'TEXT']
+
+</t>
+<t tx="tsc.20180212183140.3">Words: '18'
+Amount: 'ounce'
+Time: 'half past'
+</t>
+<t tx="tsc.20180212183140.4">Words: '31'
+Amount: 1.0
+Time: 2
+</t>
+<t tx="tsc.20180212183140.5">Words: '32'
+Amount: 1.0
+Time: 2
+</t>
+<t tx="tsc.20180212183140.6">Words: 'testykulls'
+Amount: 1.0
+Time: 2
+</t>
+<t tx="tsc.20180212183140.7">Words: 'baby'
+Amount: 2.0
+Time: 3
+</t>
+<t tx="tsc.20180212183140.8">Words: '72'
+Amount: 4.0
+Time: 5
+</t>
+<t tx="tsc.20180212183140.9">Words: 'bloborific'
+Amount: 15.0
+Time: 9
+</t>
 <t tx="tscv11.20180119175627.1">**leo4sqlite.py plugin**
 
 *This node belongs at the top level of 'leoPlugins.leo'*

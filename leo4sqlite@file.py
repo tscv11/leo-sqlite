@@ -234,7 +234,6 @@
 #@-<< docstring >>
 #@+<< imports >>
 #@+node:tsc.20180209234613.5: ** << imports >>
-
 import leo.core.leoGlobals as g
 
 import glob
@@ -257,7 +256,7 @@ def onCreate (tag, keys):
     c = keys.get('c')
     c._leo4sqlite = {}
 
-    g.registerHandler('end1', delBlobs(c))
+    g.registerHandler('end1', delBlobs)
 #@+node:tsc.20180209234613.7: ** init
 def init ():
 
@@ -1232,8 +1231,7 @@ def export_table3(self, c, p, col_nums, col_names, col_types, blob_col):
     num_cols = 0
     split_blines = []
     clean_blines = []
-    
-    
+      
     for p in p.children():
 
         split_blines = re.split(r'\n', p.b)
@@ -1257,7 +1255,7 @@ def export_table3(self, c, p, col_nums, col_names, col_types, blob_col):
 
     statement = "SELECT name FROM sqlite_master WHERE type='table';"
     if (table_name,) in cur.execute(statement).fetchall():
-        overwrite = g.app.gui.runAskYesNoDialog(c, "overwrite existing table?", message="a table by that name already exists.\nreplace it with current table?") 
+        overwrite = g.app.gui.runAskYesNoDialog(c, "overwrite existing table?", message="a table with that name already exists.\nreplace it with current table?") 
         if overwrite == "no":
             print("cancelled\n")
             return
@@ -1387,7 +1385,7 @@ def import_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
     delim = ", "
     new_row = ""
     
-    p.b = p.b + "filepath: " + str(filepath) + "\n\n"
+    #p.b = p.b + "filepath: " + str(filepath) + "\n\n"
     p.b = p.b + str(col_names) + "\n"
     p.b = p.b + str(col_types) + "\n\n"
     
@@ -1399,7 +1397,7 @@ def import_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
         if row != "":
             cols = re.split(delim, str(row))
 
-            ix = 0
+            #ix = 0
             for col in cols:
                 if col != "" and col_types[cx] != "BLOB":
                     if cx == 0: col = col[1:]
@@ -1407,14 +1405,15 @@ def import_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
                     cx = cx + 1
                 new_row = re.sub(r'[\"]', " ", str(new_row))   
              
-            if cx == 1:                    
+            if cx < 3:                    
                 p = p.insertAsLastChild()
+                cx = 0
             else:
                 p = p.insertAfter()
                 
             c.selectPosition(p)
             p.h = row[filename_col] + row[extension_col]
-            p.b = p.b + str(filepath) + "\n\n"
+            #p.b = p.b + str(filepath) + "\n\n"
             p.b = p.b + str(new_row[:-1]) + "\n"
             new_row = ""
 
@@ -1423,11 +1422,6 @@ def import_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
     headline = ("@tbl " + table_name)    
     tbl_node = g.findNodeAnywhere(c, (headline))
     c.selectPosition(tbl_node)
-#@+node:tsc.20180209234613.40: ** export_blobs
-def export_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
-    
-    g.es('triggd')
-
 #@+node:tsc.20180209234613.41: ** delete_blobs
 def delBlobs(c): 
     
