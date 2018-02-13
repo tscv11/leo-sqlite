@@ -12,21 +12,24 @@
 <v t="tsc.20180211141409.1" a="E"><vh>@settings</vh>
 <v t="tsc.20180212181615.1"><vh>@data free-layout-layout</vh></v>
 <v t="tsc.20180212181416.1"><vh>@bookmarks</vh>
+<v t="tsc.20180212210558.1"><vh>data</vh></v>
 <v t="tsc.20180212181709.1"><vh>export-blobs</vh></v>
 <v t="tsc.20180212181502.1"><vh>leo4sqlite.py</vh></v>
 </v>
-<v t="tsc.20180211224851.1"><vh>@button view-blob</vh></v>
+<v t="tsc.20180212221117.1" a="E"><vh>@buttons</vh>
 <v t="tsc.20180211224859.1"><vh>@button extract-blob</vh></v>
 <v t="tsc.20180211224516.1"><vh>@button open-blob</vh></v>
-<v t="tsc.20180212171515.1"><vh>@button export-blobs</vh>
-<v t="tsc.20180212171515.2"><vh>@@button export-blobs</vh></v>
+<v t="tsc.20180211224851.1"><vh>@button view-blob</vh></v>
+<v t="tsc.20180212174950.1"><vh>@@button import-blobs</vh></v>
+<v t="tsc.20180212205743.1"><vh>@@button export-blobs</vh>
+<v t="tsc.20180212210434.1"><vh>@@button export-blobs</vh></v>
 </v>
-<v t="tsc.20180212174950.1"><vh>@button import-blobs</vh></v>
+</v>
 <v t="tsc.20180211141409.2"><vh>@data external tools</vh></v>
 <v t="tsc.20180211141409.3"><vh>@string sqlite_output_dir = "/home/tsc/Desktop/leo4sqlite-output"</vh></v>
 <v t="tsc.20180211141409.4"><vh>@string sqlite_temp_dir = "/home/tsc/Desktop/leo4sqlite-temp"</vh></v>
-<v t="tsc.20180211141409.5"><vh>@@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
 <v t="tsc.20180211141409.6"><vh>@@file /home/tsc/Desktop/leo4sqlite/leo4sqlite.py</vh></v>
+<v t="tsc.20180211141409.5"><vh>@@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
 <v t="tsc.20180211141409.7"><vh>@@file /home/tsc/Desktop/leo4sqlite-file/leo4sqlite@file.py</vh></v>
 </v>
 <v t="tscv11.20180119175627.1" a="E"><vh>Sqlite3</vh>
@@ -205,129 +208,8 @@ with open(filepath, "wb") as output_file:
     c.redraw()    
 </t>
 <t tx="tsc.20180211224859.1"></t>
-<t tx="tsc.20180212171515.1">@language python
-
-'''export table with any text field changes included.'''
-
-import re
-import sqlite3
-
-child_h = []
-child_b = []
-col_names = []
-col_values = []
-
-p = c.p
-parent = p.parent()
-c.selectPosition(parent)
-table_name = c.p.h[5:]
-
-# for child in parent.children():
-    # child_h.append(child.h)
-    # child_b = re.split(r'\n', str(child.b))
-
-#conn = sqlite3.connect(blobfile)
-#cur = conn.cursor()
-
-keys = []
-vals = []
-
-new_row = ''
-
-#child_b = child_b[2:]
-
-for child in parent.children():
-    g.es(child.h)
-
-    g.es("\n" + table_name + "\n")
-    
-    child_b = re.split(r'\n', child.b)
-    for line in child_b:
-        line = re.sub(r'^.*match=', '', line)
-        key_val = re.split(r':\s', line)
-        
-        i = 0
-        for field in key_val:
-            if i == 0 and field != "":
-                #g.es("key: " + str(field))
-                keys.append(field)
-            else:
-                if i == 1 and field != "":
-                    #g.es("val: " + str(field))
-                    vals.append(field)
-            i += 1
-    
-@ 
-    i = 0
-    for col_name in keys:
-        col_names.append(col_name)
-        col_values.append(vals[i])
-        g.es(col_names[i])
-        g.es(col_values[i])
-        i += 1
-    
-conn = sqlite3.connect(blobfile)
-cursor = conn.cursor()
-
-for col_name in col_names:
-    name = col_names[i]
-    value = col_values[i]
-    cur.execute("UPDATE %s SET %s = %s" % (table_name, name, value)
-    
-cur.execute("DROP TABLE " + table_name)
-    print("\ndropping old table")
-    cur.execute("CREATE TABLE " + table_name + " " + sql)
-    print("creating new table")</t>
-<t tx="tsc.20180212171515.2">@
+<t tx="tsc.20180212174950.1">@
 @@language python
-
-'''export table with any text field changes included.'''
-
-import re
-import sqlite3
-
-child_h = []
-child_b = []
-
-p = c.p
-parent = p.parent()
-c.selectPosition(parent)
-table_name = c.p.h[5:]
-
-for child in parent.children():
-    child_h.append(child.h)
-    child_b = re.split(r'\n', str(child.b))
-    blobfile = child_b[0]
-    #for line in child_b:
-        #key_val = re.sub(r'^&lt;.*:\s', '', line)
-
-conn = sqlite3.connect(blobfile)
-cur = conn.cursor()
-
-col_cnt = 0        
-row_cnt = 0
-new_row = ''
-
-for row in cur.execute("select * from %s" % (table_name)):
-    g.es(table_name)
-    for line in child_b:
-        line = re.sub(r'^.*match=', '', line)
-        #key_val = re.sub(r'.*:\'&gt;\s', '', line)
-        key_val = re.split(r':\s', line)
-        #key = re.sub(r'.*:', '', line)
-        #val = re.sub(r'^.*:\s', '', key_val) 
-        #g.es(key_val[0])
-        #g.es(key_val[1])
-        for key in key_val:
-            g.es(key)
-        #new_row = new_row + str(line_key + line_val) + "\n"
-        col_cnt += 1
-    row_cnt += 1
-
-#g.es(new_row)
-     
-</t>
-<t tx="tsc.20180212174950.1">@language python
 
 #import_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
 #table_name = c._leo4sqlite['table_name']
@@ -461,6 +343,161 @@ Time: 5
 Amount: 15.0
 Time: 9
 </t>
+<t tx="tsc.20180212205743.1">@
+@@language python
+
+'''export table with any text field changes included.'''
+
+import re
+import sqlite3
+
+keys = []
+vals = []
+child_h = []
+child_b = []
+col_names = []
+col_values = []
+
+p = c.p
+parent = p.parent()
+c.selectPosition(parent)
+table_name = re.sub(r'^@tbl\s', '', p.h)
+
+p = p.parent()
+c.selectPosition(p)
+blobfile = p.h[5:]
+p = p.firstChild()
+c.selectPosition(p)
+
+for child in p.children():
+    child_h.append(child.h)
+    child_b = re.split(r'\n', str(child.b))
+
+new_row = ''
+
+#child_b = child_b[2:]
+
+g.es("\n" + table_name + "\n")
+
+for child in parent.children():
+    g.es("\n" + child.h + "\n")
+        
+    child_b = re.split(r'\n', child.b)
+    for line in child_b:
+        line = re.sub(r'^.*match=', '', line)
+        key_val = re.split(r':\s', line)
+        
+        i = 0
+        for field in key_val:
+            if i == 0 and field != "":
+                g.es("key: " + str(field))
+                keys.append(field)
+            else:
+                if i == 1 and field != "":
+                    g.es("val: " + str(field))
+                    vals.append(field)
+            i += 1
+    
+    # i = 0
+    # for col_name in keys:
+        # col_names.append(col_name)
+        # col_values.append(vals[i])
+        # g.es(col_names[i])
+        # g.es(col_values[i])
+        # i += 1
+
+i = 0
+for key in keys:
+    if vals[i] == '':
+        vals[i] = '-'
+        col_names.append(key)
+        col_values.append(vals[i])
+
+conn = sqlite3.connect(blobfile)
+cur = conn.cursor()
+
+i = 0
+for row in cur.execute("SELECT * FROM %s " % (table_name)):
+    g.es(row)
+    
+    #cur.execute("UPDATE %s SET %s = %s" % (table_name, name, value))
+    
+ </t>
+<t tx="tsc.20180212210434.1">@language python
+
+'''export table with any text field changes included.'''
+
+import re
+import sqlite3
+
+child_h = []
+child_b = []
+col_names = []
+col_values = []
+
+p = c.p
+parent = p.parent()
+c.selectPosition(parent)
+table_name = parent.h[5:]
+
+for child in parent.children():
+    child_h.append(child.h)
+    child_b = re.split(r'\n', str(child.b))
+
+#conn = sqlite3.connect(blobfile)
+#cur = conn.cursor()
+
+keys = []
+vals = []
+
+new_row = ''
+
+#child_b = child_b[2:]
+
+g.es("\n" + table_name + "\n")
+
+for child in parent.children():
+    g.es("\n" + child.h + "\n")
+        
+    child_b = re.split(r'\n', child.b)
+    for line in child_b:
+        line = re.sub(r'^.*match=', '', line)
+        key_val = re.split(r':\s', line)
+        
+        i = 0
+        for field in key_val:
+            if i == 0 and field != "":
+                g.es("key: " + str(field))
+                keys.append(field)
+            else:
+                if i == 1 and field != "":
+                    g.es("val: " + str(field))
+                    vals.append(field)
+            i += 1
+    
+@ 
+    i = 0
+    for col_name in keys:
+        col_names.append(col_name)
+        col_values.append(vals[i])
+        g.es(col_names[i])
+        g.es(col_values[i])
+        i += 1
+    
+conn = sqlite3.connect(blobfile)
+cursor = conn.cursor()
+
+for col_name in col_names:
+    name = col_names[i]
+    value = col_values[i]
+    cur.execute("UPDATE %s SET %s = %s" % (table_name, name, value)
+    
+cur.execute("DROP TABLE " + table_name)
+    print("\ndropping old table")
+    cur.execute("CREATE TABLE " + table_name + " " + sql)
+    print("creating new table")</t>
+<t tx="tsc.20180212210558.1" __bookmarks="7d7100580700000069735f6475706571014930300a732e">#data:3</t>
+<t tx="tsc.20180212221117.1"></t>
 <t tx="tscv11.20180119175627.1">**leo4sqlite.py plugin**
 
 *This node belongs at the top level of 'leoPlugins.leo'*
