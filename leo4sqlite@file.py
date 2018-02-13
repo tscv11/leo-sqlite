@@ -1376,12 +1376,12 @@ def import_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
     num_cols = 0
     for col in col_nums:
         num_cols = num_cols + 1
-    
+ 
     filename_col = num_cols - 2
     extension_col = num_cols -1
     
     g.es("\nimporting blob table: " + table_name + "\n")
-                    
+         
     delim = ", "
     new_row = ""
     
