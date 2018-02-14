@@ -1,5 +1,5 @@
 #@+leo-ver=5-thin
-#@+node:tsc.20180206152253.2: * @file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py
+#@+node:tsc.20180206152253.2: * @file /home/tsc/Desktop/leo4sqlite-file/leo4sqlite.py
 #@@language python
 #@+<< version history >>
 #@+node:tsc.20180212011016.1: ** << version history >>
@@ -794,16 +794,13 @@ class InputDialogs(QWidget):
         blob_col = c._leo4sqlite['blob_col']
         layout = c._leo4sqlite['layout']
         action = c._leo4sqlite['action']
-        
-        if action == "import blobs":   
-            import_blobs(self, c, p, col_nums, col_names, col_types, blob_col)
             
         if action == "export blobs":
             export_blobs(self, c, p, col_nums, col_names, col_types, blob_col)
         
-        if blob_col:
-            raise TableIsBlobTable
-            return
+        #if blob_col:
+            #raise TableIsBlobTable
+            #return
         
         db3_h = "@db3 " + str(db_filename)
         p = g.findNodeAnywhere(c, db3_h)
@@ -819,6 +816,11 @@ class InputDialogs(QWidget):
         p.h = "@tbl " + str(c._leo4sqlite['table_name'])
         c.selectPosition(p)
         c.redraw(p)
+        
+        if action == "import blobs":   
+            p = p.lastNode()
+            c.selectPosition(p)
+            import_blobs(self, c, p, col_nums, col_names, col_types, blob_col)
         
         if action == "import table" and blob_col:
             raise TableIsBlobTable
@@ -1372,63 +1374,98 @@ def export_table4(self, c, p, col_nums, col_names, col_types, blob_col):
     
     g.es("done\n")
 #@-others
-#@+node:tsc.20180209234613.39: ** import_blobs
+#@+node:tsc.20180214062647.1: ** import blobs
 def import_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
-    
+
     table_name = c._leo4sqlite['table_name']
     filepath = c._leo4sqlite['db_filename']
-    
-    num_cols = 0
-    for col in col_nums:
-        num_cols = num_cols + 1
- 
+
+    num_cols = len(col_nums)
     filename_col = num_cols - 2
-    extension_col = num_cols -1
-    
+    extension_col = num_cols - 1
+
     g.es("\nimporting blob table: " + table_name + "\n")
-         
-    delim = ", "
-    new_row = ""
-    
-    #p.b = p.b + "filepath: " + str(filepath) + "\n\n"
-    p.b = p.b + str(col_names) + "\n"
-    p.b = p.b + str(col_types) + "\n\n"
-    
+
+    p.b += str(col_names) + "\n"
+    p.b += str(col_types) + "\n\n"
+    node_name = p.h
+
     conn = sqlite3.connect(filepath)
     cursor = conn.cursor()
     for row in cursor.execute("SELECT * FROM " + table_name):
-    
-        rx = 0 
-        if row != "":
-            cols = re.split(delim, str(row))
 
-            cx = 0
-            for col in cols:
-                if col != "" and col_types[cx] != "BLOB":
-                    if cx == 0: col = col[1:]
-                    new_row = new_row + col_names[cx] + ": " + col + "\n"
-                    cx = cx + 1
-                new_row = re.sub(r'[\"]', " ", str(new_row))   
-             
-            if rx < 3:                    
-                p = p.insertAsLastChild()
-                cx = 0
-            else:
-                p = p.insertAfter()
-            
-            rx + 1
-                
-            c.selectPosition(p)
-            p.h = row[filename_col] + row[extension_col]
-            #p.b = p.b + str(filepath) + "\n\n"
-            p.b = p.b + str(new_row[:-1]) + "\n"
-            new_row = ""
+        new_row = ""
+        for cx, col in enumerate(row):
+            if cx == filename_col:
+                break
+            if col != "" and col_types[cx] != "BLOB":
+                new_row += "%s: %s\n" % (col_names[cx], col)
+
+        nd = p.insertAsLastChild()
+        nd.h = row[filename_col] + row[extension_col]
+        nd.b = new_row
 
     g.es("done\n")
     c.redraw()
-    headline = ("@tbl " + table_name)    
-    tbl_node = g.findNodeAnywhere(c, (headline))
-    c.selectPosition(tbl_node)
+    c.selectPosition(g.findNodeAnywhere(c, node_name))
+#@+node:tsc.20180209234613.39: *3* @@import_blobs
+#@+at
+# def import_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
+#     
+#     table_name = c._leo4sqlite['table_name']
+#     filepath = c._leo4sqlite['db_filename']
+#     
+#     num_cols = 0
+#     for col in col_nums:
+#         num_cols = num_cols + 1
+#  
+#     filename_col = num_cols - 2
+#     extension_col = num_cols -1
+#     
+#     g.es("\nimporting blob table: " + table_name + "\n")
+#          
+#     delim = ", "
+#     new_row = ""
+#     
+#     #p.b = p.b + "filepath: " + str(filepath) + "\n\n"
+#     p.b = p.b + str(col_names) + "\n"
+#     p.b = p.b + str(col_types) + "\n\n"
+#     
+#     conn = sqlite3.connect(filepath)
+#     cursor = conn.cursor()
+#     for row in cursor.execute("SELECT * FROM " + table_name):
+#     
+#         rx = 0 
+#         if row != "":
+#             cols = re.split(delim, str(row))
+# 
+#             cx = 0
+#             for col in cols:
+#                 if col != "" and col_types[cx] != "BLOB":
+#                     if cx == 0: col = col[1:]
+#                     new_row = new_row + col_names[cx] + ": " + col + "\n"
+#                     cx = cx + 1
+#                 new_row = re.sub(r'[\"]', " ", str(new_row))   
+#              
+#             if rx < 3:                    
+#                 p = p.insertAsLastChild()
+#                 cx = 0
+#             else:
+#                 p = p.insertAfter()
+#             
+#             rx + 1
+#                 
+#             c.selectPosition(p)
+#             p.h = row[filename_col] + row[extension_col]
+#             #p.b = p.b + str(filepath) + "\n\n"
+#             p.b = p.b + str(new_row[:-1]) + "\n"
+#             new_row = ""
+# 
+#     g.es("done\n")
+#     c.redraw()
+#     headline = ("@tbl " + table_name)    
+#     tbl_node = g.findNodeAnywhere(c, (headline))
+#     c.selectPosition(tbl_node)
 #@+node:tsc.20180209234613.41: ** delete_blobs
 def delBlobs(c): 
     

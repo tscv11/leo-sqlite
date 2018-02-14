@@ -9,8 +9,9 @@
 <preferences/>
 <find_panel_settings/>
 <vnodes>
-<v t="tscv11.20180119175627.1"><vh>Sqlite3</vh>
-<v t="tsc.20180206152253.2"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
+<v t="tscv11.20180119175627.1" a="E"><vh>Sqlite3</vh>
+<v t="tsc.20180206152253.2" a="E" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580b0000005f5f626f6f6b6d61726b7371037d7104580700000069735f6475706571054930300a7373732e"
+expanded="tsc.20180209234613.16,tsc.20180214062647.1,"><vh>@file /home/tsc/Desktop/leo4sqlite-file/leo4sqlite.py</vh></v>
 </v>
 </vnodes>
 <tnodes>
