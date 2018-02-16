@@ -22,11 +22,7 @@
 <v t="tsc.20180214164152.10"><vh>@button import-blobs</vh>
 <v t="tsc.20180214164152.11"><vh>@@button import-blobs</vh></v>
 </v>
-<v t="tsc.20180214164152.12"><vh>@button export-blobs</vh>
-<v t="tsc.20180215111454.1"><vh>@@button export-blobs</vh></v>
-<v t="tsc.20180215111454.2"><vh>@@button export-blobs</vh></v>
-<v t="tsc.20180215111454.3"><vh>@@button export-blobs</vh></v>
-</v>
+<v t="tsc.20180214164152.12"><vh>@button export-blobs</vh></v>
 <v t="tsc.20180214164152.14"><vh>@button edit-blob</vh></v>
 <v t="tsc.20180214164152.15"><vh>@button open-blob</vh>
 <v t="tsc.20180214164152.16"><vh>@@button open-blob</vh></v>
@@ -40,14 +36,14 @@
 <v t="tsc.20180214164152.22"><vh>@@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
 <v t="tsc.20180214164152.23"><vh>@@file /home/tsc/Desktop/leo4sqlite-file/leo4sqlite.py</vh></v>
 </v>
-<v t="tscv11.20180119175627.1"><vh>Sqlite3</vh>
-<v t="tsc.20180206152253.2" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580b0000005f5f626f6f6b6d61726b7371037d7104580700000069735f6475706571054930300a7373732e"
+<v t="tscv11.20180119175627.1" a="E"><vh>Sqlite3</vh>
+<v t="tsc.20180206152253.2" a="E" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580b0000005f5f626f6f6b6d61726b7371037d7104580700000069735f6475706571054930300a7373732e"
 expanded="tsc.20180209234613.16,"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
 </v>
 <v t="tsc.20180214164224.1"><vh>temp</vh></v>
-<v t="tsc.20180214164233.1"><vh>data</vh>
-<v t="tsc.20180214164301.1"><vh>@db3 /home/tsc/Desktop/blob_test.db3</vh>
-<v t="tsc.20180214164301.2"><vh>@tbl testorama</vh>
+<v t="tsc.20180214164233.1" a="E"><vh>data</vh>
+<v t="tsc.20180214164301.1" a="E"><vh>@db3 /home/tsc/Desktop/blob_test.db3</vh>
+<v t="tsc.20180214164301.2" a="E"><vh>@tbl testorama</vh>
 <v t="tsc.20180214164301.3"><vh>dumb.jpg</vh></v>
 <v t="tsc.20180214164301.4"><vh>Screenshot (3).png</vh></v>
 <v t="tsc.20180214164301.5"><vh>Screenshot (4).png</vh></v>
@@ -154,6 +150,7 @@ key_lst = []
 val_lst = []
 child_h = []
 child_b = []
+new_row = ''
 col_names = []
 col_values = []
 
@@ -178,11 +175,8 @@ for child in p.children():
     child_h.append(child.h)
     child_b = re.split(r'\n', str(child.b))
 
-new_row = ''
-
-for child in parent.children():
-    g.es("\n" + child.h + "\n")
-        
+children = parent.children()
+for child in children:
     child_b = re.split(r'\n', child.b)
     for line in child_b:
         line = re.sub(r'^.*match=', '', line)
@@ -191,52 +185,42 @@ for child in parent.children():
         i = 0
         for field in key_val:
             if i == 0 and field != "":
-                g.es("key: " + str(field))
                 key_lst.append(field)
             else:
                 if i == 1 and field != "":
-                    g.es("val: " + str(field))
                     val_lst.append(field)
             i += 1
+
+num_cols = len(child_b) - 1
 
 conn = sqlite3.connect(filename)
 cur = conn.cursor()
 
-#cur.execute("SELECT * FROM testorama")
-#rows = cur.fetchall()
-
-keys = []
-vals = []
-
-num_cols = 6
-
-cur.execute("SELECT * FROM testorama")
-rows = cur.fetchall()
-
-rx = 0
-for row in rows:
+for row in cur.execute("SELECT * FROM %s " % table_name):
     
-    #g.es(row[:-3])
+    #g.es(row[:-3])    
+
+    keys = key_lst[:num_cols]
+    vals = val_lst[:num_cols]
     
-    #g.es("%s : %s" % (row[:-3], rx))
-    
-    keys = key_lst[:3]
-    vals = val_lst[:3]
-    
-    g.es(keys)
-    g.es(vals)
+    #g.es(keys)
+    #g.es(vals)
     
     cx = 0
     for key in keys:
-        g.es(keys[cx], vals[cx])
-        cur.execute("update %s set %s = ?" % (table_name, keys[cx]), ([vals[cx]]))
+        
+        g.es("col: " + keys[cx] + " : " + "val: " + vals[cx])
+        
+        query = "update %s set %s = ? where %s = ?" % (table_name, keys[cx], keys[cx])
+        cur.execute(query, ([vals[cx], keys[cx]]))
+        
+        #cur.execute("update %s set %s = ?" % (table_name, keys[cx]), ([vals[cx]]))  # tsc
+        
         conn.commit()
         cx += 1
         
-    key_lst = key_lst[3:]
-    val_lst = val_lst[3:]
-    
-    rx += 1
+    key_lst = key_lst[num_cols:]
+    val_lst = val_lst[num_cols:]
     
 conn.close()
 </t>
@@ -421,8 +405,8 @@ c.executeMinibufferCommand('sqlite-insert-blob')
 ['TEXT', 'REAL', 'INTEGER', 'BLOB', 'TEXT', 'TEXT']
 
 </t>
-<t tx="tsc.20180214164301.3">Words: 18
-Amount: shmozey
+<t tx="tsc.20180214164301.3">Words: same duck
+Amount: silly me
 Time: half past
 </t>
 <t tx="tsc.20180214164301.4">Words: 31
@@ -445,273 +429,10 @@ Time: 3
 Amount: 4.0
 Time: 5
 </t>
-<t tx="tsc.20180214164301.9">Words: bloborific
+<t tx="tsc.20180214164301.9">Words: bloborificly
 Amount: 15.0
 Time: 9
 </t>
-<t tx="tsc.20180215111454.1">@
-@@language python
-
-'''export table with any text field changes included.'''
-
-import re
-import sqlite3
-
-keys = []
-vals = []
-child_h = []
-child_b = []
-col_names = []
-col_values = []
-
-p = c.p
-parent = p.parent()
-c.selectPosition(parent)
-table_name = re.sub(r'^@tbl\s', '', parent.h)
-g.es(table_name)
-
-p = p.parent()
-c.selectPosition(p)
-
-p = p.parent()
-c.selectPosition(p)
-filename = p.h[5:]
-g.es(filename)
-
-p = p.firstChild()
-c.selectPosition(p)
-
-for child in p.children():
-    child_h.append(child.h)
-    child_b = re.split(r'\n', str(child.b))
-
-new_row = ''
-
-for child in parent.children():
-    g.es("\n" + child.h + "\n")
-        
-    child_b = re.split(r'\n', child.b)
-    for line in child_b:
-        line = re.sub(r'^.*match=', '', line)
-        key_val = re.split(r':\s', line)
-        
-        i = 0
-        for field in key_val:
-            if i == 0 and field != "":
-                g.es("key: " + str(field))
-                keys.append(field)
-            else:
-                if i == 1 and field != "":
-                    g.es("val: " + str(field))
-                    vals.append(field)
-            i += 1
-
-conn = sqlite3.connect(filename)
-cur = conn.cursor()
-
-cur.execute("SELECT * FROM testorama")
-rows = cur.fetchall()
-
-tmp_keys = []
-tmp_vals = []
-
-num_cols = 6
-
-for row in rows:  # cur.execute("select * from %s" % (table_name)):
-    
-    #g.es("%s : %s" % (row[:-3], rx))
-    
-    tmp_keys = keys[:3]
-    tmp_vals = vals[:3]
-        
-    for key in tmp_keys:
-        cur.execute("update %s set %s = ?" % (table_name, tmp_keys[i]), [tmp_vals[i]])
-        conn.commit()
-    
-    g.es(tmp_keys)
-    g.es(tmp_vals)
-  
-    keys = keys[3:]
-    vals = vals[3:]
-
-# for row in cur.execute("select * from %s" % (table_name)):</t>
-<t tx="tsc.20180215111454.2">@language python
-
-'''export table with any text field changes included.'''
-
-import re
-import sqlite3
-
-keys = []
-vals = []
-child_h = []
-child_b = []
-col_names = []
-col_values = []
-
-p = c.p
-parent = p.parent()
-c.selectPosition(parent)
-table_name = re.sub(r'^@tbl\s', '', parent.h)
-g.es(table_name)
-
-p = p.parent()
-c.selectPosition(p)
-
-p = p.parent()
-c.selectPosition(p)
-filename = p.h[5:]
-g.es(filename)
-
-p = p.firstChild()
-c.selectPosition(p)
-
-for child in p.children():
-    child_h.append(child.h)
-    child_b = re.split(r'\n', str(child.b))
-
-new_row = ''
-
-for child in parent.children():
-    g.es("\n" + child.h + "\n")
-        
-    child_b = re.split(r'\n', child.b)
-    for line in child_b:
-        line = re.sub(r'^.*match=', '', line)
-        key_val = re.split(r':\s', line)
-        
-        i = 0
-        for field in key_val:
-            if i == 0 and field != "":
-                g.es("key: " + str(field))
-                keys.append(field)
-            else:
-                if i == 1 and field != "":
-                    g.es("val: " + str(field))
-                    vals.append(field)
-            i += 1
-    
-conn = sqlite3.connect(filename)
-cur = conn.cursor()
-
-# g.es(keys)
-# g.es(vals)
-
-num_cols = 6
-
-rx = 0
-for row in cur.execute("select * from %s" % (table_name)):
-    rx = rx + 1
-    
-    #g.es("%s : %s" % (row[:-3], rx))
-    
-    tmp_keys = keys[:3]
-    tmp_vals = vals[:3]
-    
-    g.es(tmp_keys)
-    g.es(tmp_vals)
-  
-    keys = keys[3:]
-    vals = vals[3:]
-
-    i = 0
-    for key in tmp_keys:
-        cur.execute("update %s set %s = ?" % (table_name, tmp_keys[i]), [tmp_vals[i]])
-        i += 1
-    conn.commit()
-            
-conn.close()
-    </t>
-<t tx="tsc.20180215111454.3">@language python
-
-'''export table with any text field changes included.'''
-
-import re
-import sqlite3
-
-keys = []
-vals = []
-child_h = []
-child_b = []
-col_names = []
-col_values = []
-
-p = c.p
-parent = p.parent()
-c.selectPosition(parent)
-table_name = re.sub(r'^@tbl\s', '', parent.h)
-g.es(table_name)
-
-p = p.parent()
-c.selectPosition(p)
-
-p = p.parent()
-c.selectPosition(p)
-filename = p.h[5:]
-g.es(filename)
-
-p = p.firstChild()
-c.selectPosition(p)
-
-for child in p.children():
-    child_h.append(child.h)
-    child_b = re.split(r'\n', str(child.b))
-
-new_row = ''
-
-for child in parent.children():
-    g.es("\n" + child.h + "\n")
-        
-    child_b = re.split(r'\n', child.b)
-    for line in child_b:
-        line = re.sub(r'^.*match=', '', line)
-        key_val = re.split(r':\s', line)
-        
-        i = 0
-        for field in key_val:
-            if i == 0 and field != "":
-                g.es("key: " + str(field))
-                keys.append(field)
-            else:
-                if i == 1 and field != "":
-                    g.es("val: " + str(field))
-                    vals.append(field)
-            i += 1
-    
-conn = sqlite3.connect(filename)
-cur = conn.cursor()
-
-# g.es(keys)
-# g.es(vals)
-
-num_cols = 6
-
-rx = 0
-for row in cur.execute("select * from %s" % (table_name)):
-    rx = rx + 1
-    #g.es("%s : %s" % (row[:-3], rx))
-    
-    cx = 0
-    
-    tmp_keys = keys[:3]
-    tmp_vals = vals[:3]
-    
-    g.es(tmp_keys)
-    g.es(tmp_vals)
-  
-    keys = keys[3:]
-    vals = vals[3:]
-  
-@
-    
-    for key in tmp_keys:
-        g.es(table_name, keys[i], vals[i])
-    i += 1
-    
-    #keys = keys[num_cols:]
-        
-conn.close()
-    </t>
 <t tx="tscv11.20180119175627.1">**leo4sqlite.py plugin**
 
 *This node belongs at the top level of 'leoPlugins.leo'*
