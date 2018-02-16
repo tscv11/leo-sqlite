@@ -1473,7 +1473,6 @@ def delBlobs(c):
     
     if del_blobs_on_exit == 1:
         sqlite_temp_dir = c.config.getString('sqlite_temp_dir') 
-        
             
         os.chdir(sqlite_temp_dir)
         files=glob.glob('*')
