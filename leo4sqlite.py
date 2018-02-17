@@ -1,5 +1,5 @@
 #@+leo-ver=5-thin
-#@+node:tsc.20180206152253.2: * @file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py
+#@+node:tsc.20180206152253.2: * @file /home/tsc/Desktop/leo4sqlite-file/leo4sqlite.py
 #@@language python
 #@+<< version history >>
 #@+node:tsc.20180212011016.1: ** << version history >>
@@ -796,7 +796,7 @@ class InputDialogs(QWidget):
         action = c._leo4sqlite['action']
             
         if action == "export blobs":
-            export_blobs(self, c, p, col_nums, col_names, col_types, blob_col)
+            export_blobs(self, c, col_nums, col_names, col_types, blob_col)
         
         #if blob_col:
             #raise TableIsBlobTable
@@ -1374,7 +1374,7 @@ def export_table4(self, c, p, col_nums, col_names, col_types, blob_col):
     
     g.es("done\n")
 #@-others
-#@+node:tsc.20180214062647.1: ** import blobs
+#@+node:tsc.20180214062647.1: ** import_blobs
 def import_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
 
     table_name = c._leo4sqlite['table_name']
@@ -1467,12 +1467,81 @@ def import_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
 #     tbl_node = g.findNodeAnywhere(c, (headline))
 #     c.selectPosition(tbl_node)
 #@+node:tsc.20180216194402.1: ** export_blobs
-def export_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
+def export_blobs(self, c, col_nums, col_names, col_types, blob_col):
+    
+    '''export table with any text field changes included.'''
+    
+    import re
+    import sqlite3
+    
+    keys = []
+    vals = []
+    key_lst = []
+    val_lst = []
+    child_h = []
+    child_b = []
+    new_row = ''
+    
+    p = c.p
+    parent = p.parent()
+    c.selectPosition(parent)
+    table_name = re.sub(r'^@tbl\s', '', parent.h)
+    g.es(table_name)
     
     p = p.parent()
     c.selectPosition(p)
-    table_name = re.sub(r'@tbl\s', '', p.h)
-    g.es(table_name)
+    
+    p = p.parent()
+    c.selectPosition(p)
+    filename = p.h[5:]
+    g.es(filename)
+    
+    p = p.firstChild()
+    c.selectPosition(p)
+    
+    for child in p.children():
+        child_h.append(child.h)
+        child_b = re.split(r'\n', str(child.b))
+    
+    children = parent.children()
+    for child in children:
+        child_b = re.split(r'\n', child.b)
+        for line in child_b:
+            line = re.sub(r'^.*match=', '', line)
+            key_val = re.split(r':\s', line)
+            
+            i = 0
+            for field in key_val:
+                if i == 0 and field != "":
+                    key_lst.append(field)
+                else:
+                    if i == 1 and field != "":
+                        val_lst.append(field)
+                i += 1
+    
+    num_cols = len(child_b) - 1
+    
+    conn = sqlite3.connect(filename)
+    cur = conn.cursor()
+    
+    for row in cur.execute("SELECT * FROM %s " % table_name):
+    
+        keys = key_lst[:num_cols]
+        vals = val_lst[:num_cols]
+
+        cx = 0
+        for key in keys:
+            
+            g.es("col: " + keys[cx] + " : " + "val: " + vals[cx])
+            
+            query = "update %s set %s = ? where %s = ?" % (table_name, keys[cx], col_names[cx])
+            cur.execute(query, ([vals[cx], row[cx]]))
+            
+            conn.commit()
+            cx += 1
+            
+        key_lst = key_lst[num_cols:]
+        val_lst = val_lst[num_cols:]
 #@+node:tsc.20180209234613.41: ** delete_blobs
 def delBlobs(c): 
     

@@ -9,13 +9,13 @@
 <preferences/>
 <find_panel_settings/>
 <vnodes>
-<v t="tsc.20180214164152.1"><vh>@settings</vh>
+<v t="tsc.20180214164152.1" a="E"><vh>@settings</vh>
 <v t="tsc.20180214164152.2"><vh>@bookmarks</vh>
 <v t="tsc.20180214164152.3"><vh>import-blobs</vh></v>
 <v t="tsc.20180214164152.4"><vh>export-blobs</vh></v>
 <v t="tsc.20180214164152.5"><vh>leo4sqlite.py</vh></v>
 </v>
-<v t="tsc.20180214164152.6"><vh>@buttons</vh>
+<v t="tsc.20180214164152.6" a="E"><vh>@buttons</vh>
 <v t="tsc.20180214164152.7"><vh>@button delete-blob</vh></v>
 <v t="tsc.20180214164152.8"><vh>@button insert-blob</vh></v>
 <v t="tsc.20180214164152.9"><vh>@button extract-blob</vh></v>
@@ -37,10 +37,11 @@
 <v t="tsc.20180214164152.23"><vh>@@file /home/tsc/Desktop/leo4sqlite-file/leo4sqlite.py</vh></v>
 </v>
 <v t="tscv11.20180119175627.1" a="E"><vh>Sqlite3</vh>
-<v t="tsc.20180206152253.2" a="E" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580b0000005f5f626f6f6b6d61726b7371037d7104580700000069735f6475706571054930300a7373732e"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
+<v t="tsc.20180206152253.2" a="E" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580b0000005f5f626f6f6b6d61726b7371037d7104580700000069735f6475706571054930300a7373732e"
+expanded="tsc.20180209234613.16,"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
 </v>
 <v t="tsc.20180214164224.1"><vh>temp</vh></v>
-<v t="tsc.20180214164233.1"><vh>data</vh>
+<v t="tsc.20180214164233.1" a="E"><vh>data</vh>
 <v t="tsc.20180214164301.1" a="E"><vh>@db3 /home/tsc/Desktop/blob_test.db3</vh>
 <v t="tsc.20180214164301.2" a="E"><vh>@tbl testorama</vh>
 <v t="tsc.20180214164301.3"><vh>dumb.jpg</vh></v>
@@ -51,6 +52,7 @@
 <v t="tsc.20180214164301.8"><vh>ly39gCL._.jpg</vh></v>
 <v t="tsc.20180214164301.9"><vh>Feather-flying.jpg</vh></v>
 </v>
+<v t="tsc.20180216210757.1"><vh>@tbl testorama</vh></v>
 </v>
 </v>
 </vnodes>
@@ -347,6 +349,7 @@ Time: 9
 </t>
 <t tx="tsc.20180216195827.1">c.executeMinibufferCommand('sqlite-export-blobs')
 </t>
+<t tx="tsc.20180216210757.1"></t>
 <t tx="tscv11.20180119175627.1">**leo4sqlite.py plugin**
 
 *This node belongs at the top level of 'leoPlugins.leo'*
