@@ -1381,6 +1381,7 @@ def import_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
     filepath = c._leo4sqlite['db_filename']
 
     num_cols = len(col_nums)
+    primary_key_col = num_cols - 4
     filename_col = num_cols - 2
     extension_col = num_cols - 1
 
@@ -1396,7 +1397,7 @@ def import_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
 
         new_row = ""
         for cx, col in enumerate(row):
-            if cx == filename_col:
+            if cx == primary_key_col:
                 break
             if col != "" and col_types[cx] != "BLOB":
                 new_row += "%s: %s\n" % (col_names[cx], col)
@@ -1471,6 +1472,9 @@ def export_blobs(self, c, col_nums, col_names, col_types, blob_col):
     
     '''export table with any text field changes included.'''
     
+    def place_holder(line):
+        return '({})'.format(', '.join('?' * len(line)))
+    
     import re
     import sqlite3
     
@@ -1524,24 +1528,149 @@ def export_blobs(self, c, col_nums, col_names, col_types, blob_col):
     conn = sqlite3.connect(filename)
     cur = conn.cursor()
     
-    for row in cur.execute("SELECT * FROM %s " % table_name):
+    rx = 1    
+    cur.execute("select * from %s" % (table_name))
+    rows = cur.fetchall()
+    for row in rows:    
     
         keys = key_lst[:num_cols]
         vals = val_lst[:num_cols]
-
+        
         cx = 0
         for key in keys:
-            
-            g.es("col: " + keys[cx] + " : " + "val: " + vals[cx])
-            
-            query = "update %s set %s = ? where %s = ?" % (table_name, keys[cx], col_names[cx])
-            cur.execute(query, ([vals[cx], row[cx]]))
-            
-            conn.commit()
+                
+            query = "update %s set %s = ? where Primary_Key = ?" % (table_name, keys[cx])
+            cur.execute(query, [vals[cx], rx])
             cx += 1
-            
+        
         key_lst = key_lst[num_cols:]
         val_lst = val_lst[num_cols:]
+        rx += 1
+            
+    conn.commit()
+    conn.close()
+#@+node:tsc.20180217214035.1: *3* @@export_blobs_bak
+#@+at
+# import sqlite3
+# 
+# col_names = ["one", "two", "three", "one", "two", "three"]
+# key_lst = ["one", "two", "three", "one", "two", "three"]
+# val_lst = ["red", "blue", "green", "white", "black", "blue"]
+# 
+# num_cols = 3
+# 
+# filename = "/home/tsc/Desktop/blob_test.db3" # your filename here
+# table_name = "testorama" # your table name here
+# 
+# conn = sqlite3.connect(filename)
+# cur = conn.cursor()
+# 
+# rx = 1    
+# cur.execute("select * from %s" % (table_name))
+# rows = cur.fetchall()
+# for row in rows:    
+#     
+#     keys = key_lst[:num_cols]
+#     vals = val_lst[:num_cols]
+#     
+#     #g.es(vals)
+#     
+#     cx = 0
+#     for key in keys:
+#             
+#         query = "update %s set %s = ? where Primary_Key = ?" % (table_name, keys[cx])
+#         cur.execute(query, [vals[cx], rx])
+#         cx += 1
+#     
+#     key_lst = key_lst[num_cols:]
+#     val_lst = val_lst[num_cols:]
+#     rx += 1
+#     
+#     g.es(key_lst)
+#     g.es(val_lst)
+#         
+# conn.commit()
+# conn.close()
+#@+node:tsc.20180221104553.1: *3* @@export_blobs_bak
+#@+at
+# import sqlite3
+# 
+# col_names = ["one", "two", "three", "four", "five", "six"]
+# key_lst = ["one", "two", "three", "four", "five", "six"]
+# val_lst = ["green", "white", "black", "yellow", "red", "blue"]
+# 
+# num_cols = 3
+# 
+# filename = "/home/tsc/Desktop/blob_test.db3" # your filename here
+# table_name = "testorama" # your table name here
+# 
+# conn = sqlite3.connect(filename)
+# cur = conn.cursor()
+# 
+# rx = 1    
+# for row in cur.execute("SELECT * FROM %s " % table_name):
+#     
+#     keys = key_lst[:num_cols]
+#     vals = val_lst[:num_cols]
+#     
+#     g.es(vals)
+#     
+#     cx = 0
+#     for key in keys:
+#             
+#         query = "update %s set %s = ? where Primary_Key = ?" % (table_name, keys[cx])
+#         cur.execute(query, [vals[cx], rx])
+#         cx += 1
+#         
+#     key_lst = key_lst[num_cols:]
+#     val_lst = val_lst[num_cols:]
+#     rx += 1
+#     
+# conn.commit()
+# conn.close()
+#@+node:tsc.20180221111226.1: *3* @@export_blobs_bak
+#@+at
+# import sqlite3
+# 
+# col_names = ["one", "two", "three", "one", "two", "three"]
+# key_lst = ["one", "two", "three", "one", "two", "three"]
+# val_lst = ["green", "white", "black", "yellow", "red", "blue"]
+# 
+# num_cols = 3
+# 
+# filename = "/home/tsc/Desktop/blob_test.db3" # your filename here
+# table_name = "testorama" # your table name here
+# 
+# conn = sqlite3.connect(filename)
+# cur = conn.cursor()
+# 
+# rx = 1    
+# #for row in cur.execute("SELECT * FROM %s" % table_name):
+# cur.execute("select * from %s" % (table_name))
+# rows = cur.fetchall()
+# for row in rows:    
+#     
+#     keys = key_lst[:num_cols]
+#     vals = val_lst[:num_cols]
+#     
+#     #g.es(vals)
+#     
+#     cx = 0
+#     for key in keys:
+#             
+#         query = "update %s set %s = ? where Primary_Key = ?" % (table_name, keys[cx])
+#         cur.execute(query, [vals[cx], rx])
+#         cx += 1
+#     
+#     key_lst = key_lst[num_cols:]
+#     val_lst = val_lst[num_cols:]
+#     rx += 1
+#     
+#     g.es(key_lst)
+#     g.es(val_lst)
+#         
+# conn.commit()
+# conn.close()
 #@+node:tsc.20180209234613.41: ** delete_blobs
 def delBlobs(c): 
     

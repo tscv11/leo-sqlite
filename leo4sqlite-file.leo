@@ -10,12 +10,7 @@
 <find_panel_settings/>
 <vnodes>
 <v t="tsc.20180214164152.1" a="E"><vh>@settings</vh>
-<v t="tsc.20180214164152.2"><vh>@bookmarks</vh>
-<v t="tsc.20180214164152.3"><vh>import-blobs</vh></v>
-<v t="tsc.20180214164152.4"><vh>export-blobs</vh></v>
-<v t="tsc.20180214164152.5"><vh>leo4sqlite.py</vh></v>
-</v>
-<v t="tsc.20180214164152.6" a="E"><vh>@buttons</vh>
+<v t="tsc.20180214164152.6"><vh>@buttons</vh>
 <v t="tsc.20180214164152.7"><vh>@button delete-blob</vh></v>
 <v t="tsc.20180214164152.8"><vh>@button insert-blob</vh></v>
 <v t="tsc.20180214164152.9"><vh>@button extract-blob</vh></v>
@@ -29,6 +24,11 @@
 </v>
 <v t="tsc.20180214164152.17"><vh>@button view-blob</vh></v>
 </v>
+<v t="tsc.20180214164152.2"><vh>@bookmarks</vh>
+<v t="tsc.20180219220649.1"><vh>export_blobs</vh></v>
+<v t="tsc.20180214164152.3"><vh>import-blobs</vh></v>
+<v t="tsc.20180214164152.5"><vh>leo4sqlite.py</vh></v>
+</v>
 <v t="tsc.20180214164152.18"><vh>@data external tools</vh></v>
 <v t="tsc.20180214164152.19"><vh>@string sqlite_output_dir = "/home/tsc/Desktop/leo4sqlite-output"</vh></v>
 <v t="tsc.20180214164152.20"><vh>@string sqlite_temp_dir = "/home/tsc/Desktop/leo4sqlite-temp"</vh></v>
@@ -37,22 +37,17 @@
 <v t="tsc.20180214164152.23"><vh>@@file /home/tsc/Desktop/leo4sqlite-file/leo4sqlite.py</vh></v>
 </v>
 <v t="tscv11.20180119175627.1" a="E"><vh>Sqlite3</vh>
-<v t="tsc.20180206152253.2" a="E" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580b0000005f5f626f6f6b6d61726b7371037d7104580700000069735f6475706571054930300a7373732e"
-expanded="tsc.20180209234613.16,"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
+<v t="tsc.20180206152253.2" a="E" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580b0000005f5f626f6f6b6d61726b7371037d7104580700000069735f6475706571054930300a7373732e"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
 </v>
 <v t="tsc.20180214164224.1"><vh>temp</vh></v>
-<v t="tsc.20180214164233.1" a="E"><vh>data</vh>
-<v t="tsc.20180214164301.1" a="E"><vh>@db3 /home/tsc/Desktop/blob_test.db3</vh>
-<v t="tsc.20180214164301.2" a="E"><vh>@tbl testorama</vh>
-<v t="tsc.20180214164301.3"><vh>dumb.jpg</vh></v>
-<v t="tsc.20180214164301.4"><vh>Screenshot (3).png</vh></v>
-<v t="tsc.20180214164301.5"><vh>Screenshot (4).png</vh></v>
-<v t="tsc.20180214164301.6"><vh>Spider.ico</vh></v>
-<v t="tsc.20180214164301.7"><vh>Screenshot (2).png</vh></v>
-<v t="tsc.20180214164301.8"><vh>ly39gCL._.jpg</vh></v>
-<v t="tsc.20180214164301.9"><vh>Feather-flying.jpg</vh></v>
+<v t="tsc.20180219191119.1"><vh>data</vh>
+<v t="tsc.20180220220849.1"><vh>@db3 /home/tsc/Desktop/blob_test.db3</vh>
+<v t="tsc.20180220220849.2"><vh>@tbl testorama</vh>
+<v t="tsc.20180220220849.3"><vh>dumb.jpg</vh></v>
+<v t="tsc.20180220220849.4"><vh>Screenshot (3).png</vh></v>
+<v t="tsc.20180220220849.6"><vh>Screenshot (2).png</vh></v>
+<v t="tsc.20180220220849.7"><vh>ly39gCL._.jpg</vh></v>
 </v>
-<v t="tsc.20180216210757.1"><vh>@tbl testorama</vh></v>
 </v>
 </v>
 </vnodes>
@@ -302,7 +297,6 @@ gimp-2.8
 <t tx="tsc.20180214164152.22"></t>
 <t tx="tsc.20180214164152.23"></t>
 <t tx="tsc.20180214164152.3" __bookmarks="7d7100580700000069735f6475706571014930300a732e">#@settings:0--&gt;@buttons:2--&gt;@button import-blobs:0</t>
-<t tx="tsc.20180214164152.4" __bookmarks="7d7100580700000069735f6475706571014930300a732e">#@settings:0--&gt;@buttons:2--&gt;@button export-blobs:1</t>
 <t tx="tsc.20180214164152.5" __bookmarks="7d7100580700000069735f6475706571014930300a732e">#Sqlite3:1--&gt;@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py:0</t>
 <t tx="tsc.20180214164152.6"></t>
 <t tx="tsc.20180214164152.7">@language python
@@ -313,43 +307,31 @@ c.executeMinibufferCommand('sqlite-insert-blob')
 </t>
 <t tx="tsc.20180214164152.9"></t>
 <t tx="tsc.20180214164224.1"></t>
-<t tx="tsc.20180214164233.1"></t>
-<t tx="tsc.20180214164301.1"></t>
-<t tx="tsc.20180214164301.2">['Words', 'Amount', 'Time', 'Blobs', 'Filename', 'Extension']
-['TEXT', 'REAL', 'INTEGER', 'BLOB', 'TEXT', 'TEXT']
-
-</t>
-<t tx="tsc.20180214164301.3">Words: same duck
-Amount: silly me
-Time: half past
-</t>
-<t tx="tsc.20180214164301.4">Words: 31
-Amount: 1.0
-Time: 2
-</t>
-<t tx="tsc.20180214164301.5">Words: 32
-Amount: 1.0
-Time: 2
-</t>
-<t tx="tsc.20180214164301.6">Words: testygulls
-Amount: 1.0
-Time: 2
-</t>
-<t tx="tsc.20180214164301.7">Words: baby
-Amount: 2.0
-Time: 3
-</t>
-<t tx="tsc.20180214164301.8">Words: 72
-Amount: 4.0
-Time: 5
-</t>
-<t tx="tsc.20180214164301.9">Words: bloborificly
-Amount: 15.0
-Time: 9
-</t>
 <t tx="tsc.20180216195827.1">c.executeMinibufferCommand('sqlite-export-blobs')
 </t>
-<t tx="tsc.20180216210757.1"></t>
+<t tx="tsc.20180219191119.1"></t>
+<t tx="tsc.20180219220649.1" __bookmarks="7d7100580700000069735f6475706571014930300a732e">#Sqlite3:1--&gt;@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py:0--&gt;export_blobs:10</t>
+<t tx="tsc.20180220220849.1"></t>
+<t tx="tsc.20180220220849.2">['one', 'two', 'three']
+['TEXT', 'REAL', 'INTEGER']
+
+</t>
+<t tx="tsc.20180220220849.3">one: fuschia
+two: charlie
+three: yellow
+</t>
+<t tx="tsc.20180220220849.4">one: fuschia
+two: black
+three: blue
+</t>
+<t tx="tsc.20180220220849.6">one: red
+two: black
+three: blue
+</t>
+<t tx="tsc.20180220220849.7">one: olive
+two: black
+three: blue
+</t>
 <t tx="tscv11.20180119175627.1">**leo4sqlite.py plugin**
 
 *This node belongs at the top level of 'leoPlugins.leo'*
