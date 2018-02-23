@@ -1591,6 +1591,108 @@ def export_table4(self, c, p, col_nums, col_names, col_types, blob_col):
 #     headline = ("@tbl " + table_name)    
 #     tbl_node = g.findNodeAnywhere(c, (headline))
 #     c.selectPosition(tbl_node)
+#@+node:tsc.20180222230615.1: ** @@export_blobs
+#@+at
+# def export_blobs(self, c, col_nums, col_names, col_types, blob_col):
+#     
+#     '''export table with any text field changes included.'''
+#     
+#     import re
+#     import sqlite3
+#     
+#     keys = []
+#     vals = []
+#     key_lst = []
+#     val_lst = []
+#     child_h = []
+#     child_b = []
+#     new_row = ''
+#     primary_keys = []
+#     
+#     p = c.p
+#     parent = p.parent()
+#     c.selectPosition(parent)
+#     table_name = re.sub(r'^@tbl\s', '', parent.h)
+#     g.es("exporting blob table: " + table_name)
+#     #g.es(table_name)
+#     
+#     p = p.parent()
+#     c.selectPosition(p)
+#     
+#     p = p.parent()
+#     c.selectPosition(p)
+#     filename = p.h[5:]
+#     g.es(filename + "\n")
+#     
+#     p = p.firstChild()
+#     c.selectPosition(p)
+#     
+#     for child in p.children():
+#         child_h.append(child.h)
+#         child_b = re.split(r'\n', str(child.b))
+#         
+#     children = parent.children()
+#     for child in children:
+#         child_b = re.split(r'\n', child.b)
+#         for line in child_b:
+#             line = re.sub(r'^.*match=', '', line)
+#             key_val = re.split(r':\s', line)
+#             
+#             i = 0
+#             for field in key_val:
+#                 if i == 0 and field != "":
+#                     key_lst.append(field)
+#                 else:
+#                     if i == 1 and field != "":
+#                         val_lst.append(field)
+#                 i += 1
+#     
+#     num_cols = len(child_b) - 1
+#     
+#     conn = sqlite3.connect(filename)
+#     cur = conn.cursor()
+#     
+#     cur.execute("select * from %s" % (table_name))
+#     rows = cur.fetchall()
+#     
+#     p = p.firstChild()
+#     #g.es(p.h)
+#     
+#     rx = 0    
+#     for row in rows:    
+#         
+#         keys = key_lst[:num_cols]
+#         vals = val_lst[:num_cols]
+#         
+#         primary_keys.append(str(row[num_cols:-3]))
+#         primary_keys[rx] = primary_keys[rx][1:-2]
+#         primary_keys[rx] = int(primary_keys[rx])
+#         typ = str(type(primary_keys[rx]))
+#         
+#         g.es(str(vals) + " : " + str(primary_keys[rx]) + " " + typ)
+#         
+#         cx = 0
+#         for key in keys:
+#                 
+#             query = "update %s set %s = ? where Primary_Key = ?" % (table_name, keys[cx])
+#             cur.execute(query, [vals[cx], primary_keys[rx]])
+#             cx += 1
+#         
+#         key_lst = key_lst[num_cols:]
+#         val_lst = val_lst[num_cols:]
+#         
+#         #g.es(p.h)
+#             
+#         rx += 1
+#         
+#         p = p.next()
+# 
+#         if p:
+#             continue
+#         else:
+#             conn.commit()
+#             conn.close()
+#             g.es("done")
 #@+node:tsc.20180214062647.1: ** import_blobs
 def import_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
 
@@ -1620,9 +1722,9 @@ def import_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
     for row in cursor.execute("SELECT * FROM " + table_name):
 
         primary_keys.append(str(row[num_cols:-3]))
-        primary_keys[rx] = int(primary_keys[rx])
-        typ = str(type(primary_keys[rx]))
-        g.es(str(row[:-3]) + typ)
+        #primary_keys[rx] = int(primary_keys[rx])
+        #typ = str(type(primary_keys[rx]))
+        g.es(str(row[:-3]))  # + typ)
 
         new_row = ""
         for cx, col in enumerate(row):
@@ -1740,109 +1842,7 @@ def export_blobs(self, c, col_nums, col_names, col_types, blob_col):
         else:
             conn.commit()
             conn.close()
-            g.es("done")
-#@+node:tsc.20180222230615.1: *3* @@export_blobs
-#@+at
-# def export_blobs(self, c, col_nums, col_names, col_types, blob_col):
-#     
-#     '''export table with any text field changes included.'''
-#     
-#     import re
-#     import sqlite3
-#     
-#     keys = []
-#     vals = []
-#     key_lst = []
-#     val_lst = []
-#     child_h = []
-#     child_b = []
-#     new_row = ''
-#     primary_keys = []
-#     
-#     p = c.p
-#     parent = p.parent()
-#     c.selectPosition(parent)
-#     table_name = re.sub(r'^@tbl\s', '', parent.h)
-#     g.es("exporting blob table: " + table_name)
-#     #g.es(table_name)
-#     
-#     p = p.parent()
-#     c.selectPosition(p)
-#     
-#     p = p.parent()
-#     c.selectPosition(p)
-#     filename = p.h[5:]
-#     g.es(filename + "\n")
-#     
-#     p = p.firstChild()
-#     c.selectPosition(p)
-#     
-#     for child in p.children():
-#         child_h.append(child.h)
-#         child_b = re.split(r'\n', str(child.b))
-#         
-#     children = parent.children()
-#     for child in children:
-#         child_b = re.split(r'\n', child.b)
-#         for line in child_b:
-#             line = re.sub(r'^.*match=', '', line)
-#             key_val = re.split(r':\s', line)
-#             
-#             i = 0
-#             for field in key_val:
-#                 if i == 0 and field != "":
-#                     key_lst.append(field)
-#                 else:
-#                     if i == 1 and field != "":
-#                         val_lst.append(field)
-#                 i += 1
-#     
-#     num_cols = len(child_b) - 1
-#     
-#     conn = sqlite3.connect(filename)
-#     cur = conn.cursor()
-#     
-#     cur.execute("select * from %s" % (table_name))
-#     rows = cur.fetchall()
-#     
-#     p = p.firstChild()
-#     #g.es(p.h)
-#     
-#     rx = 0    
-#     for row in rows:    
-#         
-#         keys = key_lst[:num_cols]
-#         vals = val_lst[:num_cols]
-#         
-#         primary_keys.append(str(row[num_cols:-3]))
-#         primary_keys[rx] = primary_keys[rx][1:-2]
-#         primary_keys[rx] = int(primary_keys[rx])
-#         typ = str(type(primary_keys[rx]))
-#         
-#         g.es(str(vals) + " : " + str(primary_keys[rx]) + " " + typ)
-#         
-#         cx = 0
-#         for key in keys:
-#                 
-#             query = "update %s set %s = ? where Primary_Key = ?" % (table_name, keys[cx])
-#             cur.execute(query, [vals[cx], primary_keys[rx]])
-#             cx += 1
-#         
-#         key_lst = key_lst[num_cols:]
-#         val_lst = val_lst[num_cols:]
-#         
-#         #g.es(p.h)
-#             
-#         rx += 1
-#         
-#         p = p.next()
-# 
-#         if p:
-#             continue
-#         else:
-#             conn.commit()
-#             conn.close()
-#             g.es("done")
+            g.es("\ndone")
 #@+node:tsc.20180209234613.41: ** delete_blobs
 def delBlobs(c): 
     
