@@ -1536,42 +1536,35 @@ def export_blobs(self, c, col_nums, col_names, col_types, blob_col):
     
     p = p.firstChild()
     
-    rx = 0    
+    rx = 1    
     for row in rows:    
         
         keys = key_lst[:num_cols]
         vals = val_lst[:num_cols]
-        
-        # primary_keys.append(str(row[num_cols:-3]))
-        # primary_keys[rx] = primary_keys[rx][1:-2]
-        # primary_keys[rx] = int(primary_keys[rx])
-        # typ = str(type(primary_keys[rx]))
-        
-        #g.es(str(vals) + " : " + str(primary_keys[rx]) + " " + typ)
-        
+                  
         cx = 0
         for key in keys:
                 
             query = "update {table} set {field} = ? where {pk_field} = ?".format(table=table_name, field=keys[cx], pk_field='IDKey')
+            p.v.u['leo4sqlite']['index'] = rx
             cur.execute(query, [vals[cx], p.v.u['leo4sqlite']['index']])
-
-            #query = "update %s set %s = ? where PrimaryKey = ?" % (table_name, keys[cx])
-            #cur.execute(query, [vals[cx], primary_keys[rx]])
+            g.es(vals[cx], p.v.u['leo4sqlite']['index'])
             cx += 1
-        
+
         key_lst = key_lst[num_cols:]
         val_lst = val_lst[num_cols:]
         
-        rx += 1
-        
         p = p.next()
 
+        rx += 1
+        
         if p:
             continue
         else:
             conn.commit()
             conn.close()
             g.es("\ndone")
+            
 #@+node:tsc.20180224081353.1: *3* @@export_blobs
 #@+at
 # def export_blobs(self, c, col_nums, col_names, col_types, blob_col):

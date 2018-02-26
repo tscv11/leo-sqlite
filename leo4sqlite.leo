@@ -36,11 +36,20 @@
 <v t="tsc.20180214164152.22"><vh>@@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
 <v t="tsc.20180214164152.23"><vh>@@file /home/tsc/Desktop/leo4sqlite-file/leo4sqlite.py</vh></v>
 </v>
-<v t="tscv11.20180119175627.1" a="E"><vh>Sqlite3</vh>
-<v t="tsc.20180206152253.2" a="E" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580b0000005f5f626f6f6b6d61726b7371037d7104580700000069735f6475706571054930300a7373732e"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
+<v t="tscv11.20180119175627.1"><vh>Sqlite3</vh>
+<v t="tsc.20180206152253.2" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580b0000005f5f626f6f6b6d61726b7371037d7104580700000069735f6475706571054930300a7373732e"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
 </v>
 <v t="tsc.20180214164224.1"><vh>temp</vh></v>
-<v t="tsc.20180224090820.1"><vh>data</vh></v>
+<v t="tsc.20180224090820.1"><vh>data</vh>
+<v t="tsc.20180225234500.1" a="E"><vh>@db3 /home/tsc/Desktop/blob_test.db3</vh>
+<v t="tsc.20180225234500.2" a="E"><vh>@tbl testorama</vh>
+<v t="tsc.20180225234500.3"><vh>dumb.jpg</vh></v>
+<v t="tsc.20180225234500.4"><vh>Screenshot (2).png</vh></v>
+<v t="tsc.20180225234500.5"><vh>Screenshot (3).png</vh></v>
+<v t="tsc.20180225234500.6"><vh>ly39gCL._.jpg</vh></v>
+</v>
+</v>
+</v>
 </vnodes>
 <tnodes>
 <t tx="tsc.20180214164152.1"></t>
@@ -302,6 +311,27 @@ c.executeMinibufferCommand('sqlite-insert-blob')
 </t>
 <t tx="tsc.20180219220649.1" __bookmarks="7d7100580700000069735f6475706571014930300a732e">#Sqlite3:1--&gt;@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py:0--&gt;export_blobs:10</t>
 <t tx="tsc.20180224090820.1"></t>
+<t tx="tsc.20180225234500.1"></t>
+<t tx="tsc.20180225234500.2">['one', 'two', 'three', 'IDKey', 'Blobs', 'Filename', 'Extension']
+['TEXT', 'REAL', 'INTEGER', 'INTEGER', 'BLOB', 'TEXT', 'TEXT']
+
+</t>
+<t tx="tsc.20180225234500.3" leo4sqlite="7d71005805000000696e64657871014b01732e">one: green
+two: happy
+three: clown
+</t>
+<t tx="tsc.20180225234500.4" leo4sqlite="7d71005805000000696e64657871014b02732e">one: blue
+two: goofy
+three: frown
+</t>
+<t tx="tsc.20180225234500.5" leo4sqlite="7d71005805000000696e64657871014b03732e">one: grey
+two: smarty
+three: brown
+</t>
+<t tx="tsc.20180225234500.6" leo4sqlite="7d71005805000000696e64657871014b04732e">one: olive
+two: smarty
+three: clown
+</t>
 <t tx="tscv11.20180119175627.1">**leo4sqlite.py plugin**
 
 *This node belongs at the top level of 'leoPlugins.leo'*
