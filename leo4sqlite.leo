@@ -37,12 +37,11 @@
 <v t="tsc.20180214164152.23"><vh>@@file /home/tsc/Desktop/leo4sqlite-file/leo4sqlite.py</vh></v>
 </v>
 <v t="tscv11.20180119175627.1" a="E"><vh>Sqlite3</vh>
-<v t="tsc.20180206152253.2" a="E" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580b0000005f5f626f6f6b6d61726b7371037d7104580700000069735f6475706571054930300a7373732e"
-expanded="tsc.20180209234613.16,tsc.20180209235407.1,tsc.20180224081154.1,"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
+<v t="tsc.20180206152253.2" a="E" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580b0000005f5f626f6f6b6d61726b7371037d7104580700000069735f6475706571054930300a7373732e"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
 </v>
 <v t="tsc.20180214164224.1"><vh>temp</vh></v>
-<v t="tsc.20180224090820.1" a="E"><vh>data</vh>
-<v t="tsc.20180225234500.1" a="E"><vh>@db3 /home/tsc/Desktop/blob_test.db3</vh>
+<v t="tsc.20180224090820.1"><vh>data</vh>
+<v t="tsc.20180225234500.1"><vh>@db3 /home/tsc/Desktop/blob_test.db3</vh>
 <v t="tsc.20180225234500.2" a="E"><vh>@tbl testorama</vh>
 <v t="tsc.20180225234500.3"><vh>dumb.jpg</vh></v>
 <v t="tsc.20180225234500.4"><vh>Screenshot (2).png</vh></v>
@@ -50,7 +49,7 @@ expanded="tsc.20180209234613.16,tsc.20180209235407.1,tsc.20180224081154.1,"><vh>
 <v t="tsc.20180225234500.6"><vh>ly39gCL._.jpg</vh></v>
 </v>
 </v>
-<v t="tsc.20180226003650.1" a="E"><vh>@db3 /home/tsc/Desktop/sqlite_filename.db3</vh>
+<v t="tsc.20180226003650.1"><vh>@db3 /home/tsc/Desktop/sqlite_filename.db3</vh>
 <v t="tsc.20180226003650.2" a="E"><vh>@tbl test</vh>
 <v t="tsc.20180226003650.3"><vh>bd, cv, gdfg</vh></v>
 <v t="tsc.20180226003650.4"><vh>123, 456.0, 789</vh></v>
