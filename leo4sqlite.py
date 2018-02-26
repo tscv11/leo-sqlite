@@ -421,10 +421,10 @@ class InputDialogs(QWidget):
         
         tbl_nm_str = ''
         for name in res:
-            tbl_names.append(name[0])
-            tbl_nm_str += "\"" + name[0] + "\", "
-        tbl_nm_str = tbl_nm_str[:-3] + "\""
-
+            if name[0] != "sqlite_sequence":
+                tbl_names.append(name[0])
+                tbl_nm_str += "\"" + name[0] + "\", "
+            tbl_nm_str = tbl_nm_str[:-3] + "\""
         
         self.setStyleSheet('padding: 3px; background: white');
         item, okPressed = QInputDialog.getItem(self, "leo4sqlite","select a table: ", tbl_names, 0, False)    
@@ -1548,7 +1548,7 @@ def export_blobs(self, c, col_nums, col_names, col_types, blob_col):
             query = "update {table} set {field} = ? where {pk_field} = ?".format(table=table_name, field=keys[cx], pk_field='IDKey')
             p.v.u['leo4sqlite']['index'] = rx
             cur.execute(query, [vals[cx], p.v.u['leo4sqlite']['index']])
-            g.es(vals[cx], p.v.u['leo4sqlite']['index'])
+
             cx += 1
 
         key_lst = key_lst[num_cols:]

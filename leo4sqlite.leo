@@ -36,17 +36,29 @@
 <v t="tsc.20180214164152.22"><vh>@@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
 <v t="tsc.20180214164152.23"><vh>@@file /home/tsc/Desktop/leo4sqlite-file/leo4sqlite.py</vh></v>
 </v>
-<v t="tscv11.20180119175627.1"><vh>Sqlite3</vh>
-<v t="tsc.20180206152253.2" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580b0000005f5f626f6f6b6d61726b7371037d7104580700000069735f6475706571054930300a7373732e"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
+<v t="tscv11.20180119175627.1" a="E"><vh>Sqlite3</vh>
+<v t="tsc.20180206152253.2" a="E" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580b0000005f5f626f6f6b6d61726b7371037d7104580700000069735f6475706571054930300a7373732e"
+expanded="tsc.20180209234613.16,tsc.20180209235407.1,tsc.20180224081154.1,"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
 </v>
 <v t="tsc.20180214164224.1"><vh>temp</vh></v>
-<v t="tsc.20180224090820.1"><vh>data</vh>
+<v t="tsc.20180224090820.1" a="E"><vh>data</vh>
 <v t="tsc.20180225234500.1" a="E"><vh>@db3 /home/tsc/Desktop/blob_test.db3</vh>
 <v t="tsc.20180225234500.2" a="E"><vh>@tbl testorama</vh>
 <v t="tsc.20180225234500.3"><vh>dumb.jpg</vh></v>
 <v t="tsc.20180225234500.4"><vh>Screenshot (2).png</vh></v>
 <v t="tsc.20180225234500.5"><vh>Screenshot (3).png</vh></v>
 <v t="tsc.20180225234500.6"><vh>ly39gCL._.jpg</vh></v>
+</v>
+</v>
+<v t="tsc.20180226003650.1" a="E"><vh>@db3 /home/tsc/Desktop/sqlite_filename.db3</vh>
+<v t="tsc.20180226003650.2" a="E"><vh>@tbl test</vh>
+<v t="tsc.20180226003650.3"><vh>bd, cv, gdfg</vh></v>
+<v t="tsc.20180226003650.4"><vh>123, 456.0, 789</vh></v>
+</v>
+<v t="tsc.20180226003822.1"><vh>@tbl test2</vh>
+<v t="tsc.20180226003822.2"><vh>one</vh></v>
+<v t="tsc.20180226003822.3"><vh>two</vh></v>
+<v t="tsc.20180226003822.4"><vh>IDKey</vh></v>
 </v>
 </v>
 </v>
@@ -316,7 +328,7 @@ c.executeMinibufferCommand('sqlite-insert-blob')
 ['TEXT', 'REAL', 'INTEGER', 'INTEGER', 'BLOB', 'TEXT', 'TEXT']
 
 </t>
-<t tx="tsc.20180225234500.3" leo4sqlite="7d71005805000000696e64657871014b01732e">one: green
+<t tx="tsc.20180225234500.3" leo4sqlite="7d71005805000000696e64657871014b01732e">one: sheen
 two: happy
 three: clown
 </t>
@@ -331,6 +343,37 @@ three: brown
 <t tx="tsc.20180225234500.6" leo4sqlite="7d71005805000000696e64657871014b04732e">one: olive
 two: smarty
 three: clown
+</t>
+<t tx="tsc.20180226003650.1"></t>
+<t tx="tsc.20180226003650.2">filepath: /home/tsc/Desktop/sqlite_filename.db3
+
+['one', 'two', 'three']
+['INTEGER', 'REAL', 'INTEGER']
+
+layout: two
+
+</t>
+<t tx="tsc.20180226003650.3"></t>
+<t tx="tsc.20180226003650.4"></t>
+<t tx="tsc.20180226003822.1">filepath: /home/tsc/Desktop/sqlite_filename.db3
+
+['one', 'two', 'IDKey']
+['STRING', 'TEXT', 'INTEGER']
+
+layout: three
+
+</t>
+<t tx="tsc.20180226003822.2">hi
+hey
+hello
+</t>
+<t tx="tsc.20180226003822.3">mom
+dad
+terry
+</t>
+<t tx="tsc.20180226003822.4">1
+2
+3
 </t>
 <t tx="tscv11.20180119175627.1">**leo4sqlite.py plugin**
 
