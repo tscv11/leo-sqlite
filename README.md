@@ -13,7 +13,7 @@ sqlite-view-blob
 sqlite-open-blob  
 sqlite-edit-blob  
 sqlite-import-blobs    
-sqlite-export-blobs   (*in progress*)  
+sqlite-export-blobs
 sqlite-clear-temp  
 sqlite-delete-data  
 sqlite-purge-files*    
