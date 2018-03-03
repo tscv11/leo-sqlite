@@ -357,10 +357,14 @@ class InputDialogs(QWidget):
                     "open blob": cmds + " open_blob",
                     "view blob": cmds + " view_blob",
                     "edit blob": cmds + " edit_blob",
+                    "pandoc table": cmds + " grand_central"
              }
         
         if action == "export blobs":
             export_blobs(self, c)
+            
+        if action == "pandoc table":
+            c._leo4sqlite['layout'] = "one"
         
         if action not in actions:
             raise UnknownActionError()
@@ -796,9 +800,12 @@ class InputDialogs(QWidget):
         action = c._leo4sqlite['action']
             
         if action == "export blobs":
-            export_blobs(self, c)  # , col_nums, col_names, col_types, blob_col)
+            export_blobs(self, c)
             return
             
+        if action == "pandoc table":
+            pandoc_table(c, col_nums, col_names, col_types, blob_col)
+             
         db3_h = "@db3 " + str(db_filename)
         p = g.findNodeAnywhere(c, db3_h)
         
@@ -822,6 +829,7 @@ class InputDialogs(QWidget):
         if action == "import table" and blob_col:
             raise TableIsBlobTable
             return
+            
             
         if action == "import table":
             if layout == "one":
@@ -1371,6 +1379,81 @@ def export_table4(self, c, p, col_nums, col_names, col_types, blob_col):
     
     g.es("done\n")
 #@-others
+#@+node:tsc.20180302144128.1: ** pandoc_table
+def pandoc_table(c, col_nums, col_names, col_types, blob_col):
+    
+    table_name = c._leo4sqlite['table_name']
+    filepath = c._leo4sqlite['db_filename']
+    
+    num_cols = 0
+    num_cols = len(col_nums)
+    
+    g.es("\nimporting as pandoc table: " + table_name + "\n")
+                    
+    rx = 0
+    delim = ", "
+    new_row = ""
+    line_val = ""
+    
+    # p.b = p.b + "filepath: " + str(filepath) + "\n\n"
+    # p.b = p.b + str(col_names) + "\n"
+    # p.b = p.b + str(col_types) + "\n\n"
+
+    conn = sqlite3.connect(filepath)
+    cursor = conn.cursor()
+    
+    col_widths = {}
+    header_width = 0
+    print_names = ""
+    print_line = ""
+    for col_name in col_names:
+        if col_name == "IDKey":
+            return
+        cursor.execute("SELECT MAX(%s) FROM %s" % (col_name, table_name))
+        row = cursor.fetchone()
+        width= len(str(row[0]))
+        col_widths[col_name] = width
+    
+    for col_name in col_names:
+        #g.es(col_widths[col_name])
+        
+        # if col_widths[col_name] > len(col_name): # I just set them to that!
+            # col_widths[col_name] = len(col_name)
+        
+        print_names += "|" + col_name  
+    
+    g.es(print_names)
+    
+    for col_name in col_names:
+        
+        #col_widths[col_name] > len(col_name):
+            #col_widths[col_name] = len(col_name)
+        line_val += ("|" + ("-" * col_widths[col_name])) 
+        
+    g.es(line_val)
+    
+    for row in cursor.execute("SELECT * FROM " + table_name):
+         
+        cx = 0 
+        if row != "":
+            cols = re.split(delim, str(row))
+
+            ix = 0
+            for col in cols:
+                
+                if col != "":
+                    new_row = new_row + col + "|"
+                    cx = cx + 1
+                    ix += 1
+                # else:
+                    # return
+            new_row = new_row[1:-3]
+            new_row = re.sub(r"\'\)\(", "", new_row)
+            g.es(new_row[:-1])
+            new_row = ""
+    
+    g.es("done\n")
+    
 #@+node:tsc.20180214062647.1: ** import_blobs
 def import_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
 
@@ -1869,38 +1952,19 @@ def export_blobs(self, c):
 #             conn.commit()
 #             conn.close()
 #             g.es("done")
-#@+node:tsc.20180209234613.41: ** delete_blobs
-def delBlobs(c): 
-    
-    del_blobs_on_exit = c.config.getBool('del_blobs_on_exit')
-    
-    if del_blobs_on_exit == 1:
-        sqlite_temp_dir = c.config.getString('sqlite_temp_dir') 
-            
-        os.chdir(sqlite_temp_dir)
-        files=glob.glob('*')
-        if files:
-            for filename in files:
-                os.unlink(filename)
-#@+node:tsc.20180226071844.1: ** db3_tbl_idx
-def db3_tbl_idx(c):
-
-    import re
-    
-    db3_tbl_idx = {}
-    
-    db3s = c.find_h(r'^@db3\s.*')
-    
-    for db3 in db3s:
-        db3_h = re.sub(r'.*@db3 ', '', db3.h)
-        for tbl in db3.children():
-            tbl_h = re.sub(r'.*@tbl ', '', tbl.h)
-            db3_tbl_idx.setdefault(db3_h, []).append(tbl_h)
-    
-    #g.es(db3_tbl_idx)
-    return db3_tbl_idx
 #@+node:tsc.20180209235759.1: ** g.commands
 #@+others
+#@+node:tsc.20180302143847.1: *3* sqlite-pandoc-table
+@g.command('sqlite-pandoc-table')
+def sqlite_pandoc_table(event):
+    
+    c = event.get('c')
+     
+    c._leo4sqlite['action'] = "pandoc table"
+
+    InputDialogs(c)
+    
+    #InputDialogs(c)
 #@+node:tsc.20180209234613.42: *3* sqlite_make_template
 @g.command('sqlite-make-template')
 def sqlite_make_template(event):
@@ -2086,6 +2150,36 @@ def sqlite_purge_files(event):
         for filename in files:
             os.unlink(filename)
 #@-others
+#@+node:tsc.20180209234613.41: ** delete_blobs
+def delBlobs(c): 
+    
+    del_blobs_on_exit = c.config.getBool('del_blobs_on_exit')
+    
+    if del_blobs_on_exit == 1:
+        sqlite_temp_dir = c.config.getString('sqlite_temp_dir') 
+            
+        os.chdir(sqlite_temp_dir)
+        files=glob.glob('*')
+        if files:
+            for filename in files:
+                os.unlink(filename)
+#@+node:tsc.20180226071844.1: ** db3_tbl_idx
+def db3_tbl_idx(c):
+
+    import re
+    
+    db3_tbl_idx = {}
+    
+    db3s = c.find_h(r'^@db3\s.*')
+    
+    for db3 in db3s:
+        db3_h = re.sub(r'.*@db3 ', '', db3.h)
+        for tbl in db3.children():
+            tbl_h = re.sub(r'.*@tbl ', '', tbl.h)
+            db3_tbl_idx.setdefault(db3_h, []).append(tbl_h)
+    
+    #g.es(db3_tbl_idx)
+    return db3_tbl_idx
 #@-others
 #@@tabwidth -4
 #@-leo
