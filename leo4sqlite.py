@@ -803,8 +803,6 @@ class InputDialogs(QWidget):
             export_blobs(self, c)
             return
             
-        if action == "pandoc table":
-            pandoc_table(c, col_nums, col_names, col_types, blob_col)
              
         db3_h = "@db3 " + str(db_filename)
         p = g.findNodeAnywhere(c, db3_h)
@@ -826,10 +824,12 @@ class InputDialogs(QWidget):
             c.selectPosition(p)
             import_blobs(self, c, p, col_nums, col_names, col_types, blob_col)
         
+        if action == "pandoc table":
+            pandoc_table(c, p, col_nums, col_names, col_types, blob_col)
+            
         if action == "import table" and blob_col:
             raise TableIsBlobTable
             return
-            
             
         if action == "import table":
             if layout == "one":
@@ -1380,7 +1380,7 @@ def export_table4(self, c, p, col_nums, col_names, col_types, blob_col):
     g.es("done\n")
 #@-others
 #@+node:tsc.20180302144128.1: ** pandoc_table
-def pandoc_table(c, col_nums, col_names, col_types, blob_col):
+def pandoc_table(c, p, col_nums, col_names, col_types, blob_col):
     
     table_name = c._leo4sqlite['table_name']
     filepath = c._leo4sqlite['db_filename']
@@ -1395,10 +1395,6 @@ def pandoc_table(c, col_nums, col_names, col_types, blob_col):
     new_row = ""
     line_val = ""
     
-    # p.b = p.b + "filepath: " + str(filepath) + "\n\n"
-    # p.b = p.b + str(col_names) + "\n"
-    # p.b = p.b + str(col_types) + "\n\n"
-
     conn = sqlite3.connect(filepath)
     cursor = conn.cursor()
     
@@ -1414,46 +1410,92 @@ def pandoc_table(c, col_nums, col_names, col_types, blob_col):
         width= len(str(row[0]))
         col_widths[col_name] = width
     
-    for col_name in col_names:
-        #g.es(col_widths[col_name])
-        
-        # if col_widths[col_name] > len(col_name): # I just set them to that!
-            # col_widths[col_name] = len(col_name)
-        
-        print_names += "|" + col_name  
-    
+    for col_name in col_names:    
+        print_names += "|" + col_name + (" " * (col_widths[col_name] - len(col_name)))
+
+
+    print_names += "|"
     g.es(print_names)
+    p.b = print_names + "\n"
     
     for col_name in col_names:
-        
-        #col_widths[col_name] > len(col_name):
-            #col_widths[col_name] = len(col_name)
         line_val += ("|" + ("-" * col_widths[col_name])) 
-        
+    
+    line_val += "|"    
     g.es(line_val)
+    p.b += line_val + "\n"
     
     for row in cursor.execute("SELECT * FROM " + table_name):
-         
-        cx = 0 
+        new_row += "|"
         if row != "":
-            cols = re.split(delim, str(row))
-
-            ix = 0
-            for col in cols:
-                
+            for col, col_name in zip(row, col_names):
                 if col != "":
-                    new_row = new_row + col + "|"
-                    cx = cx + 1
-                    ix += 1
-                # else:
-                    # return
-            new_row = new_row[1:-3]
-            new_row = re.sub(r"\'\)\(", "", new_row)
-            g.es(new_row[:-1])
+                    new_row += str(col) + (" " * (col_widths[col_name] - len(str(col)))) + "|"
+                    
+            p.b += new_row + "\n"
+            g.es(new_row)
             new_row = ""
-    
+    p.b += "\n" 
     g.es("done\n")
-    
+    return        
+#@+node:tsc.20180303162852.1: *3* @@pandoc_table
+#@+at
+# def pandoc_table(c, p, col_nums, col_names, col_types, blob_col):
+#     
+#     table_name = c._leo4sqlite['table_name']
+#     filepath = c._leo4sqlite['db_filename']
+#     
+#     num_cols = 0
+#     num_cols = len(col_nums)
+#     
+#     g.es("\nimporting as pandoc table: " + table_name + "\n")
+#                     
+#     rx = 0
+#     delim = ", "
+#     new_row = ""
+#     line_val = ""
+#     
+#     conn = sqlite3.connect(filepath)
+#     cursor = conn.cursor()
+#     
+#     col_widths = {}
+#     header_width = 0
+#     print_names = ""
+#     print_line = ""
+#     for col_name in col_names:
+#         if col_name == "IDKey":
+#             return
+#         cursor.execute("SELECT MAX(%s) FROM %s" % (col_name, table_name))
+#         row = cursor.fetchone()
+#         width= len(str(row[0]))
+#         col_widths[col_name] = width
+#     
+#     for col_name in col_names:    
+#         print_names += "|" + col_name  
+#     
+#     g.es(print_names)
+#     p.b = print_names + "\n"
+#     
+#     for col_name in col_names:
+#         line_val += ("|" + ("-" * col_widths[col_name])) 
+#     
+#     line_val += "|"    
+#     g.es(line_val)
+#     p.b += line_val + "\n"
+#     
+#     for row in cursor.execute("SELECT * FROM " + table_name):
+#         new_row += "|"
+#         if row != "":
+#             for col in row:
+#                 if col != "":
+#                     new_row += str(col) + "|"
+#                     
+#             p.b += new_row + "\n"
+#             g.es(new_row)
+#             new_row = ""
+#         else:
+#             g.es("done\n")
+#             return    
 #@+node:tsc.20180214062647.1: ** import_blobs
 def import_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
 
