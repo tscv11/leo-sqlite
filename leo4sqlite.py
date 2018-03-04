@@ -1407,7 +1407,7 @@ def pandoc_table(c, p, col_nums, col_names, col_types, blob_col):
             return
         cursor.execute("SELECT MAX(%s) FROM %s" % (col_name, table_name))
         row = cursor.fetchone()
-        width = len(str(row[0]))
+        width = len(str(row))  # [0]
         col_widths[col_name] = width
     
     for col_name in col_names:    
@@ -1418,8 +1418,11 @@ def pandoc_table(c, p, col_nums, col_names, col_types, blob_col):
     p.b = print_names + "\n"
     
     for col_name in col_names:
+        if len(col_name) > col_widths[col_name]:
+            col_widths[col_name] = len(col_name)
         line_val += ("|" + ("-" * col_widths[col_name])) 
-    
+        
+        
     line_val += "|"    
     g.es(line_val)
     p.b += line_val + "\n"
