@@ -38,7 +38,7 @@
 </v>
 <v t="tscv11.20180119175627.1" a="E"><vh>Sqlite3</vh>
 <v t="tsc.20180206152253.2" a="E" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580b0000005f5f626f6f6b6d61726b7371037d7104580700000069735f6475706571054930300a7373732e"
-expanded="tsc.20180209234613.16,tsc.20180304164938.1,"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
+expanded="tsc.20180209234613.16,"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
 </v>
 <v t="tsc.20180214164224.1"><vh>temp</vh></v>
 <v t="tsc.20180224090820.1" a="E"><vh>data</vh>
@@ -56,6 +56,18 @@ expanded="tsc.20180209234613.16,tsc.20180304164938.1,"><vh>@file /home/tsc/Deskt
 <v t="tsc.20180225234500.4"><vh>Screenshot (2).png</vh></v>
 <v t="tsc.20180225234500.5"><vh>Screenshot (3).png</vh></v>
 <v t="tsc.20180225234500.6"><vh>ly39gCL._.jpg</vh></v>
+</v>
+<v t="tsc.20180304181918.1"><vh>@tbl testorama</vh>
+<v t="tsc.20180304181919.1"><vh>dumb.jpg</vh></v>
+<v t="tsc.20180304181919.2"><vh>Screenshot (2).png</vh></v>
+<v t="tsc.20180304181919.3"><vh>Screenshot (3).png</vh></v>
+<v t="tsc.20180304181919.4"><vh>ly39gCL._.jpg</vh></v>
+</v>
+<v t="tsc.20180304181758.1"><vh>@tbl testorama</vh>
+<v t="tsc.20180304181758.2"><vh>dumb.jpg</vh></v>
+<v t="tsc.20180304181758.3"><vh>Screenshot (2).png</vh></v>
+<v t="tsc.20180304181758.4"><vh>Screenshot (3).png</vh></v>
+<v t="tsc.20180304181758.5"><vh>ly39gCL._.jpg</vh></v>
 </v>
 </v>
 </v>
@@ -367,6 +379,46 @@ terry
 |bdsdfasdfasdfasdfasdf     | cv     | gdfg              |
 |123                       |456.0   |789                |
 
+</t>
+<t tx="tsc.20180304181758.1">['one', 'two', 'three', 'IDKey', 'Blobs', 'Filename', 'Extension']
+['TEXT', 'REAL', 'INTEGER', 'INTEGER', 'BLOB', 'TEXT', 'TEXT']
+
+</t>
+<t tx="tsc.20180304181758.2" leo4sqlite="7d71005805000000696e64657871014b00732e">one: sheen
+two: happy
+three: clown
+</t>
+<t tx="tsc.20180304181758.3" leo4sqlite="7d71005805000000696e64657871014b01732e">one: blue
+two: goofy
+three: frown
+</t>
+<t tx="tsc.20180304181758.4" leo4sqlite="7d71005805000000696e64657871014b02732e">one: grey
+two: smarty
+three: brown
+</t>
+<t tx="tsc.20180304181758.5" leo4sqlite="7d71005805000000696e64657871014b03732e">one: olive
+two: smarty
+three: clown
+</t>
+<t tx="tsc.20180304181918.1">['one', 'two', 'three', 'IDKey', 'Blobs', 'Filename', 'Extension']
+['TEXT', 'REAL', 'INTEGER', 'INTEGER', 'BLOB', 'TEXT', 'TEXT']
+
+</t>
+<t tx="tsc.20180304181919.1" leo4sqlite="7d71005805000000696e64657871014b00732e">one: sheen
+two: happy
+three: clown
+</t>
+<t tx="tsc.20180304181919.2" leo4sqlite="7d71005805000000696e64657871014b01732e">one: blue
+two: goofy
+three: frown
+</t>
+<t tx="tsc.20180304181919.3" leo4sqlite="7d71005805000000696e64657871014b02732e">one: grey
+two: smarty
+three: brown
+</t>
+<t tx="tsc.20180304181919.4" leo4sqlite="7d71005805000000696e64657871014b03732e">one: olive
+two: smarty
+three: clown
 </t>
 <t tx="tscv11.20180119175627.1">**leo4sqlite.py plugin**
 
