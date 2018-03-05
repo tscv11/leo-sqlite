@@ -273,6 +273,9 @@ def init ():
 class Leo4SqliteError(Exception): pass
 
 #@+others
+#@+node:tsc.20180304165949.1: *3* class BlobTableNotSelected
+class BlobTableNotSelected(Leo4SqliteError):
+    """A blob table must be selected for 'sqlite-export-blobs' to work."""
 #@+node:tsc.20180209234613.9: *3* class Sqlite3DatabaseError
 class Sqlite3DatabaseError(Leo4SqliteError):
     """File is encrypted or is not a database."""
@@ -1407,7 +1410,7 @@ def pandoc_table(c, p, col_nums, col_names, col_types, blob_col):
             return
         cursor.execute("SELECT MAX(%s) FROM %s" % (col_name, table_name))
         row = cursor.fetchone()
-        width = len(str(row))  # [0]
+        width = len(str(row))
         col_widths[col_name] = width
     
     for col_name in col_names:    
@@ -1721,7 +1724,7 @@ def import_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
 #     headline = ("@tbl " + table_name)    
 #     tbl_node = g.findNodeAnywhere(c, (headline))
 #     c.selectPosition(tbl_node)
-#@+node:tsc.20180224081154.1: ** export_blobs
+#@+node:tsc.20180304164938.1: ** export_blobs
 def export_blobs(self, c): 
     '''export table with any text field changes included.'''
     
@@ -1739,10 +1742,13 @@ def export_blobs(self, c):
     defalt = ''
     
     p = c.p
-    parent = p.parent()
-    c.selectPosition(parent)
-    table_name = re.sub(r'^@tbl\s', '', parent.h)
-    
+    #parent = p.parent()
+    #c.selectPosition(parent)
+    if re.match(r'^@tbl\s', str(p.h)):
+        table_name = re.sub(r'^@tbl\s', '', p.h)
+    else:
+        raise BlobTableNotSelected
+        
     index = db3_tbl_idx(c)
     
     for db3 in index:
@@ -1833,6 +1839,316 @@ def export_blobs(self, c):
             conn.close()
             g.es("\ndone")
             
+#@+node:tsc.20180304165709.1: *3* @@export_blobs
+#@+at
+# def export_blobs(self, c): 
+#     '''export table with any text field changes included.'''
+#     
+#     db3s = []
+#     keys = []
+#     vals = []
+#     key_lst = []
+#     val_lst = []
+#     child_h = []
+#     child_b = []
+#     index = {}
+#     new_row = ''
+#     leo4sqlite = []
+#     db3_name = ''
+#     defalt = ''
+#     
+#     p = c.p
+#     parent = p.parent()
+#     c.selectPosition(parent)
+#     table_name = re.sub(r'^@tbl\s', '', parent.h)
+#     
+#     index = db3_tbl_idx(c)
+#     
+#     for db3 in index:
+#     
+#         if table_name in index[db3]:
+#             db3_name = db3
+#             c._leo4sqlite['db_filename'] = db3_name
+#         else:
+#             db3s.append(db3)
+#         
+#     db3s.insert(0, db3_name)
+# 
+#     self.setStyleSheet('padding: 3px; background: white');
+#     item, okPressed = QInputDialog.getItem(self, "leo4sqlite","select target database (default: currently selected)", db3s, 0, False)    
+#     if not okPressed:
+#             raise UserCancel()
+#             return
+#     
+#     g.es("exporting blob table: " + table_name)
+#     
+#     p = p.parent()
+#     c.selectPosition(p)
+#     
+#     p = p.parent()
+#     c.selectPosition(p)
+#     filename = p.h[5:]
+#     g.es(filename + "\n")
+#     
+#     p = p.firstChild()
+#     c.selectPosition(p)
+#     
+#     for child in p.children():
+#         child_h.append(child.h)
+#         child_b = re.split(r'\n', str(child.b))
+#         
+#     children = parent.children()
+#     for child in children:
+#         child_b = re.split(r'\n', child.b)
+#         for line in child_b:
+#             line = re.sub(r'^.*match=', '', line)
+#             key_val = re.split(r':\s', line)
+#             
+#             i = 0
+#             for field in key_val:
+#                 if i == 0 and field != "":
+#                     key_lst.append(field)
+#                 else:
+#                     if i == 1 and field != "":
+#                         val_lst.append(field)
+#                 i += 1
+#     
+#     num_cols = len(child_b) - 1
+#     
+#     conn = sqlite3.connect(filename)
+#     cur = conn.cursor()
+#     
+#     cur.execute("select * from %s" % (table_name))
+#     rows = cur.fetchall()
+#     
+#     p = p.firstChild()
+#     
+#     rx = 1    
+#     for row in rows:    
+#         
+#         keys = key_lst[:num_cols]
+#         vals = val_lst[:num_cols]
+#                   
+#         cx = 0
+#         for key in keys:
+#                 
+#             query = "update {table} set {field} = ? where {pk_field} = ?".format(table=table_name, field=keys[cx], pk_field='IDKey')
+#             p.v.u['leo4sqlite']['index'] = rx
+#             cur.execute(query, [vals[cx], p.v.u['leo4sqlite']['index']])
+# 
+#             cx += 1
+# 
+#         key_lst = key_lst[num_cols:]
+#         val_lst = val_lst[num_cols:]
+#         
+#         p = p.next()
+# 
+#         rx += 1
+#         
+#         if p:
+#             continue
+#         else:
+#             conn.commit()
+#             conn.close()
+#             g.es("\ndone")
+#             
+#@+node:tsc.20180224081154.1: *3* @@export_blobs
+#@+at
+# def export_blobs(self, c): 
+#     '''export table with any text field changes included.'''
+#     
+#     db3s = []
+#     keys = []
+#     vals = []
+#     key_lst = []
+#     val_lst = []
+#     child_h = []
+#     child_b = []
+#     index = {}
+#     new_row = ''
+#     leo4sqlite = []
+#     db3_name = ''
+#     defalt = ''
+#     
+#     p = c.p
+#     if not re.match(r'@db3\s', p.h):
+#         parent = p.parent()
+#         c.selectPosition(parent)
+#             if not re.match(r'@tbl\s', p.h):
+#         c.selectPosition(parent)
+#     
+#     table_name = re.sub(r'^@tbl\s', '', parent.h)
+#     
+#     index = db3_tbl_idx(c)
+#     
+#     for db3 in index:
+#     
+#         if table_name in index[db3]:
+#             db3_name = db3
+#             c._leo4sqlite['db_filename'] = db3_name
+#         else:
+#             db3s.append(db3)
+#         
+#     db3s.insert(0, db3_name)
+# 
+#     self.setStyleSheet('padding: 3px; background: white');
+#     item, okPressed = QInputDialog.getItem(self, "leo4sqlite","select target database (default: currently selected)", db3s, 0, False)    
+#     if not okPressed:
+#             raise UserCancel()
+#             return
+#     
+#     g.es("exporting blob table: " + table_name)
+#     
+#     p = p.parent()
+#     c.selectPosition(p)
+#     
+#     p = p.parent()
+#     c.selectPosition(p)
+#     filename = p.h[5:]
+#     g.es(filename + "\n")
+#     
+#     p = p.firstChild()
+#     c.selectPosition(p)
+#     
+#     for child in p.children():
+#         child_h.append(child.h)
+#         child_b = re.split(r'\n', str(child.b))
+#         
+#     children = parent.children()
+#     for child in children:
+#         child_b = re.split(r'\n', child.b)
+#         for line in child_b:
+#             line = re.sub(r'^.*match=', '', line)
+#             key_val = re.split(r':\s', line)
+#             
+#             i = 0
+#             for field in key_val:
+#                 if i == 0 and field != "":
+#                     key_lst.append(field)
+#                 else:
+#                     if i == 1 and field != "":
+#                         val_lst.append(field)
+#                 i += 1
+#     
+#     num_cols = len(child_b) - 1
+#     
+#     conn = sqlite3.connect(filename)
+#     cur = conn.cursor()
+#     
+#     cur.execute("select * from %s" % (table_name))
+#     rows = cur.fetchall()
+#     
+#     p = p.firstChild()
+#     
+#     rx = 1    
+#     for row in rows:    
+#         
+#         keys = key_lst[:num_cols]
+#         vals = val_lst[:num_cols]
+#                   
+#         cx = 0
+#         for key in keys:
+#                 
+#             query = "update {table} set {field} = ? where {pk_field} = ?".format(table=table_name, field=keys[cx], pk_field='IDKey')
+#             p.v.u['leo4sqlite']['index'] = rx
+#             cur.execute(query, [vals[cx], p.v.u['leo4sqlite']['index']])
+# 
+#             cx += 1
+# 
+#         key_lst = key_lst[num_cols:]
+#         val_lst = val_lst[num_cols:]
+#         
+#         p = p.next()
+# 
+#         rx += 1
+#         
+#         if p:
+#             continue
+#         else:
+#             conn.commit()
+#             conn.close()
+#             g.es("\ndone")
+#             
+#@+node:tsc.20180224081154.2: *3* @@export_blobs
+#@+at
+# def export_blobs(self, c, col_nums, col_names, col_types, blob_col):
+#     
+#     '''export table with any text field changes included.'''
+#     
+#     def place_holder(line):
+#         return '({})'.format(', '.join('?' * len(line)))
+#     
+#     keys = []
+#     vals = []
+#     key_lst = []
+#     val_lst = []
+#     child_h = []
+#     child_b = []
+#     new_row = ''
+#     
+#     p = c.p
+#     parent = p.parent()
+#     c.selectPosition(parent)
+#     table_name = re.sub(r'^@tbl\s', '', parent.h)
+#     g.es(table_name)
+#     
+#     p = p.parent()
+#     c.selectPosition(p)
+#     
+#     p = p.parent()
+#     c.selectPosition(p)
+#     filename = p.h[5:]
+#     g.es(filename)
+#     
+#     p = p.firstChild()
+#     c.selectPosition(p)
+#     
+#     for child in p.children():
+#         child_h.append(child.h)
+#         child_b = re.split(r'\n', str(child.b))
+#     
+#     children = parent.children()
+#     for child in children:
+#         child_b = re.split(r'\n', child.b)
+#         for line in child_b:
+#             line = re.sub(r'^.*match=', '', line)
+#             key_val = re.split(r':\s', line)
+#             
+#             i = 0
+#             for field in key_val:
+#                 if i == 0 and field != "":
+#                     key_lst.append(field)
+#                 else:
+#                     if i == 1 and field != "":
+#                         val_lst.append(field)
+#                 i += 1
+#     
+#     num_cols = len(child_b) - 1
+#     
+#     conn = sqlite3.connect(filename)
+#     cur = conn.cursor()
+#     
+#     rx = 1    
+#     cur.execute("select * from %s" % (table_name))
+#     rows = cur.fetchall()
+#     for row in rows:    
+#     
+#         keys = key_lst[:num_cols]
+#         vals = val_lst[:num_cols]
+#         
+#         cx = 0
+#         for key in keys:
+#                 
+#             query = "update %s set %s = ? where Primary_Key = ?" % (table_name, keys[cx])
+#             cur.execute(query, [vals[cx], rx])
+#             cx += 1
+#         
+#         key_lst = key_lst[num_cols:]
+#         val_lst = val_lst[num_cols:]
+#         rx += 1
+#             
+#     conn.commit()
+#     conn.close()
 #@+node:tsc.20180224081353.1: *3* @@export_blobs
 #@+at
 # def export_blobs(self, c, col_nums, col_names, col_types, blob_col):
@@ -1935,86 +2251,6 @@ def export_blobs(self, c):
 #             conn.commit()
 #             conn.close()
 #             g.es("\ndone")
-#@+node:tsc.20180224081154.2: *3* @@export_blobs
-#@+at
-# def export_blobs(self, c, col_nums, col_names, col_types, blob_col):
-#     
-#     '''export table with any text field changes included.'''
-#     
-#     def place_holder(line):
-#         return '({})'.format(', '.join('?' * len(line)))
-#     
-#     keys = []
-#     vals = []
-#     key_lst = []
-#     val_lst = []
-#     child_h = []
-#     child_b = []
-#     new_row = ''
-#     
-#     p = c.p
-#     parent = p.parent()
-#     c.selectPosition(parent)
-#     table_name = re.sub(r'^@tbl\s', '', parent.h)
-#     g.es(table_name)
-#     
-#     p = p.parent()
-#     c.selectPosition(p)
-#     
-#     p = p.parent()
-#     c.selectPosition(p)
-#     filename = p.h[5:]
-#     g.es(filename)
-#     
-#     p = p.firstChild()
-#     c.selectPosition(p)
-#     
-#     for child in p.children():
-#         child_h.append(child.h)
-#         child_b = re.split(r'\n', str(child.b))
-#     
-#     children = parent.children()
-#     for child in children:
-#         child_b = re.split(r'\n', child.b)
-#         for line in child_b:
-#             line = re.sub(r'^.*match=', '', line)
-#             key_val = re.split(r':\s', line)
-#             
-#             i = 0
-#             for field in key_val:
-#                 if i == 0 and field != "":
-#                     key_lst.append(field)
-#                 else:
-#                     if i == 1 and field != "":
-#                         val_lst.append(field)
-#                 i += 1
-#     
-#     num_cols = len(child_b) - 1
-#     
-#     conn = sqlite3.connect(filename)
-#     cur = conn.cursor()
-#     
-#     rx = 1    
-#     cur.execute("select * from %s" % (table_name))
-#     rows = cur.fetchall()
-#     for row in rows:    
-#     
-#         keys = key_lst[:num_cols]
-#         vals = val_lst[:num_cols]
-#         
-#         cx = 0
-#         for key in keys:
-#                 
-#             query = "update %s set %s = ? where Primary_Key = ?" % (table_name, keys[cx])
-#             cur.execute(query, [vals[cx], rx])
-#             cx += 1
-#         
-#         key_lst = key_lst[num_cols:]
-#         val_lst = val_lst[num_cols:]
-#         rx += 1
-#             
-#     conn.commit()
-#     conn.close()
 #@+node:tsc.20180224081154.3: *3* @@export_blobs
 #@+at
 # def export_blobs(self, c, col_nums, col_names, col_types, blob_col):
