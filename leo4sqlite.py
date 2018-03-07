@@ -911,9 +911,8 @@ def import_table1(c, p, col_nums, col_names, col_types, blob_col):
     
     g.es("done\n")
     c.redraw()
-    headline = ("@tbl " + table_name)    
-    tbl_node = g.findNodeAnywhere(c, (headline))
-    c.selectPosition(tbl_node)
+    
+    find_sel_tbl(c, p, table_name)
 #@+node:tsc.20180209234613.32: *3* import_table2
 def import_table2(c, p, col_nums, col_names, col_types, blob_col):
 
@@ -928,7 +927,7 @@ def import_table2(c, p, col_nums, col_names, col_types, blob_col):
     idx = 0
     rx = 0
     
-    names_types(p, filepath, col_names, col_types, layout)
+    names_types(p, db_filename, col_names, col_types, layout)
     
     g.es("\nimporting table: " + table_name + "\n\n(layout 2)\n")
 
@@ -936,6 +935,7 @@ def import_table2(c, p, col_nums, col_names, col_types, blob_col):
     
     conn = sqlite3.connect(db_filename)
     cursor = conn.cursor()
+    
     for row in cursor.execute("SELECT * FROM " + table_name):    
         rows.append(row)
     
@@ -960,10 +960,9 @@ def import_table2(c, p, col_nums, col_names, col_types, blob_col):
         p.h = str(final_row[1:-3])
     
     g.es("done\n")
-    c.redraw()        
-    headline = ("@tbl " + table_name)
-    tbl_node = g.findNodeAnywhere(c, (headline))
-    c.selectPosition(tbl_node)
+    c.redraw()
+    find_sel_tbl(c, p, table_name)        
+    
 #@+node:tsc.20180209234613.33: *3* import_table3
 def import_table3(c, p, col_nums, col_names, col_types, blob_col):
 
@@ -983,7 +982,7 @@ def import_table3(c, p, col_nums, col_names, col_types, blob_col):
     cx = 0
     num_cols = 0
 
-    names_types(p, filepath, col_names, col_types, layout)
+    names_types(p, db_filename, col_names, col_types, layout)
 
     for col_num in col_nums:
         num_cols = num_cols + 1
@@ -1010,9 +1009,7 @@ def import_table3(c, p, col_nums, col_names, col_types, blob_col):
     g.es("done\n")
         
     c.redraw()
-    headline = ("@tbl " + table_name)    
-    tbl_node = g.findNodeAnywhere(c, (headline))
-    c.selectPosition(tbl_node)
+    find_sel_tbl(c, p, table_name)
 #@+node:tsc.20180209234613.34: *3* import_table4
 def import_table4(c, p, col_nums, col_names, col_types, blob_col):
 
@@ -1028,7 +1025,7 @@ def import_table4(c, p, col_nums, col_names, col_types, blob_col):
 
     idx = 0
     
-    names_types(p, filepath, col_names, col_types, layout)
+    names_types(p, db_filename, col_names, col_types, layout)
     
     for col_name in col_names:
         if idx == 0:
@@ -1079,10 +1076,7 @@ def import_table4(c, p, col_nums, col_names, col_types, blob_col):
 
     g.es("done\n")
     c.redraw()
-    headline = ("@tbl " + table_name)
-    tbl_node = g.findNodeAnywhere(c, (headline))
-    c.selectPosition(tbl_node)
-
+    find_sel_tbl(c, p, table_name)
 #@-others
 #@+node:tsc.20180209235541.1: ** export_tables
 #@+others
@@ -1100,11 +1094,7 @@ def export_table1(self, c, p, col_nums, col_names, col_types, blob_col):
 
     lines = re.split("\n", p.b)
 
-    new_names = re.sub(r'[\"\'\[\]\s]', "", str(col_names))
-    new_types = re.sub(r'[\"\'\[\]\s]', "", str(col_types))
-
-    split_names = re.split(r',', str(new_names))
-    split_types = re.split(r',', str(new_types))
+    split_names, split_types = splt_type_name(col_names, col_types)
     
     sql = "("
     for i in range(len(split_names)):
@@ -1161,11 +1151,7 @@ def export_table2(self, c, p, col_nums, col_names, col_types, blob_col):
     for p in p.children():
         hlines.append(p.h)
     
-    new_names = re.sub(r'[\"\'\[\]\s]', "", str(names))
-    new_types = re.sub(r'[\"\'\[\]\s]', "", str(types))
-    
-    split_names = re.split(r',', str(new_names))
-    split_types = re.split(r',', str(new_types))
+    split_names, split_types = splt_type_name(col_names, col_types)
 
     sql = "("
     for i in range(len(split_names)):
@@ -1216,10 +1202,7 @@ def export_table3(self, c, p, col_nums, col_names, col_types, blob_col):
     names = lines[2]
     types = lines[3]
 
-    new_names = re.sub(r'[\"\'\[\]\s]', "", str(names))
-    new_types = re.sub(r'[\"\'\[\]\s]', "", str(types))
-    split_names = re.split(r',', str(new_names))
-    split_types = re.split(r',', str(new_types))
+    split_names, split_types = splt_type_name(col_names, col_types)
 
     row = []
     rows = []
@@ -1315,11 +1298,7 @@ def export_table4(self, c, p, col_nums, col_names, col_types, blob_col):
     num_cols = len(col_hlines)
     num_rows =int(len(row_hlines) / num_cols)
 
-    new_names = re.sub(r'[\"\'\[\]\s]', "", str(col_names))
-    new_types = re.sub(r'[\"\'\[\]\s]', "", str(col_types))
-    
-    split_names = re.split(r',', str(new_names))
-    split_types = re.split(r',', str(new_types))
+    split_names, split_types = splt_type_name(col_names, col_types)
     
     sql = "("
     for i in range(len(split_names)):
@@ -2605,17 +2584,6 @@ def find_sel_tbl(c, p, table_name):
     c.redraw()
     p = c.p
     return p
-#@+node:tsc.20180307104216.1: ** names_types
-#@@language python
-
-def names_types(p, filepath, col_names, col_types, layout):
-
-    p.b = p.b + "filepath: " + str(filepath) + "\n\n"
-    p.b = p.b + str(col_names) + "\n"
-    p.b = p.b + str(col_types) + "\n\n"
-    p.b = p.b + str("layout: " + layout) + "\n\n"
-    
-    return
 #@+node:tsc.20180209234613.41: ** delete_blobs
 def delBlobs(c): 
     
@@ -2629,6 +2597,27 @@ def delBlobs(c):
         if files:
             for filename in files:
                 os.unlink(filename)
+#@+node:tsc.20180307104216.1: ** names_types
+#@@language python
+
+def names_types(p, filepath, col_names, col_types, layout):
+
+    p.b = p.b + "filepath: " + str(filepath) + "\n\n"
+    p.b = p.b + str(col_names) + "\n"
+    p.b = p.b + str(col_types) + "\n\n"
+    p.b = p.b + str("layout: " + layout) + "\n\n"
+    
+    return
+#@+node:tsc.20180307105918.1: ** splt_type_name
+def splt_type_name(col_names, col_types):
+
+    new_names = re.sub(r'[\"\'\[\]\s]', "", str(col_names))
+    new_types = re.sub(r'[\"\'\[\]\s]', "", str(col_types))
+
+    split_names = re.split(r',', str(new_names))
+    split_types = re.split(r',', str(new_types))
+    
+    return split_names, split_types
 #@-others
 #@@tabwidth -4
 #@-leo

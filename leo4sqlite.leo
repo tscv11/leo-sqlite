@@ -11,19 +11,17 @@
 <vnodes>
 <v t="tsc.20180214164152.1"><vh>@settings</vh>
 <v t="tsc.20180307094620.1"><vh>@data free-layout-layout</vh></v>
-<v t="tsc.20180214164152.6"><vh>@buttons</vh>
-<v t="tsc.20180214164152.7"><vh>@button delete-blob</vh></v>
-<v t="tsc.20180214164152.8"><vh>@button insert-blob</vh></v>
-<v t="tsc.20180214164152.9"><vh>@button extract-blob</vh></v>
+<v t="tsc.20180214164152.6" a="E"><vh>@buttons</vh>
+<v t="tsc.20180216195827.1"><vh>@button export-blobs</vh></v>
 <v t="tsc.20180214164152.10"><vh>@button import-blobs</vh>
 <v t="tsc.20180214164152.11"><vh>@@button import-blobs</vh></v>
 </v>
-<v t="tsc.20180216195827.1"><vh>@button export-blobs</vh></v>
-<v t="tsc.20180214164152.14"><vh>@button edit-blob</vh></v>
+<v t="tsc.20180214164152.17"><vh>@button view-blob</vh></v>
 <v t="tsc.20180214164152.15"><vh>@button open-blob</vh>
 <v t="tsc.20180214164152.16"><vh>@@button open-blob</vh></v>
 </v>
-<v t="tsc.20180214164152.17"><vh>@button view-blob</vh></v>
+<v t="tsc.20180307110756.1"><vh>@button export-table</vh></v>
+<v t="tsc.20180307110749.1"><vh>@button import-table</vh></v>
 </v>
 <v t="tsc.20180214164152.2"><vh>@bookmarks</vh>
 <v t="tsc.20180219220649.1"><vh>export_blobs</vh></v>
@@ -42,21 +40,12 @@
 expanded="tsc.20180209235541.1,"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
 </v>
 <v t="tsc.20180214164224.1"><vh>temp</vh></v>
-<v t="tsc.20180224090820.1"><vh>data</vh>
-<v t="tsc.20180226003650.1"><vh>@db3 /home/tsc/Desktop/sqlite_filename.db3</vh>
-<v t="tsc.20180307105205.1"><vh>@tbl test</vh>
-<v t="tsc.20180307105205.2"><vh>one</vh>
-<v t="tsc.20180307105205.3"><vh>'bd'</vh></v>
-<v t="tsc.20180307105205.4"><vh>123</vh></v>
-</v>
-<v t="tsc.20180307105205.5"><vh>two</vh>
-<v t="tsc.20180307105205.6"><vh> ' cv'</vh></v>
-<v t="tsc.20180307105205.7"><vh> 456.0</vh></v>
-</v>
-<v t="tsc.20180307105205.8"><vh>three</vh>
-<v t="tsc.20180307105205.9"><vh> ' gdfg' </vh></v>
-<v t="tsc.20180307105205.10"><vh> 789 </vh></v>
-</v>
+<v t="tsc.20180224090820.1" a="E"><vh>data</vh>
+<v t="tsc.20180226003650.1" a="E"><vh>@db3 /home/tsc/Desktop/sqlite_filename.db3</vh>
+<v t="tsc.20180307113703.1"><vh>@tbl test</vh>
+<v t="tsc.20180307113703.2"><vh>one</vh></v>
+<v t="tsc.20180307113703.3"><vh>two</vh></v>
+<v t="tsc.20180307113703.4"><vh>three</vh></v>
 </v>
 </v>
 <v t="tsc.20180225234500.1"><vh>@db3 /home/tsc/Desktop/blob_test.db3</vh>
@@ -150,10 +139,6 @@ c.redraw()
 headline = ("@tbl " + table_name)    
 tbl_node = g.findNodeAnywhere(c, (headline))
 c.selectPosition(tbl_node)
-</t>
-<t tx="tsc.20180214164152.14">@language python
-
-c.executeMinibufferCommand('sqlite-edit-blob')
 </t>
 <t tx="tsc.20180214164152.15">@language python
 
@@ -317,15 +302,10 @@ gimp-2.8
 <t tx="tsc.20180214164152.3" __bookmarks="7d7100580700000069735f6475706571014930300a732e">#@settings:0--&gt;@buttons:2--&gt;@button import-blobs:0</t>
 <t tx="tsc.20180214164152.5" __bookmarks="7d7100580700000069735f6475706571014930300a732e">#Sqlite3:1--&gt;@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py:0</t>
 <t tx="tsc.20180214164152.6"></t>
-<t tx="tsc.20180214164152.7">@language python
-</t>
-<t tx="tsc.20180214164152.8">@language python
-
-c.executeMinibufferCommand('sqlite-insert-blob')
-</t>
-<t tx="tsc.20180214164152.9"></t>
 <t tx="tsc.20180214164224.1"></t>
-<t tx="tsc.20180216195827.1">c.executeMinibufferCommand('sqlite-export-blobs')
+<t tx="tsc.20180216195827.1">@language python
+
+c.executeMinibufferCommand('sqlite-export-blobs')
 </t>
 <t tx="tsc.20180219220649.1" __bookmarks="7d7100580700000069735f6475706571014930300a732e">#Sqlite3:1--&gt;@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py:0--&gt;export_blobs:10</t>
 <t tx="tsc.20180224090820.1"></t>
@@ -350,7 +330,7 @@ three: brown
 two: smarty
 three: clown
 </t>
-<t tx="tsc.20180226003650.1"></t>
+<t tx="tsc.20180226003650.1">`</t>
 <t tx="tsc.20180307094620.1">{
     "content": [
         "_leo_pane:bodyFrame",
@@ -374,23 +354,31 @@ three: clown
     ],
     "orientation": 1
 }</t>
-<t tx="tsc.20180307105205.1">filepath: /home/tsc/Desktop/sqlite_filename.db3
+<t tx="tsc.20180307110749.1">@language python
+
+c.executeMinibufferCommand('sqlite-import-table')
+</t>
+<t tx="tsc.20180307110756.1">@language python
+
+c.executeMinibufferCommand('sqlite-export-table')
+</t>
+<t tx="tsc.20180307113703.1">filepath: /home/tsc/Desktop/sqlite_filename.db3
 
 ['one', 'two', 'three']
 ['INTEGER', 'REAL', 'INTEGER']
 
-layout: four
+layout: three
 
 </t>
-<t tx="tsc.20180307105205.10"></t>
-<t tx="tsc.20180307105205.2"></t>
-<t tx="tsc.20180307105205.3"></t>
-<t tx="tsc.20180307105205.4"></t>
-<t tx="tsc.20180307105205.5"></t>
-<t tx="tsc.20180307105205.6"></t>
-<t tx="tsc.20180307105205.7"></t>
-<t tx="tsc.20180307105205.8"></t>
-<t tx="tsc.20180307105205.9"></t>
+<t tx="tsc.20180307113703.2">'bd'
+123
+</t>
+<t tx="tsc.20180307113703.3"> ' cv'
+456.0
+</t>
+<t tx="tsc.20180307113703.4"> ' gdfg' 
+789
+</t>
 <t tx="tscv11.20180119175627.1">**leo4sqlite.py plugin**
 
 *This node belongs at the top level of 'leoPlugins.leo'*
