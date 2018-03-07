@@ -353,7 +353,7 @@ class InputDialogs(QWidget):
         
         actions = {
                     "import table": cmds + " get_layout grand_central",
-                    "export table": " get_int_dbs select_table get_blob_col grand_central",
+                    "export table": " get_int_dbs select_table get_blob_col get_layout grand_central",
                     "import blobs": cmds + " grand_central", 
                     "insert blob": cmds + " insert_blob",
                     "extract blob": cmds + " extract_blob",
@@ -790,7 +790,7 @@ class InputDialogs(QWidget):
             line = lines[5]
             layout = line[8:]
             c._leo4sqlite['layout'] = layout
-            g.es('layout: ' + str(layout))
+            
     #@+node:tsc.20180209234613.30: *3* grand_central
     def grand_central(self, c):
         
@@ -806,22 +806,23 @@ class InputDialogs(QWidget):
             export_blobs(self, c)
             return
             
-             
-        db3_h = "@db3 " + str(db_filename)
-        p = g.findNodeAnywhere(c, db3_h)
-        
-        if p:
+        if action != "export table":
+
+            db3_h = "@db3 " + str(db_filename)
+            p = g.findNodeAnywhere(c, db3_h)
+            
+            if p:
+                c.selectPosition(p)
+            else:    
+                p = c.lastTopLevel().insertAsNthChild(1)
+                p.h = "@db3 " + str(db_filename)
+                c.redraw(p)
+            
+            p = p.insertAsNthChild(1)
+            p.h = "@tbl " + str(c._leo4sqlite['table_name'])
             c.selectPosition(p)
-        else:    
-            p = c.lastTopLevel().insertAsNthChild(1)
-            p.h = "@db3 " + str(db_filename)
             c.redraw(p)
-        
-        p = p.insertAsNthChild(1)
-        p.h = "@tbl " + str(c._leo4sqlite['table_name'])
-        c.selectPosition(p)
-        c.redraw(p)
-        
+            
         if action == "import blobs":   
             p = p.lastNode()
             c.selectPosition(p)
@@ -851,7 +852,9 @@ class InputDialogs(QWidget):
         if action == 'export table' and blob_col:
             raise TableIsBlobTable
             return
-            
+        
+        if action == 'export table':
+        
             p = c.p
                 
             if layout == "one":
@@ -962,7 +965,7 @@ def import_table2(c, p, col_nums, col_names, col_types, blob_col):
             final_row = re.sub(r',', ", ", str(new_row))
         p.h = str(final_row[1:-3])
     
-    g.es("\ndone\n")
+    g.es("done\n")
     c.redraw()        
     headline = ("@tbl " + table_name)
     tbl_node = g.findNodeAnywhere(c, (headline))
@@ -1097,7 +1100,7 @@ def import_table4(c, p, col_nums, col_names, col_types, blob_col):
 #@+others
 #@+node:tsc.20180209234613.35: *3* export_table1
 def export_table1(self, c, p, col_nums, col_names, col_types, blob_col):
-    
+
     def place_holder(line):
         return '({})'.format(', '.join('?' * len(line)))
     
