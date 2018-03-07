@@ -9,9 +9,9 @@
 <preferences/>
 <find_panel_settings/>
 <vnodes>
-<v t="tsc.20180214164152.1" a="E"><vh>@settings</vh>
+<v t="tsc.20180214164152.1"><vh>@settings</vh>
 <v t="tsc.20180307094620.1"><vh>@data free-layout-layout</vh></v>
-<v t="tsc.20180214164152.6" a="E"><vh>@buttons</vh>
+<v t="tsc.20180214164152.6"><vh>@buttons</vh>
 <v t="tsc.20180214164152.7"><vh>@button delete-blob</vh></v>
 <v t="tsc.20180214164152.8"><vh>@button insert-blob</vh></v>
 <v t="tsc.20180214164152.9"><vh>@button extract-blob</vh></v>
@@ -39,28 +39,23 @@
 </v>
 <v t="tscv11.20180119175627.1" a="E"><vh>Sqlite3</vh>
 <v t="tsc.20180206152253.2" a="E" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580b0000005f5f626f6f6b6d61726b7371037d7104580700000069735f6475706571054930300a7373732e"
-expanded="tsc.20180209235407.1,tsc.20180209235759.1,"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
+expanded="tsc.20180209235541.1,"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
 </v>
 <v t="tsc.20180214164224.1"><vh>temp</vh></v>
 <v t="tsc.20180224090820.1"><vh>data</vh>
 <v t="tsc.20180226003650.1"><vh>@db3 /home/tsc/Desktop/sqlite_filename.db3</vh>
-<v t="tsc.20180307100959.1"><vh>@tbl test2</vh>
-<v t="tsc.20180307100959.2"><vh>hi, mom, None, 1</vh></v>
-<v t="tsc.20180307100959.3"><vh>hey, dad, None, 2</vh></v>
-<v t="tsc.20180307100959.4"><vh>hello, terry, None, 3</vh></v>
+<v t="tsc.20180307105205.1"><vh>@tbl test</vh>
+<v t="tsc.20180307105205.2"><vh>one</vh>
+<v t="tsc.20180307105205.3"><vh>'bd'</vh></v>
+<v t="tsc.20180307105205.4"><vh>123</vh></v>
 </v>
-<v t="tsc.20180307101231.1"><vh>@tbl test</vh>
-<v t="tsc.20180307101231.2"><vh>one</vh>
-<v t="tsc.20180307101231.3"><vh>'bd'</vh></v>
-<v t="tsc.20180307101231.4"><vh>123</vh></v>
+<v t="tsc.20180307105205.5"><vh>two</vh>
+<v t="tsc.20180307105205.6"><vh> ' cv'</vh></v>
+<v t="tsc.20180307105205.7"><vh> 456.0</vh></v>
 </v>
-<v t="tsc.20180307101231.5"><vh>two</vh>
-<v t="tsc.20180307101231.6"><vh> ' cv'</vh></v>
-<v t="tsc.20180307101231.7"><vh> 456.0</vh></v>
-</v>
-<v t="tsc.20180307101231.8"><vh>three</vh>
-<v t="tsc.20180307101231.9"><vh> ' gdfg' </vh></v>
-<v t="tsc.20180307101231.10"><vh> 789 </vh></v>
+<v t="tsc.20180307105205.8"><vh>three</vh>
+<v t="tsc.20180307105205.9"><vh> ' gdfg' </vh></v>
+<v t="tsc.20180307105205.10"><vh> 789 </vh></v>
 </v>
 </v>
 </v>
@@ -379,18 +374,7 @@ three: clown
     ],
     "orientation": 1
 }</t>
-<t tx="tsc.20180307100959.1">filepath: /home/tsc/Desktop/sqlite_filename.db3
-
-['one', 'two', 'three', 'IDKey']
-['STRING', 'TEXT', 'TEXT', 'INTEGER']
-
-layout: two
-
-</t>
-<t tx="tsc.20180307100959.2"></t>
-<t tx="tsc.20180307100959.3"></t>
-<t tx="tsc.20180307100959.4"></t>
-<t tx="tsc.20180307101231.1">filepath: /home/tsc/Desktop/sqlite_filename.db3
+<t tx="tsc.20180307105205.1">filepath: /home/tsc/Desktop/sqlite_filename.db3
 
 ['one', 'two', 'three']
 ['INTEGER', 'REAL', 'INTEGER']
@@ -398,15 +382,15 @@ layout: two
 layout: four
 
 </t>
-<t tx="tsc.20180307101231.10"></t>
-<t tx="tsc.20180307101231.2"></t>
-<t tx="tsc.20180307101231.3"></t>
-<t tx="tsc.20180307101231.4"></t>
-<t tx="tsc.20180307101231.5"></t>
-<t tx="tsc.20180307101231.6"></t>
-<t tx="tsc.20180307101231.7"></t>
-<t tx="tsc.20180307101231.8"></t>
-<t tx="tsc.20180307101231.9"></t>
+<t tx="tsc.20180307105205.10"></t>
+<t tx="tsc.20180307105205.2"></t>
+<t tx="tsc.20180307105205.3"></t>
+<t tx="tsc.20180307105205.4"></t>
+<t tx="tsc.20180307105205.5"></t>
+<t tx="tsc.20180307105205.6"></t>
+<t tx="tsc.20180307105205.7"></t>
+<t tx="tsc.20180307105205.8"></t>
+<t tx="tsc.20180307105205.9"></t>
 <t tx="tscv11.20180119175627.1">**leo4sqlite.py plugin**
 
 *This node belongs at the top level of 'leoPlugins.leo'*

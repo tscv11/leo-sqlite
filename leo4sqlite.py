@@ -888,10 +888,7 @@ def import_table1(c, p, col_nums, col_names, col_types, blob_col):
     delim = ", "
     new_row = ""
     
-    p.b = p.b + "filepath: " + str(filepath) + "\n\n"
-    p.b = p.b + str(col_names) + "\n"
-    p.b = p.b + str(col_types) + "\n\n"
-    p.b = p.b + str("layout: " + layout) + "\n\n"
+    names_types(p, filepath, col_names, col_types, layout)
 
     conn = sqlite3.connect(filepath)
     cursor = conn.cursor()
@@ -931,10 +928,7 @@ def import_table2(c, p, col_nums, col_names, col_types, blob_col):
     idx = 0
     rx = 0
     
-    p.b = p.b + "filepath: " + str(db_filename) + "\n\n"
-    p.b = p.b + str(col_names) + "\n"
-    p.b = p.b + str(col_types) + "\n\n"
-    p.b = p.b + 'layout: ' + layout + '\n\n'
+    names_types(p, filepath, col_names, col_types, layout)
     
     g.es("\nimporting table: " + table_name + "\n\n(layout 2)\n")
 
@@ -989,10 +983,7 @@ def import_table3(c, p, col_nums, col_names, col_types, blob_col):
     cx = 0
     num_cols = 0
 
-    p.b = p.b + "filepath: " + str(db_filename) + "\n\n"
-    p.b = p.b + str(col_names) + "\n"
-    p.b = p.b + str(col_types) + "\n\n"    
-    p.b = p.b + 'layout: ' + layout + '\n\n'
+    names_types(p, filepath, col_names, col_types, layout)
 
     for col_num in col_nums:
         num_cols = num_cols + 1
@@ -1036,11 +1027,8 @@ def import_table4(c, p, col_nums, col_names, col_types, blob_col):
         num_cols = num_cols + 1
 
     idx = 0
-
-    p.b = p.b + "filepath: " + str(db_filename) + "\n\n"
-    p.b = p.b + str(col_names) + "\n"
-    p.b = p.b + str(col_types) + "\n\n"
-    p.b = p.b + 'layout: ' + layout + '\n\n'
+    
+    names_types(p, filepath, col_names, col_types, layout)
     
     for col_name in col_names:
         if idx == 0:
@@ -1106,11 +1094,7 @@ def export_table1(self, c, p, col_nums, col_names, col_types, blob_col):
     
     table_name = c._leo4sqlite['table_name']
 
-    headline = ("@tbl " + table_name)
-    tbl_node = g.findNodeAnywhere(c, (headline))        
-    c.selectPosition(tbl_node)
-    c.redraw()
-    p = c.p
+    find_sel_tbl(c, p, table_name)
     
     g.es("\nexporting table " + table_name + "\n\n(layout 1)\n")
 
@@ -1153,9 +1137,9 @@ def export_table1(self, c, p, col_nums, col_names, col_types, blob_col):
             plh = place_holder(cells)
             cur.execute("insert into " + table_name + " values {} ".format(plh), cells)
             conn.commit()
-        else:
-            g.es("\ndone\n")
-            return
+    
+    g.es("done\n")
+    return
 #@+node:tsc.20180209234613.36: *3* export_table2
 def export_table2(self, c, p, col_nums, col_names, col_types, blob_col):
     
@@ -1167,12 +1151,9 @@ def export_table2(self, c, p, col_nums, col_names, col_types, blob_col):
         return '({})'.format(', '.join('?' * len(line)))
 
     g.es("\nexporting table: " + table_name + "\n\n(layout 2)\n") 
-
-    headline = ("@tbl " + table_name)
-    tbl_node = g.findNodeAnywhere(c, (headline))
-    c.selectPosition(tbl_node)
-    c.redraw()
-    p = c.p
+    
+    find_sel_tbl(c, p, table_name)
+    
     lines = re.split(r"\n", p.b)
     names = lines[2]
     types = lines[3]
@@ -1228,11 +1209,9 @@ def export_table3(self, c, p, col_nums, col_names, col_types, blob_col):
     layout = c._leo4sqlite['layout']
     
     g.es("\nexporting table: " + table_name + "\n\n(layout 3)\n") 
-    headline = ("@tbl " + table_name)
-    tbl_node = g.findNodeAnywhere(c, (headline))
-    c.selectPosition(tbl_node)
-    c.redraw()
-    p = c.p
+    
+    find_sel_tbl(c, p, table_name)
+    
     lines = re.split(r'\n', str(p.b))
     names = lines[2]
     types = lines[3]
@@ -1309,7 +1288,7 @@ def export_table3(self, c, p, col_nums, col_names, col_types, blob_col):
     
     row = row[num_cols:]
             
-    g.es("\ndone\n")
+    g.es("done\n")
 #@+node:tsc.20180209234613.38: *3* export_table4
 def export_table4(self, c, p, col_nums, col_names, col_types, blob_col):
     
@@ -1323,11 +1302,8 @@ def export_table4(self, c, p, col_nums, col_names, col_types, blob_col):
     table_name = c._leo4sqlite['table_name']
     
     g.es("\nexporting table: " + table_name + "\n\n(layout 4)\n") 
-    headline = ("@tbl " + table_name)
-    tbl_node = g.findNodeAnywhere(c, (headline))
-    c.selectPosition(tbl_node)
-    c.redraw()
-    p = c.p
+    
+    find_sel_tbl(c, p, table_name)
     
     lines = re.split(r'\n', str(p.b))
   
@@ -2601,19 +2577,6 @@ def sqlite_purge_files(event):
         for filename in files:
             os.unlink(filename)
 #@-others
-#@+node:tsc.20180209234613.41: ** delete_blobs
-def delBlobs(c): 
-    
-    del_blobs_on_exit = c.config.getBool('del_blobs_on_exit')
-    
-    if del_blobs_on_exit == 1:
-        sqlite_temp_dir = c.config.getString('sqlite_temp_dir') 
-            
-        os.chdir(sqlite_temp_dir)
-        files=glob.glob('*')
-        if files:
-            for filename in files:
-                os.unlink(filename)
 #@+node:tsc.20180226071844.1: ** db3_tbl_idx
 def db3_tbl_idx(c):
 
@@ -2631,6 +2594,41 @@ def db3_tbl_idx(c):
     
     #g.es(db3_tbl_idx)
     return db3_tbl_idx
+#@+node:tsc.20180307103717.1: ** find_sel_tbl
+#@@language python
+
+def find_sel_tbl(c, p, table_name):
+
+    headline = ("@tbl " + table_name)
+    tbl_node = g.findNodeAnywhere(c, (headline))        
+    c.selectPosition(tbl_node)
+    c.redraw()
+    p = c.p
+    return p
+#@+node:tsc.20180307104216.1: ** names_types
+#@@language python
+
+def names_types(p, filepath, col_names, col_types, layout):
+
+    p.b = p.b + "filepath: " + str(filepath) + "\n\n"
+    p.b = p.b + str(col_names) + "\n"
+    p.b = p.b + str(col_types) + "\n\n"
+    p.b = p.b + str("layout: " + layout) + "\n\n"
+    
+    return
+#@+node:tsc.20180209234613.41: ** delete_blobs
+def delBlobs(c): 
+    
+    del_blobs_on_exit = c.config.getBool('del_blobs_on_exit')
+    
+    if del_blobs_on_exit == 1:
+        sqlite_temp_dir = c.config.getString('sqlite_temp_dir') 
+            
+        os.chdir(sqlite_temp_dir)
+        files=glob.glob('*')
+        if files:
+            for filename in files:
+                os.unlink(filename)
 #@-others
 #@@tabwidth -4
 #@-leo
