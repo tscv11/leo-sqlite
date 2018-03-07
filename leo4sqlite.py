@@ -1024,6 +1024,9 @@ def import_table4(c, p, col_nums, col_names, col_types, blob_col):
     
     names_types(p, db_filename, col_names, col_types, layout)
     
+    conn = sqlite3.connect(db_filename)
+    cursor = conn.cursor()
+    
     for col_name in col_names:
         if idx == 0:
             p = p.insertAsLastChild()
@@ -1037,8 +1040,6 @@ def import_table4(c, p, col_nums, col_names, col_types, blob_col):
         cx = 0
         rows = []
         
-        conn = sqlite3.connect(db_filename)
-        cursor = conn.cursor()
         cursor.execute("select * from " + table_name)
         results = cursor.fetchall()
         num_rows = len(results)
@@ -1050,12 +1051,13 @@ def import_table4(c, p, col_nums, col_names, col_types, blob_col):
                 else:
                     p = p.insertAfter()
                             
-                new_row = re.sub(r'[\(\)\"]', " ", str(row))
-                new_row = new_row.lstrip()
-                new_row = re.split(r',', new_row)
-                rows.append(new_row)
+                #new_row = re.sub(r'[\(\)\"]', " ", str(row))
+                #new_row = row.lstrip()
+                #new_row = row.rstrip()
+                #new_row = re.split(r',', new_row)
+                rows.append(row)
                 
-                p.h = str(rows[rx][cx + idx])
+                p.h = (rows[rx][cx + idx])  # str
                 
                 i = i + 1
                 rx += 1

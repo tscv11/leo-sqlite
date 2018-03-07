@@ -36,26 +36,13 @@
 <v t="tsc.20180214164152.23"><vh>@@file /home/tsc/Desktop/leo4sqlite-file/leo4sqlite.py</vh></v>
 </v>
 <v t="tscv11.20180119175627.1" a="E"><vh>Sqlite3</vh>
-<v t="tsc.20180206152253.2" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580b0000005f5f626f6f6b6d61726b7371037d7104580700000069735f6475706571054930300a7373732e"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
+<v t="tsc.20180206152253.2" a="E" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580b0000005f5f626f6f6b6d61726b7371037d7104580700000069735f6475706571054930300a7373732e"
+expanded="tsc.20180209235407.1,"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
 </v>
 <v t="tsc.20180214164224.1"><vh>temp</vh></v>
-<v t="tsc.20180224090820.1"><vh>data</vh>
+<v t="tsc.20180224090820.1" a="E"><vh>data</vh>
 <v t="tsc.20180226003650.1"><vh>@db3 /home/tsc/Desktop/sqlite_filename.db3</vh></v>
-<v t="tsc.20180307130037.1"><vh>@db3 /home/tsc/Desktop/database.db</vh>
-<v t="tsc.20180307144558.1"><vh>@tbl table_name</vh>
-<v t="tsc.20180307144558.2"><vh>Ulauncher,   Aleksadr Gornostal,  4.0.3,   Linux,  GPLv3,  Yes,   Pythonny</vh></v>
-<v t="tsc.20180307144558.3"><vh>xlunch,   Tomas Matejicek,  1,   Linux,  GPLv3,  Yes,  C</vh></v>
-<v t="tsc.20180307144558.4"><vh>9menu,   Arnold Robbins,  1.8,   Linux,  GPL,  Yes,  C</vh></v>
-<v t="tsc.20180307144558.5"><vh>Synapse,   Synapse core team,  0.2.99.1,   Linux,  GPLv3,  Yes,  Vala</vh></v>
-<v t="tsc.20180307144558.6"><vh>Albert,   Manuel Schneider,  0.14.15,   Linux,  GPLv3,  Yes,  C++</vh></v>
-<v t="tsc.20180307144558.7"><vh>Unity Dash,   Canonical Ltd.,  7.3.0,   Ubuntu,  GPLv3,  Yes,  Vala</vh></v>
-<v t="tsc.20180307144558.8"><vh>Kupfer,   Kupfer,  208,   Linux,  GPL,  Yes,  Python</vh></v>
-<v t="tsc.20180307144558.9"><vh>Katapult,   Katapult Developers,  0.3.2.1,   Linux with KDE,  GPL,  Yes,  C++</vh></v>
-<v t="tsc.20180307144558.10"><vh>GNOME Do,   Gnome Do Developers,  0.95.1,   Linux,  GPL,  Yes,  C Sharp</vh></v>
-<v t="tsc.20180307144558.11"><vh>dmenu,   dwm developers,  4.5,   Linux,  MIT License,  Yes,  C</vh></v>
-<v t="tsc.20180307144558.12"><vh>Avant Window Navigator,   Neil J. Patel,  0.4.2,   Linux,  GPL,  Yes,  C</vh></v>
-</v>
-</v>
+<v t="tsc.20180307130037.1"><vh>@db3 /home/tsc/Desktop/database.db</vh></v>
 <v t="tsc.20180225234500.1"><vh>@db3 /home/tsc/Desktop/blob_test.db3</vh>
 <v t="tsc.20180225234500.2"><vh>@tbl testorama</vh>
 <v t="tsc.20180225234500.3"><vh>dumb.jpg</vh></v>
@@ -371,25 +358,6 @@ c.executeMinibufferCommand('sqlite-import-table')
 c.executeMinibufferCommand('sqlite-export-table')
 </t>
 <t tx="tsc.20180307130037.1"></t>
-<t tx="tsc.20180307144558.1">filepath: /home/tsc/Desktop/database.db
-
-['Application', 'Creator', 'LatestStableVersion', 'OS', 'Softwarelicense', 'OpenSource', 'ProgrammingLanguage']
-['TEXT', 'TEXT', 'TEXT', 'TEXT', 'TEXT', 'TEXT', 'TEXT']
-
-layout: two
-
-</t>
-<t tx="tsc.20180307144558.10"></t>
-<t tx="tsc.20180307144558.11"></t>
-<t tx="tsc.20180307144558.12"></t>
-<t tx="tsc.20180307144558.2"></t>
-<t tx="tsc.20180307144558.3"></t>
-<t tx="tsc.20180307144558.4"></t>
-<t tx="tsc.20180307144558.5"></t>
-<t tx="tsc.20180307144558.6"></t>
-<t tx="tsc.20180307144558.7"></t>
-<t tx="tsc.20180307144558.8"></t>
-<t tx="tsc.20180307144558.9"></t>
 <t tx="tscv11.20180119175627.1">**leo4sqlite.py plugin**
 
 *This node belongs at the top level of 'leoPlugins.leo'*
