@@ -896,16 +896,13 @@ def import_table1(c, p, col_nums, col_names, col_types, blob_col):
     
         cx = 0 
         if row != "":
-            cols = re.split(delim, str(row))
-
             ix = 0
-            for col in cols:
+            for col in row:
                 if col != "":
                     new_row = new_row + col + ", "
                     cx = cx + 1
-                new_row = re.sub(r'[\"]', " ", str(new_row))   
                                 
-            p.b = p.b + str(new_row[1:-3]) + "\n"
+            p.b = p.b + new_row[:-2] + "\n"
             new_row = ""
             rx = rx + 1       
     
@@ -955,7 +952,7 @@ def import_table2(c, p, col_nums, col_names, col_types, blob_col):
             cols = re.split(delim, str(row))
             for col in cols:
                 new_row = new_row + col + ","
-            new_row = re.sub(r'[\"\'\s]', "", str(new_row))
+            new_row = re.sub(r'[\"\']', "", str(new_row))
             final_row = re.sub(r',', ", ", str(new_row))
         p.h = str(final_row[1:-3])
     
