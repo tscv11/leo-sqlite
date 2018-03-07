@@ -9,9 +9,9 @@
 <preferences/>
 <find_panel_settings/>
 <vnodes>
-<v t="tsc.20180214164152.1"><vh>@settings</vh>
+<v t="tsc.20180214164152.1" a="E"><vh>@settings</vh>
 <v t="tsc.20180307094620.1"><vh>@data free-layout-layout</vh></v>
-<v t="tsc.20180214164152.6"><vh>@buttons</vh>
+<v t="tsc.20180214164152.6" a="E"><vh>@buttons</vh>
 <v t="tsc.20180214164152.7"><vh>@button delete-blob</vh></v>
 <v t="tsc.20180214164152.8"><vh>@button insert-blob</vh></v>
 <v t="tsc.20180214164152.9"><vh>@button extract-blob</vh></v>
@@ -38,7 +38,8 @@
 <v t="tsc.20180214164152.23"><vh>@@file /home/tsc/Desktop/leo4sqlite-file/leo4sqlite.py</vh></v>
 </v>
 <v t="tscv11.20180119175627.1" a="E"><vh>Sqlite3</vh>
-<v t="tsc.20180206152253.2" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580b0000005f5f626f6f6b6d61726b7371037d7104580700000069735f6475706571054930300a7373732e"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
+<v t="tsc.20180206152253.2" a="E" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580b0000005f5f626f6f6b6d61726b7371037d7104580700000069735f6475706571054930300a7373732e"
+expanded="tsc.20180209235407.1,tsc.20180209235759.1,"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
 </v>
 <v t="tsc.20180214164224.1"><vh>temp</vh></v>
 <v t="tsc.20180224090820.1"><vh>data</vh>

@@ -2355,18 +2355,7 @@ def export_blobs(self, c):
 #             g.es("done")
 #@+node:tsc.20180209235759.1: ** g.commands
 #@+others
-#@+node:tsc.20180302143847.1: *3* sqlite-pandoc-table
-@g.command('sqlite-pandoc-table')
-def sqlite_pandoc_table(event):
-    
-    c = event.get('c')
-     
-    c._leo4sqlite['action'] = "pandoc table"
-
-    InputDialogs(c)
-    
-    #InputDialogs(c)
-#@+node:tsc.20180209234613.42: *3* sqlite_make_template
+#@+node:tsc.20180307103230.1: *3* sqlite_make_template
 @g.command('sqlite-make-template')
 def sqlite_make_template(event):
     
@@ -2376,6 +2365,14 @@ def sqlite_make_template(event):
             ("@string sqlite_output_dir = ~/leo4sqlite-output", "Enter the full path.", []),
             ("@bool del_blobs_on_exit = False", "Delete blobs extracted for viewing.", []),
             ("@data external tools", "# leave one blank line at the end of this body text\n\nExamples for linux:\n\n/usr/bin/gimp\n/usr/bin/xviewer\n", []),
+            ("@buttons", "", [
+                ("@button sqlite-import-table", "c.executeMinibufferCommand('sqlite-import-table')", []),
+                ("@button sqlite-export-table", "c.executeMinibufferCommand('sqlite-export-table')", []),
+                ("@button sqlite-import-blobs", "c.executeMinibufferCommand('sqlite-import-blobs')", []),
+                ("@button sqlite-export-blobs", "c.executeMinibufferCommand('sqlite-export-blobs')", []),
+                ("@button sqlite-open-blob", "c.executeMinibufferCommand('sqlite-open-blob')", []),
+                ("@button sqlite-view-blob", "c.executeMinibufferCommand('sqlite-view-blob')", [])
+                ]),
             ("@commands", "Examples of hotkeys. Command names are in the docstring.", [
                 ("@command sqlite-clear-temp @key Alt-Shift-Ctrl-t", "c.executeMinibufferCommand('sqlite-clear-temp'", [
                     ("@test child", "something", []),
@@ -2383,6 +2380,7 @@ def sqlite_make_template(event):
                 ]),
                 ("@command sqlite-delete-data @key Alt-Shift-Ctrl-d", "c.executeMinibufferCommand('sqlite-delete-data')", []),
                 ("@command sqlite-purge-files @key Alt-Shift-Ctrl-p", "c.executeMinibufferCommand('sqlite-purge-files')", []),
+                ("@button sqlite-import-blobs", "c.executeMinibufferCommand('sqlite-import-blobs')", []),
             ]),
         ]),
         ("temp", "Clean up temporary nodes.", []),
@@ -2406,6 +2404,58 @@ def sqlite_make_template(event):
         mknode(p.insertAfter(), data)
    
     c.redraw()
+#@+node:tsc.20180209234613.42: *4* @@sqlite_make_template
+#@+at
+# @g.command('sqlite-make-template')
+# def sqlite_make_template(event):
+#     
+#     template = [
+#         ("@settings", "Please customize...", [
+#             ("@string sqlite_temp_dir = ~/leo4sqlite-temp", "Enter the full path...", []),
+#             ("@string sqlite_output_dir = ~/leo4sqlite-output", "Enter the full path.", []),
+#             ("@bool del_blobs_on_exit = False", "Delete blobs extracted for viewing.", []),
+#             ("@data external tools", "# leave one blank line at the end of this body text\n\nExamples for linux:\n\n/usr/bin/gimp\n/usr/bin/xviewer\n", []),
+#             ("@commands", "Examples of hotkeys. Command names are in the docstring.", [
+#                 ("@command sqlite-clear-temp @key Alt-Shift-Ctrl-t", "c.executeMinibufferCommand('sqlite-clear-temp'", [
+#                     ("@test child", "something", []),
+#                     ("@test child2", "something else", []),
+#                 ]),
+#                 ("@command sqlite-delete-data @key Alt-Shift-Ctrl-d", "c.executeMinibufferCommand('sqlite-delete-data')", []),
+#                 ("@command sqlite-purge-files @key Alt-Shift-Ctrl-p", "c.executeMinibufferCommand('sqlite-purge-files')", []),
+#             ]),
+#         ]),
+#         ("temp", "Clean up temporary nodes.", []),
+#         ("data", "This node must be the last top level node.", []),
+#     ]
+#     
+#     c = event.get('c')
+#     c = c.new({}, gui=g.app.gui)
+#     
+#     p = c.p
+#     p.h = "leo4sqlite template"
+#     
+#     def mknode(nd, data):
+#         head, body, children = data
+#         nd.h = head
+#         nd.b = body
+#         for child in children:
+#             mknode(nd.insertAsLastChild(), child)
+#     
+#     for data in reversed(template):
+#         mknode(p.insertAfter(), data)
+#    
+#     c.redraw()
+#@+node:tsc.20180302143847.1: *3* sqlite-pandoc-table
+@g.command('sqlite-pandoc-table')
+def sqlite_pandoc_table(event):
+    
+    c = event.get('c')
+     
+    c._leo4sqlite['action'] = "pandoc table"
+
+    InputDialogs(c)
+    
+    #InputDialogs(c)
 #@+node:tsc.20180209234613.43: *3* sqlite_import_table
 @g.command('sqlite-import-table')
 def sqlite_import_table(event):
