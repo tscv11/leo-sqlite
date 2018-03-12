@@ -9,7 +9,7 @@
 <preferences/>
 <find_panel_settings/>
 <vnodes>
-<v t="tsc.20180214164152.1"><vh>@settings</vh>
+<v t="tsc.20180214164152.1" a="E"><vh>@settings</vh>
 <v t="tsc.20180307094620.1"><vh>@data free-layout-layout</vh></v>
 <v t="tsc.20180214164152.6" a="E"><vh>@buttons</vh>
 <v t="tsc.20180216195827.1"><vh>@button export-blobs</vh></v>
@@ -29,18 +29,18 @@
 <v t="tsc.20180214164152.5"><vh>leo4sqlite.py</vh></v>
 </v>
 <v t="tsc.20180214164152.18"><vh>@data external tools</vh></v>
-<v t="tsc.20180214164152.19"><vh>@string sqlite_output_dir = "/home/tsc/Desktop/leo4sqlite-output"</vh></v>
-<v t="tsc.20180214164152.20"><vh>@string sqlite_temp_dir = "/home/tsc/Desktop/leo4sqlite-temp"</vh></v>
+<v t="tsc.20180214164152.19"><vh>@string sqlite_output_dir = "/home/tsc/Desktop/leo4sqlite-output</vh></v>
+<v t="tsc.20180214164152.20"><vh>@string sqlite_temp_dir = /home/tsc/Desktop/leo4sqlite-temp</vh></v>
 <v t="tsc.20180214164152.21"><vh>@@file /home/tsc/Desktop/leo4sqlite/leo4sqlite.py</vh></v>
 <v t="tsc.20180214164152.22"><vh>@@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
 <v t="tsc.20180214164152.23"><vh>@@file /home/tsc/Desktop/leo4sqlite-file/leo4sqlite.py</vh></v>
 </v>
 <v t="tscv11.20180119175627.1" a="E"><vh>Sqlite3</vh>
 <v t="tsc.20180206152253.2" a="E" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580b0000005f5f626f6f6b6d61726b7371037d7104580700000069735f6475706571054930300a7373732e"
-expanded="tsc.20180209235407.1,"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
+expanded="tsc.20180209234613.16,"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
 </v>
 <v t="tsc.20180214164224.1"><vh>temp</vh></v>
-<v t="tsc.20180224090820.1" a="E"><vh>data</vh>
+<v t="tsc.20180224090820.1"><vh>data</vh>
 <v t="tsc.20180226003650.1"><vh>@db3 /home/tsc/Desktop/sqlite_filename.db3</vh></v>
 <v t="tsc.20180307130037.1"><vh>@db3 /home/tsc/Desktop/database.db</vh></v>
 <v t="tsc.20180225234500.1"><vh>@db3 /home/tsc/Desktop/blob_test.db3</vh>
@@ -325,7 +325,7 @@ three: brown
 two: smarty
 three: clown
 </t>
-<t tx="tsc.20180226003650.1">`</t>
+<t tx="tsc.20180226003650.1"></t>
 <t tx="tsc.20180307094620.1">{
     "content": [
         "_leo_pane:bodyFrame",

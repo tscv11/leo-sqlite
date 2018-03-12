@@ -230,6 +230,14 @@
 
 | Included with this distribution you'll find a template made for leo4sqlite that
 | includes the standard nodes you'll need, ready for customization.
+|
+
+**Examples**
+
+Here are some examples using the the included table "table_name", from the database file
+"database.db" (included with this plugin). The table is a shortened version of a
+table from Wikipedia that compares Linux 'launcher' applications.
+
 '''
 #@-<< docstring >>
 #@+<< imports >>
@@ -380,7 +388,6 @@ class InputDialogs(QWidget):
     def get_ext_db(self, c):
             
         options = QFileDialog.Options()
-        #options |= QFileDialog.DontUseNativeDialog
         self.setStyleSheet('padding: 3px; background: white');
         db_fname, _ = QFileDialog.getOpenFileName(self,"select an external database:", "","sqlite files (*.db *.db3 *.sqlite *.sqlite3);;all files (*.*)", options=options) # tnb
         if db_fname == '':
@@ -423,6 +430,7 @@ class InputDialogs(QWidget):
     def select_table(self, c):
 
         db_filename = c._leo4sqlite['db_filename']
+
         tbl_names = []
       
         conn = sqlite3.connect(db_filename)
@@ -609,8 +617,6 @@ class InputDialogs(QWidget):
             raise NoTempDirectory
             return
         
-        
-        
         p = g.findNodeAnywhere(c, '@data external tools')
         c.selectPosition(p)
         tools = re.split(r'\n', p.b)
@@ -641,7 +647,7 @@ class InputDialogs(QWidget):
         filename = os.path.basename(filename)
         extension = row[ext_col]
 
-        filepath = (sqlite_temp_dir + '//' + filename + extension)
+        filepath = (sqlite_temp_dir + '/' + filename + extension)
 
         with open(filepath, "wb") as output_file:        
             cursor.execute("select * from %s where %s = ?" % (table_name, search_col), [search_term])
@@ -1182,7 +1188,7 @@ def export_table2(self, c, p, col_nums, col_names, col_types, blob_col):
             plh = place_holder(cells)
             cur.execute("insert into " + table_name + " values {} ".format(plh), cells)
             conn.commit()
-    g.es("\ndone\n")
+    g.es("done\n")
 #@+node:tsc.20180209234613.37: *3* export_table3
 def export_table3(self, c, p, col_nums, col_names, col_types, blob_col):
 
