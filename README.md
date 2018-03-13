@@ -7,7 +7,7 @@
 *sqlite-make-template   
 sqlite-import-table  
 sqlite-export-table  
-sqlite-pandoc-table
+sqlite-pandoc-table  
 sqlite-insert-blob    
 sqlite-extract-blob    
 sqlite-view-blob  
