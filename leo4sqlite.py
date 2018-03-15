@@ -373,6 +373,7 @@ class InputDialogs(QWidget):
         
         if action == "export blobs":
             export_blobs(self, c)
+            return
             
         if action == "pandoc table":
             c._leo4sqlite['layout'] = "one"
