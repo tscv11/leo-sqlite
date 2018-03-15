@@ -497,52 +497,6 @@ class InputDialogs(QWidget):
         c._leo4sqlite['blob_col'] = blob_col
         c._leo4sqlite['file_col'] = file_col
         c._leo4sqlite['ext_col'] = ext_col
-    #@+node:tsc.20180209234613.24: *3* insert_blob
-    def insert_blob(self, c):
-        
-        def place_holder(line):
-            return '({})'.format(', '.join('?' * len(line)))
-        
-        col_vals = []
-        
-        db_filename = c._leo4sqlite['db_filename']
-        table_name = c._leo4sqlite['table_name']
-        col_names = c._leo4sqlite['col_names']
-        
-        str_col_names = str(col_names)
-        str_col_names = str_col_names[1:-1]
-
-        for i in range(len(col_names)):
-            if col_names[i] != "Blobs" and col_names[i] != "Filename" and col_names[i] != "Extension":
-                text, okPressed = QInputDialog.getText(self, table_name, col_names[i], QLineEdit.Normal, "")
-                if okPressed and text != '':
-                    col_vals.append(text)
-        
-        str_col_names = str(col_names)
-        str_col_names = str_col_names[1:-1]
-                    
-        options = QFileDialog.Options()
-        self.setStyleSheet('padding: 3px; background: white');
-        blob_filepath, _ = QFileDialog.getOpenFileName(self,"select file to insert:", "","binary files (*)", options=options)
-        
-        full_filename = os.path.basename(blob_filepath)
-        filename, extension = os.path.splitext(full_filename)
-
-        conn = sqlite3.connect(db_filename)
-        cursor = conn.cursor()
-        
-        with open(blob_filepath, "rb") as input_file:
-            ablob = input_file.read()
-            cells = col_vals
-            cells.append(sqlite3.Binary(ablob))
-            cells.append(filename)
-            cells.append(extension)
-            plh = place_holder(cells)
-                            
-            cursor.execute("insert into " + table_name + " values {} ".format(plh), cells)
-            conn.commit()
-            
-            g.es("\ndone\n")
     #@+node:tsc.20180209234613.25: *3* extract_blob
     def extract_blob(self, c):
         
@@ -906,7 +860,7 @@ def import_table1(c, p, col_nums, col_names, col_types, blob_col):
             ix = 0
             for col in row:
                 if col != "":
-                    new_row = new_row + col + ", "
+                    new_row = new_row + str(col) + ", "
                     cx = cx + 1
                                 
             p.b = p.b + new_row[:-2] + "\n"
@@ -958,7 +912,7 @@ def import_table2(c, p, col_nums, col_names, col_types, blob_col):
         if row != "":
             cols = re.split(delim, str(row))
             for col in cols:
-                new_row = new_row + col + ","
+                new_row = new_row + str(col) + ","
             new_row = re.sub(r'[\"\']', "", str(new_row))
             final_row = re.sub(r',', ", ", str(new_row))
         p.h = str(final_row[1:-3])
@@ -1023,9 +977,7 @@ def import_table4(c, p, col_nums, col_names, col_types, blob_col):
     
     g.es("\nimporting table: " + table_name + "\n\n(layout 4)\n")
 
-    num_cols = 0
-    for col_num in col_nums:
-        num_cols = num_cols + 1
+    num_cols = len(col_nums)
 
     idx = 0
     
@@ -1040,7 +992,7 @@ def import_table4(c, p, col_nums, col_names, col_types, blob_col):
         else:
             p = p.insertAfter()
             
-        p.h = col_name
+        p.h = str(col_name)
     
         i = 0
         rx = 0
@@ -1057,14 +1009,10 @@ def import_table4(c, p, col_nums, col_names, col_types, blob_col):
                     p = p.insertAsLastChild()
                 else:
                     p = p.insertAfter()
-                            
-                #new_row = re.sub(r'[\(\)\"]', " ", str(row))
-                #new_row = row.lstrip()
-                #new_row = row.rstrip()
-                #new_row = re.split(r',', new_row)
+
                 rows.append(row)
                 
-                p.h = (rows[rx][cx + idx])  # str
+                p.h = str(rows[rx][cx + idx])
                 
                 i = i + 1
                 rx += 1
@@ -1798,7 +1746,7 @@ def export_blobs(self, c):
         else:
             conn.commit()
             conn.close()
-            g.es("\ndone")
+            g.es("\ndone\n")
             
     return
     

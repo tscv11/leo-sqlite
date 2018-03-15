@@ -9,7 +9,7 @@
 <preferences/>
 <find_panel_settings/>
 <vnodes>
-<v t="tsc.20180214164152.1" a="E"><vh>@settings</vh>
+<v t="tsc.20180214164152.1"><vh>@settings</vh>
 <v t="tsc.20180307094620.1"><vh>@data free-layout-layout</vh></v>
 <v t="tsc.20180214164152.6" a="E"><vh>@buttons</vh>
 <v t="tsc.20180216195827.1"><vh>@button export-blobs</vh></v>
@@ -36,22 +36,12 @@
 <v t="tsc.20180214164152.23"><vh>@@file /home/tsc/Desktop/leo4sqlite-file/leo4sqlite.py</vh></v>
 </v>
 <v t="tscv11.20180119175627.1" a="E"><vh>Sqlite3</vh>
-<v t="tsc.20180206152253.2" a="E" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580b0000005f5f626f6f6b6d61726b7371037d7104580700000069735f6475706571054930300a7373732e"
-expanded="tsc.20180209234613.16,"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
+<v t="tsc.20180206152253.2" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580b0000005f5f626f6f6b6d61726b7371037d7104580700000069735f6475706571054930300a7373732e"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
 </v>
-<v t="tsc.20180214164224.1" a="E"><vh>temp</vh>
+<v t="tsc.20180214164224.1"><vh>temp</vh>
 <v t="tsc.20180313113053.1"><vh>@image gray-wallpaper-1.jpg</vh></v>
 </v>
-<v t="tsc.20180224090820.1" a="E"><vh>data</vh>
-<v t="tsc.20180226003650.1"><vh>@db3 /home/tsc/Desktop/sqlite_filename.db3</vh></v>
-<v t="tsc.20180313114437.1" a="E"><vh>@db3 /home/tsc/Desktop/blob_test.db3</vh>
-<v t="tsc.20180313193045.1" a="E"><vh>@tbl testorama</vh>
-<v t="tsc.20180313193045.2"><vh>gray-wallpaper-1.jpg</vh></v>
-<v t="tsc.20180313193045.3"><vh>gray-gradient-9803.jpg</vh></v>
-</v>
-</v>
-<v t="tsc.20180307130037.1"><vh>@db3 /home/tsc/Desktop/database.db</vh></v>
-</v>
+<v t="tsc.20180314214021.1"><vh>data</vh></v>
 </vnodes>
 <tnodes>
 <t tx="tsc.20180214164152.1"></t>
@@ -303,8 +293,6 @@ gimp-2.8
 c.executeMinibufferCommand('sqlite-export-blobs')
 </t>
 <t tx="tsc.20180219220649.1" __bookmarks="7d7100580700000069735f6475706571014930300a732e">#Sqlite3:1--&gt;@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py:0--&gt;export_blobs:10</t>
-<t tx="tsc.20180224090820.1"></t>
-<t tx="tsc.20180226003650.1"></t>
 <t tx="tsc.20180307094620.1">{
     "content": [
         "_leo_pane:bodyFrame",
@@ -336,17 +324,8 @@ c.executeMinibufferCommand('sqlite-import-table')
 
 c.executeMinibufferCommand('sqlite-export-table')
 </t>
-<t tx="tsc.20180307130037.1"></t>
 <t tx="tsc.20180313113053.1">/home/tsc/Desktop/leo4sqlite-temp/gray-wallpaper-1.jpg</t>
-<t tx="tsc.20180313114437.1"></t>
-<t tx="tsc.20180313193045.1">['one', 'two', 'three', 'IDKey', 'Blobs', 'Filename', 'Extension']
-['TEXT', 'REAL', 'INTEGER', 'INTEGER', 'BLOB', 'TEXT', 'TEXT']</t>
-<t tx="tsc.20180313193045.2" leo4sqlite="7d71005805000000696e64657871014b00732e">one: one
-two: two
-three: six</t>
-<t tx="tsc.20180313193045.3" leo4sqlite="7d71005805000000696e64657871014b01732e">one: hi
-two: to
-three: you</t>
+<t tx="tsc.20180314214021.1"></t>
 <t tx="tscv11.20180119175627.1">**leo4sqlite.py plugin**
 
 *This node belongs at the top level of 'leoPlugins.leo'*
