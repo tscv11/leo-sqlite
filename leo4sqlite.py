@@ -1705,8 +1705,8 @@ def export_blobs(self, c):
     defalt = ''
     
     p = c.p
-    #parent = p.parent()
-    #c.selectPosition(parent)
+    parent = p.parent()
+    c.selectPosition(parent)
     if re.match(r'^@tbl\s', str(p.h)):
         table_name = re.sub(r'^@tbl\s', '', p.h)
     else:
@@ -1731,23 +1731,19 @@ def export_blobs(self, c):
             return
     
     g.es("exporting blob table: " + table_name)
-    
-    p = p.parent()
-    c.selectPosition(p)
-    
+
     p = p.parent()
     c.selectPosition(p)
     filename = p.h[5:]
-    g.es(filename + "\n")
     
     p = p.firstChild()
     c.selectPosition(p)
-    
+        
     for child in p.children():
         child_h.append(child.h)
         child_b = re.split(r'\n', str(child.b))
         
-    children = parent.children()
+    children = p.children()
     for child in children:
         child_b = re.split(r'\n', child.b)
         for line in child_b:
@@ -1761,6 +1757,7 @@ def export_blobs(self, c):
                 else:
                     if i == 1 and field != "":
                         val_lst.append(field)
+
                 i += 1
     
     num_cols = len(child_b) - 1
@@ -1773,7 +1770,7 @@ def export_blobs(self, c):
     
     p = p.firstChild()
     
-    rx = 1    
+    rx = 0    
     for row in rows:    
         
         keys = key_lst[:num_cols]
@@ -1781,7 +1778,7 @@ def export_blobs(self, c):
                   
         cx = 0
         for key in keys:
-                
+             
             query = "update {table} set {field} = ? where {pk_field} = ?".format(table=table_name, field=keys[cx], pk_field='IDKey')
             p.v.u['leo4sqlite']['index'] = rx
             cur.execute(query, [vals[cx], p.v.u['leo4sqlite']['index']])
@@ -1802,6 +1799,8 @@ def export_blobs(self, c):
             conn.close()
             g.es("\ndone")
             
+    return
+    
 #@+node:tsc.20180304165709.1: *3* @@export_blobs
 #@+at
 # def export_blobs(self, c): 
@@ -2313,6 +2312,74 @@ def export_blobs(self, c):
 #             conn.commit()
 #             conn.close()
 #             g.es("done")
+#@+node:tsc.20180226071844.1: ** db3_tbl_idx
+#@@language python
+
+def db3_tbl_idx(c):
+
+    import re
+    
+    db3_tbl_idx = {}
+    
+    db3s = c.find_h(r'^@db3\s.*')
+    
+    for db3 in db3s:
+        db3_h = re.sub(r'.*@db3 ', '', db3.h)
+        for tbl in db3.children():
+            tbl_h = re.sub(r'.*@tbl ', '', tbl.h)
+            db3_tbl_idx.setdefault(db3_h, []).append(tbl_h)
+    
+    #g.es(db3_tbl_idx)
+    return db3_tbl_idx
+#@+node:tsc.20180307103717.1: ** find_sel_tbl
+#@@language python
+
+def find_sel_tbl(c, p, table_name):
+
+    headline = ("@tbl " + table_name)
+    tbl_node = g.findNodeAnywhere(c, (headline))        
+    c.selectPosition(tbl_node)
+    c.redraw()
+    p = c.p
+    return p
+#@+node:tsc.20180209234613.41: ** delete_blobs
+#@@language python
+
+def delBlobs(c): 
+    
+    del_blobs_on_exit = c.config.getBool('del_blobs_on_exit')
+    
+    if del_blobs_on_exit == 1:
+        sqlite_temp_dir = c.config.getString('sqlite_temp_dir') 
+            
+        os.chdir(sqlite_temp_dir)
+        files=glob.glob('*')
+        if files:
+            for filename in files:
+                os.unlink(filename)
+#@+node:tsc.20180307104216.1: ** names_types
+#@@language python
+
+def names_types(p, filepath, col_names, col_types, layout):
+
+    p.b = p.b + "filepath: " + str(filepath) + "\n\n"
+    p.b = p.b + str(col_names) + "\n"
+    p.b = p.b + str(col_types) + "\n\n"
+    p.b = p.b + str("layout: " + layout) + "\n\n"
+    
+    return
+#@+node:tsc.20180307105918.1: ** splt_type_name
+#@@language python
+
+def splt_type_name(col_names, col_types):
+
+    new_names = re.sub(r'[\"\'\[\]\s]', "", str(col_names))
+    new_types = re.sub(r'[\"\'\[\]\s]', "", str(col_types))
+
+    split_names = re.split(r',', str(new_names))
+    split_types = re.split(r',', str(new_types))
+    
+    return split_names, split_types
 #@+node:tsc.20180209235759.1: ** g.commands
 #@+others
 #@+node:tsc.20180307103230.1: *3* sqlite_make_template
@@ -2561,68 +2628,6 @@ def sqlite_purge_files(event):
         for filename in files:
             os.unlink(filename)
 #@-others
-#@+node:tsc.20180226071844.1: ** db3_tbl_idx
-def db3_tbl_idx(c):
-
-    import re
-    
-    db3_tbl_idx = {}
-    
-    db3s = c.find_h(r'^@db3\s.*')
-    
-    for db3 in db3s:
-        db3_h = re.sub(r'.*@db3 ', '', db3.h)
-        for tbl in db3.children():
-            tbl_h = re.sub(r'.*@tbl ', '', tbl.h)
-            db3_tbl_idx.setdefault(db3_h, []).append(tbl_h)
-    
-    #g.es(db3_tbl_idx)
-    return db3_tbl_idx
-#@+node:tsc.20180307103717.1: ** find_sel_tbl
-#@@language python
-
-def find_sel_tbl(c, p, table_name):
-
-    headline = ("@tbl " + table_name)
-    tbl_node = g.findNodeAnywhere(c, (headline))        
-    c.selectPosition(tbl_node)
-    c.redraw()
-    p = c.p
-    return p
-#@+node:tsc.20180209234613.41: ** delete_blobs
-def delBlobs(c): 
-    
-    del_blobs_on_exit = c.config.getBool('del_blobs_on_exit')
-    
-    if del_blobs_on_exit == 1:
-        sqlite_temp_dir = c.config.getString('sqlite_temp_dir') 
-            
-        os.chdir(sqlite_temp_dir)
-        files=glob.glob('*')
-        if files:
-            for filename in files:
-                os.unlink(filename)
-#@+node:tsc.20180307104216.1: ** names_types
-#@@language python
-
-def names_types(p, filepath, col_names, col_types, layout):
-
-    p.b = p.b + "filepath: " + str(filepath) + "\n\n"
-    p.b = p.b + str(col_names) + "\n"
-    p.b = p.b + str(col_types) + "\n\n"
-    p.b = p.b + str("layout: " + layout) + "\n\n"
-    
-    return
-#@+node:tsc.20180307105918.1: ** splt_type_name
-def splt_type_name(col_names, col_types):
-
-    new_names = re.sub(r'[\"\'\[\]\s]', "", str(col_names))
-    new_types = re.sub(r'[\"\'\[\]\s]', "", str(col_types))
-
-    split_names = re.split(r',', str(new_names))
-    split_types = re.split(r',', str(new_types))
-    
-    return split_names, split_types
 #@-others
 #@@tabwidth -4
 #@-leo
