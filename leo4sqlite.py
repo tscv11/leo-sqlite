@@ -630,7 +630,7 @@ class InputDialogs(QWidget):
             raise NoTempDirectory
             return
             
-        temp_dir = temp_dir[1:-1]
+        #temp_dir = temp_dir[1:-1]
         
         def get_extension(path):
             extension = os.path.splitext(path)[1]
@@ -673,7 +673,7 @@ class InputDialogs(QWidget):
             if extension in vid_types:
                 ph2b =  (r"@movie " + filename + extension)
                 
-            p = g.findNodeAnywhere(c, "temp")
+            p = g.findNodeAnywhere(c, r"sqlite-temp")
             c.selectPosition(p)
             
             for child in p.children():
@@ -774,8 +774,10 @@ class InputDialogs(QWidget):
             
             if p:
                 c.selectPosition(p)
-            else:    
-                p = c.lastTopLevel().insertAsNthChild(1)
+            else:
+                p = g.findNodeAnywhere(c, r'sqlite-data')
+                c.selectPosition(p)
+                p = p.insertAsNthChild(1)
                 p.h = "@db3 " + str(db_filename)
                 c.redraw(p)
             
@@ -785,7 +787,7 @@ class InputDialogs(QWidget):
             c.redraw(p)
             
         if action == "import blobs":   
-            p = p.lastNode()
+            p = g.findNodeAnywhere(c, r'sqlite-data')
             c.selectPosition(p)
             import_blobs(self, c, p, col_nums, col_names, col_types, blob_col)
         
@@ -1300,7 +1302,6 @@ def pandoc_table(c, p, col_nums, col_names, col_types, blob_col):
     table_name = c._leo4sqlite['table_name']
     filepath = c._leo4sqlite['db_filename']
     
-    num_cols = 0
     num_cols = len(col_nums)
     
     g.es("\nimporting as pandoc table: " + table_name + "\n")
@@ -1354,7 +1355,7 @@ def pandoc_table(c, p, col_nums, col_names, col_types, blob_col):
             new_row = ""
     p.b += "\n" 
     g.es("done\n")
-    return        
+   
 #@+node:tsc.20180303184953.1: *3* @@pandoc_table
 #@+at
 # def pandoc_table(c, p, col_nums, col_names, col_types, blob_col):
@@ -1551,15 +1552,11 @@ def import_blobs(self, c, p, col_nums, col_names, col_types, blob_col):
     p.b += str(col_types) + "\n\n"
     node_name = p.h
 
-    g.es(filepath + "\n")
-
     conn = sqlite3.connect(filepath)
     cursor = conn.cursor()
     
     rx = 0
     for row in cursor.execute("SELECT * FROM " + table_name):
-
-        g.es(str(row[:-3]))
 
         new_row = ""
         for cx, col in enumerate(row):
