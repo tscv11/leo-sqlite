@@ -41,11 +41,17 @@
 <v t="tsc.20180315095328.5"><vh>n4</vh></v>
 </v>
 </v>
-<v t="tscv11.20180119175627.1"><vh>Sqlite3</vh>
-<v t="tsc.20180206152253.2" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580b0000005f5f626f6f6b6d61726b7371037d7104580700000069735f6475706571054930300a7373732e"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
+<v t="tscv11.20180119175627.1" a="E"><vh>Sqlite3</vh>
+<v t="tsc.20180206152253.2" a="E" descendentVnodeUnknownAttributes="7d710058010000003071017d7102580b0000005f5f626f6f6b6d61726b7371037d7104580700000069735f6475706571054930300a7373732e"
+expanded="tsc.20180209234613.16,"><vh>@file /home/tsc/Desktop/leo-editor/leo/plugins/leo4sqlite.py</vh></v>
 </v>
 <v t="tsc.20180214164224.1"><vh>sqlite-temp</vh></v>
-<v t="tsc.20180314214021.1"><vh>sqlite-data</vh></v>
+<v t="tsc.20180314214021.1" a="E"><vh>sqlite-data</vh>
+<v t="tsc.20180315185733.1" a="E"><vh>@db3 /home/tsc/Desktop/sqlite_filename.db3</vh>
+<v t="tsc.20180315185733.2"><vh>@tbl test</vh></v>
+<v t="tsc.20180315185946.1"><vh>@tbl test</vh></v>
+</v>
+</v>
 <v t="tsc.20180315084817.1"><vh>more nodes</vh>
 <v t="tsc.20180315095254.1"><vh>node</vh></v>
 <v t="tsc.20180315095256.1" a="E"><vh>n2</vh>
@@ -323,6 +329,19 @@ c.executeMinibufferCommand('sqlite-export-table')
 <t tx="tsc.20180315095328.3"></t>
 <t tx="tsc.20180315095328.4"></t>
 <t tx="tsc.20180315095328.5"></t>
+<t tx="tsc.20180315185733.1"></t>
+<t tx="tsc.20180315185733.2">|one      |two        |three         |
+|---------|-----------|--------------|
+|'bd'     | ' cv'     | ' gdfg'      |
+|123      |456.0      |789           |
+
+</t>
+<t tx="tsc.20180315185946.1">|one      |two        |three         |
+|---------|-----------|--------------|
+|'bd'     | ' cv'     | ' gdfg'      |
+|123      |456.0      |789           |
+
+</t>
 <t tx="tscv11.20180119175627.1">**leo4sqlite.py plugin**
 
 *This node belongs at the top level of 'leoPlugins.leo'*
